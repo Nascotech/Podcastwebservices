@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/app-assets/vendors/css/vendors.min.css";
+@import "assets/app-assets/vendors/css/tables/datatable/datatables.min.css";
+@import "assets/app-assets/vendors/css/file-uploaders/dropzone.min.css";
+@import "assets/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css";
+@import "assets/app-assets/vendors/css/forms/select/select2.min.css";
+@import "assets/app-assets/vendors/css/pickers/pickadate/pickadate.css";
+
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "assets/plugins/fontawesome/css/brands.min.css";
+@import "assets/plugins/fontawesome/css/solid.min.css";
+@import "assets/plugins/fontawesome/css/regular.min.css";
+@import "assets/plugins/fontawesome/css/light.min.css";
+
+
+@import "assets/app-assets/css/bootstrap.css";
+@import "assets/app-assets/css/bootstrap-extended.css";
+@import "assets/app-assets/css/colors.css";
+@import "assets/app-assets/css/components.css";
+@import "assets/app-assets/css/themes/dark-layout.css";
+@import "assets/app-assets/css/themes/semi-dark-layout.css";
+
+@import "assets/app-assets/css/core/menu/menu-types/vertical-menu.css";
+@import "assets/app-assets/css/core/colors/palette-gradient.css";
+@import "assets/app-assets/css/pages/app-user.css";
+@import "assets/app-assets/css/plugins/file-uploaders/dropzone.css";
+@import "assets/app-assets/css/pages/data-list-view.css";
+@import "assets/app-assets/css/pages/authentication.css";
+@import "assets/css/style.css";
+

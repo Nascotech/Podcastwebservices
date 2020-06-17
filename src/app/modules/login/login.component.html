@@ -1,0 +1,84 @@
+<div class="content-body">
+  <section class="row flexbox-container">
+    <div class="col-xl-8 col-11 d-flex justify-content-center">
+      <div class="card bg-authentication rounded-0 mb-0">
+        <div class="row m-0">
+          <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+            <img src="assets/app-assets/images/pages/login.png" alt="branding logo">
+          </div>
+          <div class="col-lg-6 col-12 p-0">
+            <div class="card rounded-0 mb-0 px-2">
+              <div class="card-header c-card-header pb-1">
+                <div class="card-title">
+                  <h4 class="mb-0">Login</h4>
+                </div>
+              </div>
+              <p class="px-2">Welcome, please login to your account.</p>
+              <div class="card-content c-card-content">
+                <div class="card-body pt-1">
+                  <form [formGroup]="loginForm">
+                    <fieldset class="form-label-group form-group position-relative has-icon-left">
+                      <input type="text" class="form-control" id="user-name" placeholder="Username" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <div *ngIf="(submitted || f.email.touched) && f.email.errors" class="focus-input100">
+                        <div *ngIf="f.email.errors.required" class="text-danger">Email is required.</div>
+                        <div *ngIf="f.email.errors.email" class="text-danger">Email not valid.</div>
+                      </div>
+                      <div class="form-control-position">
+                        <i class="feather icon-user"></i>
+                      </div>
+                      <label for="user-name">Username</label>
+                    </fieldset>
+
+                    <fieldset class="form-label-group position-relative has-icon-left">
+                      <input type="password" class="form-control" id="user-password" placeholder="Password"  formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                      >
+                      <div *ngIf="(submitted || f.password.touched) && f.password.errors" class="focus-input100">
+                        <div *ngIf="f.password.errors.required" class="text-danger">Password is required.</div>
+                      </div>
+                      <!-- <div *ngIf="(submitted || f.password.touched) && f.password.errors" class="focus-input100">
+                        <div *ngIf="f.password.errors.minlength" class="text-danger">	Password must be at least 8 characters.</div>
+                      </div>
+                      <div class="error-text" *ngIf="loginForm.get('password').hasError('passwordStrength')">
+                        {{loginForm.get('password').errors['passwordStrength']}}
+                      </div> -->
+                      <div class="form-control-position">
+                        <i class="feather icon-lock"></i>
+                      </div>
+                      <label for="user-password">Password</label>
+                    </fieldset>
+                    <div class="form-group d-flex justify-content-between align-items-center">
+                      <div class="col-md-12 col-sm-12">
+                        <!-- <div class="text-right">
+                          <a routerLink="/forgot-password" class="card-link">Forgot Password?</a>
+                        </div> -->
+                      </div>
+                    </div>
+                    <!-- <a href="auth-register.html" class="btn btn-outline-primary float-left btn-inline">Register</a> -->
+                    <!-- <button type="submit" [disabled]="!loginForm.valid" [ngClass]="{'disable':!loginForm.valid}"  (click)="onSubmit()" class="btn btn-primary float-right btn-inline waves-effect waves-light">
+                      <span  class="spinner-border spinner-border-sm mr-1"></span>
+                      Login</button> -->
+                      <button *ngIf="this.submitted === true" type="submit" [disabled]="loginForm.valid" [ngClass]="{'disable':!loginForm.valid}" class="btn btn-primary float-right btn-inline waves-effect waves-light">
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> loading...
+                      </button>
+                      <button *ngIf="this.submitted === false" type="submit" [disabled]="!loginForm.valid" [ngClass]="{'disable':!loginForm.valid}" (click)="onSubmit()" class="btn btn-primary float-right btn-inline waves-effect waves-light">
+                        <span> Login </span>
+                      </button>
+                  </form>
+                </div>
+                <div class="alert alert-danger mt-2" *ngIf="errorMessage" role="alert">
+                  {{errorMessage}}
+                </div>
+                <div class="alert alert-danger mt-2" *ngIf="validationMessage.length >= 1" role="alert">
+                  <ul>
+                    <li *ngFor="let message of validationMessage;">{{message}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,493 @@
+<div class="app-content content">
+  <div class="content-overlay"></div>
+  <div class="header-navbar-shadow"></div>
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <!-- users edit start -->
+      <section class="users-edit">
+        <div class="row">
+          <!-- Back Button Row -->
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header c-title-header">
+                <div class="col-8 col-md-6 px-0">
+                  <div class="card-title float-left">Publisher Details</div>
+                </div>
+                <div class="col-4 col-md-6 px-0">
+                  <div class="card-title float-right">
+                    <div class="actions action-btns float-left">
+                      <div class="dt-buttons btn-group">
+                        <button class="btn btn-outline-primary" (click)="gotobackpage()"><span><i class="feather icon-chevron-left"></i> Back</span></button> </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- END Back Button Row -->
+
+          <!-- Publisher Information Start -->
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <!-- users edit media object start -->
+                  <form [formGroup]="publisherForm">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="mb-2 mt-1"><i class="fas fa-user mr-25"></i>Publisher Information</h4>
+                    </div>
+                  </div>
+                  <div class="media mb-2">
+                    <a class="mr-2 my-25" >
+                      <img class="img-thumbnail img-circle" [src]="croppedImage" alt="" height="150" width="150">
+                      <input #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
+                      <input type="hidden" class="form-control" formControlName="image">
+                      <div class="text-danger" *ngIf="submitted && publisherForm.controls['image'].hasError('required')">Please upload publisher image</div>
+                      <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
+                       <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
+                    </a>
+                    <div class="media-body mt-50">
+                      <!-- <h4 class="media-heading">Angelo Sashington</h4> -->
+                      <div class="col-12 d-flex mt-1 px-0">
+                        <button (click)="publisherImage.click()" class="btn btn-primary d-none d-sm-block mr-75">Change</button>
+                        <!-- <button (click)="publisherImage.click()" class="btn btn-primary d-block d-sm-none mr-75"><i class="feather icon-edit-1"></i></button> -->
+                        <a (click)="removeImage()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
+                        <!-- <a (click)="removeImage()" class="btn btn-outline-danger d-block d-sm-none"><i class="feather icon-trash-2"></i></a> -->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- users edit media object ends -->
+                  <!-- users edit account form start -->
+
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Publisher Name	</label>
+                            <input type="text" class="form-control" placeholder="Publisher Name" formControlName="publisherName">
+                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('publisherName').touched) && publisherForm.controls['publisherName'].hasError('required')">Publisher Name Required</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Contact Name	</label>
+                            <input type="text" class="form-control" placeholder="Contact Name" formControlName="fullName" >
+                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('fullName').touched) && publisherForm.controls['fullName'].hasError('required')">Contact Name is Required</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Contact Email	</label>
+                            <input type="email" class="form-control" placeholder="Contact Info" formControlName="email">
+                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('required')">Contact Info is Required</div>
+                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('email')">Please Enter Valid Email</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Domain	</label>
+                            <input type="text" class="form-control" placeholder="Domain" formControlName="domain">
+                            <div class="text-danger">
+                                <div  *ngIf="(submitted || publisherForm.get('domain').touched) && publisherForm.controls['domain'].hasError('required')">Please Enter Domain</div>
+                                <div  *ngIf="f?.domain?.errors?.pattern">Please Enter Valid Domain</div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label>Status</label>
+                          <select formControlName="isActive" (change)="onChange($event.target.value)"  class="form-control">
+                            <option *ngFor="let status of Publisherstatus" [value]="status.value">{{status.name}}</option>
+
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label>Registered Date</label>
+                          <input class="form-control"  name="registeredDate" formControlName="registeredDate" (click)="d.toggle()" ngbDatepicker #d="ngbDatepicker">
+                          <!-- <input type="text"
+                          class="form-control"
+                          #dp="bsDatepicker"
+                          bsDatepicker formControlName="registeredDate"
+                          [bsValue]="bsValue" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',containerClass: 'theme-dark-blue'  }"> -->
+                          <!-- <input type="text" class="form-control birthdate-picker" value="DD/MM/YYYY" placeholder="DD/MM/YYYY"> -->
+                        </div>
+                      </div>
+
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Publisher Information END -->
+
+          <!-- sgRecast Credentials Start -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-content">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-key"></i> sgRecast Credentials</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="sgrecastForm">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgBaseURL</label>
+                            <input type="text" formControlName="sgBaseUrl" class="form-control" placeholder="sgBaseURL">
+                            <div class="text-danger">
+                              <div *ngIf="(submitted || sgrecastForm.get('sgBaseUrl').touched) && sgrecastForm.controls['sgBaseUrl'].hasError('required')">sgBaseURL Required</div>
+                              <div *ngIf="p?.sgBaseUrl?.errors?.pattern">Please Enter Valid Url</div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgUsername</label>
+                            <input type="text" formControlName="sgUsername" class="form-control" placeholder="sgUsername">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgUsername').touched) && sgrecastForm.controls['sgUsername'].hasError('required')">sgUsername Required</div>
+
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgClienSecret</label>
+                            <input type="text" formControlName="sgClientSecret" class="form-control" placeholder="sgClienSecret">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgClientSecret').touched) && sgrecastForm.controls['sgClientSecret'].hasError('required')">sgClienSecret required</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgGrantType</label>
+                            <input type="text" formControlName="sgGrantType" class="form-control" placeholder="sgGrantType">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgGrantType').touched) && sgrecastForm.controls['sgGrantType'].hasError('required')">sgGrantType required</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgClientId</label>
+                            <input type="text" formControlName="sgClientId" class="form-control" placeholder="sgClientId">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgClientId').touched) && sgrecastForm.controls['sgClientId'].hasError('required')">sgClientId required</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgScope</label>
+                            <input type="text" class="form-control" formControlName="sgScope" placeholder="sgScope">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgScope').touched) && sgrecastForm.controls['sgScope'].hasError('required')">sgScope required</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgPassword</label>
+                            <input type="text" class="form-control" formControlName="password" placeholder="sgPassword">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('password').touched) && sgrecastForm.controls['password'].hasError('required')">sgPassword required</div>
+
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>sgTokenType	</label>
+                            <input type="text" formControlName="sgTokenType" class="form-control" placeholder="sgTokenType">
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgTokenType').touched) && sgrecastForm.controls['sgTokenType'].hasError('required')">sgTokenType required</div>
+                            <div class="text-danger" *ngIf="(submitted || sgrecastForm.get('sgTokenType').touched) && sgrecastForm.controls['sgTokenType'].hasError('email')">Please Enter Valid Email</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- sgRecast Credentials END -->
+
+          <!-- Theme Information Start -->
+          <div class="col-12 col-md-6">
+            <div class="card">
+              <div class="card-content" style="height: 200px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 style="color:'2C2C2C'" class="mb-2 mt-1"><i class="fa fa-moon-o" aria-hidden="true"></i>Theme Info</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="themeForm">
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Primary Color</label>
+                            <input type="text" [style.background]="color" formControlName="headerColor"  [(colorPicker)]="color" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" [value]="color" (colorPickerClose)="onEventLog('colorPickerClose', $event)" (cpInputChange)="onEventLog('cpInputChange', $event)" (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" class="form-control" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                            <div class="text-danger" *ngIf="(submitted || themeForm.get('headerColor').touched) && themeForm.controls['headerColor'].hasError('required')">Primary color Required</div>
+
+                            <!-- <div class="text-danger" *ngIf="t?.headerColor?.errors?.required">Header Color Code Required</div> -->
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Footer</label>
+                            <input type="text" class="form-control" formControlName="footer" placeholder="Enter Color Code">
+                            <div class="text-danger" *ngIf="(submitted || themeForm.get('footer').touched) && themeForm.controls['footer'].hasError('required')">Footer Color Code required</div>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- sgRecast Credentials END -->
+
+          <!-- Theme Information Start -->
+          <div class="col-12 col-md-6">
+            <div class="card">
+              <div class="card-content" style="height: 200px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 col-md-12">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Ad Manager Header Script Tag</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="manageheaderForm"  >
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                          <div class="controls">
+                            <!-- <label>Header</label> -->
+                            <textarea class="form-control" formControlName="manageheader"  rows="3" placeholder="Paste Code here"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- sgRecast Credentials END -->
+
+          <!-- Sidebar 1 Start -->
+          <div class="col-12 col-md-3">
+            <div class="card">
+              <div class="card-content" style="height: 225px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 col-md-12">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 1</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="sidebar1Form">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                          <div class="controls">
+                            <!-- <label>Header</label> -->
+                            <textarea class="form-control" formControlName="sidebar1" rows="4" placeholder="Paste Code here"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar 1 END -->
+
+          <!-- Sidebar 2 Start -->
+          <div class="col-12 col-md-3">
+            <div class="card">
+              <div class="card-content" style="height: 225px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 col-md-12">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 2</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="sidebar2Form">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                          <div class="controls">
+                            <!-- <label>Header</label> -->
+                            <textarea class="form-control" formControlName="sidebar2" rows="4" placeholder="Paste Code here"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar 2 END -->
+
+          <!-- Sidebar 3 Start -->
+          <div class="col-12 col-md-3">
+            <div class="card">
+              <div class="card-content" style="height: 225px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 col-md-12">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 3</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="sidebar3Form">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                          <div class="controls">
+                            <!-- <label>Header</label> -->
+                            <textarea class="form-control" formControlName="sidebar3" rows="4" placeholder="Paste Code here"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar 3 END -->
+
+          <!-- Sidebar 4 Start -->
+          <div class="col-12 col-md-3">
+            <div class="card">
+              <div class="card-content" style="height: 225px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 col-md-12">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 4</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="sidebar4Form">
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                          <div class="controls">
+                            <!-- <label>Header</label> -->
+                            <textarea class="form-control" formControlName="sidebar4" rows="4" placeholder="Paste Code here"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar 4 END -->
+
+          <!-- Leaderboard 1 Start -->
+          <div class="col-12 col-md-12">
+            <div class="card">
+              <div class="card-content" style="height: 200px;">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Leaderboard 1</h4>
+                    </div>
+                  </div>
+                  <!-- users edit account form start -->
+                  <form [formGroup]="leaderboardForm" >
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                          <div class="controls">
+                            <!-- <label>Header</label> -->
+                            <textarea class="form-control" formControlName="leaderboard1" rows="3" placeholder="Paste Code here"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                  <div class="alert alert-danger mt-2 col-md-12" *ngIf="errorMessage" role="alert">
+                    {{errorMessage}}
+                  </div>
+                  <div class="alert alert-danger mt-2 col-md-12" *ngIf="validationMessage.length >= 1" role="alert">
+                    <ul>
+                      <li *ngFor="let message of validationMessage;">{{message}}</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Leaderboard 1 END -->
+        </div>
+
+        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
+          <button *ngIf="this.submitted === true" type="submit" [disabled]="!publisherForm.valid || !sgrecastForm.valid || !themeForm.valid" [ngClass]="{'disable':!publisherForm.valid || !sgrecastForm.valid || !themeForm.valid}" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> loading...
+          </button>
+          <button *ngIf="this.submitted === false" [ngClass]="{'disable':!publisherForm.valid || !sgrecastForm.valid || !themeForm.valid}"  [disabled]="!publisherForm.valid || !sgrecastForm.valid || !themeForm.valid" (click)="onSubmit()"  type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">Save
+            Changes</button>
+          <button type="reset" (click)="reset()" class="btn btn-outline-warning waves-effect waves-light">Reset</button>
+        </div>
+
+      </section>
+      <!-- users edit ends -->
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Publisher Image Modal-->
+<div class="modal fade" id="publisherImageModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crop Image</h5>
+      </div>
+      <div class="modal-body">
+        <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1 / 1"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Crop Image</button>
+      </div>
+    </div>
+  </div>
+</div>

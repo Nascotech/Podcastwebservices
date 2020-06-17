@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PublishersRoutingModule } from './publishers-routing.module';
+import { DefaultModule } from 'src/app/layouts/default/default.module';
+import {  ReactiveFormsModule } from '@angular/forms';
+import { ManagePublisherComponent } from './manage-publisher/manage-publisher.component';
+import { PublishersComponent } from './publishers.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    PublishersRoutingModule ,
+    DefaultModule,
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
+    ImageCropperModule,
+    ColorPickerModule,
+    NgbModule
+
+     // Added
+  ],
+  declarations: [ManagePublisherComponent,PublishersComponent]
+})
+export class PublishersModule { }

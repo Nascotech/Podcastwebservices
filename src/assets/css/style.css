@@ -1,0 +1,200 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+/* Begin Custom CSS */
+
+
+/* Sidebar */
+
+.main-menu ul.navigation-main>li:first-child {
+    margin-top: 1rem;
+}
+
+
+/* END Sidebar */
+
+
+/* Pagination */
+
+div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+
+div.dataTables_paginate ul.pagination {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+div.dataTables_paginate ul.pagination li a {
+    font-size: 0.8rem !important;
+}
+
+
+/* END Pagination */
+
+
+/*  */
+
+.card-header.c-card-header {
+    padding: 4rem 1.5rem 0;
+}
+
+.c-card-content {
+    padding-bottom: 4rem;
+}
+
+.dropdown-toggle::after {
+    border: none !important;
+    font-family: 'feather';
+    /* content: '\e842' !important; */
+    content: '' !important;
+    position: relative;
+    top: 1px;
+    right: 0;
+    left: 0.714rem;
+    padding: 0;
+    margin: 0;
+    vertical-align: 0;
+}
+
+.btn-border-primary {
+    border: 1px solid #7367F0;
+    background-color: transparent;
+    color: #7367F0;
+}
+
+table.data-user-list.dataTable tbody tr {
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 4px 20px 0;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.c-action-filters {
+    display: inline-flex;
+}
+
+.has-search .form-control {
+    margin-left: 1rem;
+}
+
+.has-search .form-control-search {
+    border-radius: 1.428rem;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 5rem;
+    height: 2.375rem;
+    line-height: 2.75rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.c-form-control {
+    padding: 0.7rem 2.5rem;
+    border-radius: 1.428rem;
+    height: 3rem;
+}
+
+.product-action a {
+    color: #626262;
+}
+
+.product-action a:hover {
+    color: #7367F0;
+}
+
+.navbar-brand h2 {
+    font-size: 1.275rem;
+}
+
+
+/* datalist buttons */
+
+.dt-buttons .btn-outline-primary {
+    padding: 0.9rem 1rem;
+}
+
+
+/* END Data list buttons */
+
+
+/* data list table */
+
+.p-img img {
+    width: 50px;
+    margin-right: 0.95rem;
+}
+
+.p-em-name p {
+    margin-bottom: 0.4rem;
+}
+
+span.d-ex-link {
+    margin-left: 5px;
+}
+
+table.dataTable tbody tr.selected a,
+table.dataTable tbody th.selected a,
+table.dataTable tbody td.selected a {
+    color: #7367f0 !important;
+}
+
+
+/* END Data list table */
+
+
+/* Card */
+
+.c-title-header {
+    padding: 0.7rem 1.5rem !important;
+}
+
+.c-card-info {
+    height: 400px;
+}
+
+.cus-code,
+.card-body pre {
+    background-color: transparent;
+    ;
+}
+
+.card-sidebar {
+    height: 200px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    /* IE 11 */
+    scrollbar-width: none;
+    /* Firefox 64 */
+    scroll-behavior: smooth;
+}
+
+.card-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.card-sidebar::-moz-scrollbars {
+    display: none;
+}
+
+
+/* END Card */

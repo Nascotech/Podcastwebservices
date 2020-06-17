@@ -1,0 +1,166 @@
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+<!-- BEGIN: Header-->
+<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu floating-nav navbar-light navbar-shadow">
+  <div class="navbar-wrapper">
+    <div class="navbar-container content">
+      <div class="navbar-collapse" id="navbar-mobile">
+        <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+          <ul class="nav navbar-nav">
+            <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+              class="ficon feather icon-menu"></i></a></li>
+          </ul>
+        </div>
+        <ul class="nav navbar-nav float-right">
+          <li class="dropdown dropdown-user nav-item">
+            <a class="dropdown-toggle nav-link dropdown-user-link" data-toggle="dropdown">
+              <div class="user-nav d-sm-flex d-none">
+                <span class="user-name text-bold-600">{{currentuser.response.userInfo.firstName}} {{currentuser.response.userInfo.lastName}}</span>
+                <span class="user-status">{{currentuser.response.userInfo.email}}</span>
+              </div>
+              <span><img class="round" src="assets/img/noavatar.png"
+                         alt="avatar" height="40" width="40"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a  data-toggle="modal" data-target="#changeAdminPassword"  class="dropdown-item"><i class="feather icon-lock"></i> Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="feather icon-power"></i> Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+  <div class="navbar-header">
+    <ul class="nav navbar-nav flex-row">
+      <li class="nav-item mr-auto">
+        <a class="navbar-brand" routerLink="/dashboard">
+          <div class="brand-logo"></div>
+          <h2 class="brand-text mb-0">Atunwa Digital</h2>
+        </a>
+      </li>
+      <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+        class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i
+        class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary"
+        data-ticon="icon-disc"></i></a></li>
+    </ul>
+  </div>
+  <div class="shadow-bottom"></div>
+  <div class="main-menu-content">
+    <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+      <li class="nav-item active"><a routerLink="/dashboard"><i class="feather icon-home"></i><span class="menu-title"
+      >Dashboard</span></a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- END: Main Menu-->
+
+<router-outlet></router-outlet>
+
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
+
+<!-- BEGIN: Footer-->
+<footer class="footer footer-static footer-light">
+  <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2020<a
+    class="text-bold-800 grey darken-2" href="https://1.envato.market/pixinvent_portfolio"
+    target="_blank">Atunwa Digital,</a>All rights Reserved</span>
+    <button class="btn btn-primary btn-icon scroll-top" type="button"><i
+      class="feather icon-arrow-up"></i></button>
+  </p>
+</footer>
+<!-- END: Footer-->
+
+</body>
+
+
+<!-- Change admin password model-->
+<div class="modal fade" id="changeAdminPassword" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="changePasswordForm">
+          <div class="form-group">
+            <label>Old Password</label>
+            <input type="password" class="form-control" formControlName="oldPassword">
+            <div class="text-danger" *ngIf="(submitted || changePasswordForm.controls['oldPassword'].touched) && changePasswordForm.controls['oldPassword'].hasError('required')">Password is required.</div>
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" class="form-control" formControlName="newPassword" aria-describedby="passwordHelpBlock" [ngClass]="{'is-invalid':newPassword.invalid && (newPassword.dirty || newPassword.touched)}">
+            <password-strength-meter [password]="newPassword.value" [enableFeedback]="true"></password-strength-meter>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('minlength') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must be at least 8 characters!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasNumber') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 number!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasCapitalCase') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 in Capital Case!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSmallCase') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 Letter in Small Case!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSpecialCharacters') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 Special Character!
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{'is-invalid':confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)}">
+            <div class="text-danger" *ngIf="(changePasswordForm.controls['confirmPassword'].touched) && changePasswordForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
+            <div class="text-danger" *ngIf="(changePasswordForm.controls['confirmPassword'].touched) && changePasswordForm.controls['confirmPassword'].hasError('mustMatch')">Passwords does't match with confirm password.</div>
+          </div>
+        </form>
+      </div>
+      <div class="alert alert-danger mt-2" *ngIf="errorMessage" role="alert">
+        <p class="text-center text-danger">{{errorMessage}}</p>
+      </div>
+      <div class="alert alert-danger mt-2" *ngIf="validationMessage.length >= 1" role="alert">
+        <ul>
+          <li *ngFor="let message of validationMessage;">{{message}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" id="submit" class="btn btn-primary float-right" (click)="changePassword()" value="Change Password">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" (click)="Logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
