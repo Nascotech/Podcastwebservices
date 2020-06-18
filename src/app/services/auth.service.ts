@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of, throwError } from 'rxjs';
+import { of, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { CoreHttpService } from 'src/app/services/core-http.service';
@@ -12,9 +12,7 @@ import { Router } from '@angular/router';
 export class AuthService {
     private baseURL = environment.base_url;
     changepasswordURL = this.baseURL + '/api/changePassword';
-
     constructor(private httpService: CoreHttpService,private router:Router) {
-
     }
 
     login(data) {
@@ -27,6 +25,11 @@ export class AuthService {
     changeAdminPassword(data) {
       return this.httpService.httpPostRequest(this.changepasswordURL,data);
     }
+
+    logout() {
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('accesstoken');
+  }
 
 
 }

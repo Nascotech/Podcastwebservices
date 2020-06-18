@@ -1,10 +1,8 @@
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpUserEvent, HttpEvent} from '@angular/common/http';
 import {Observable} from 'rxjs';
-// import 'rxjs/add/operator/do';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/observable/throw';
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -13,21 +11,19 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
     if (req.headers.get('No-Auth') === 'True') {
       return next.handle(req.clone());
     }
-
-    if (localStorage.getItem('accesstoken') != null) {
+    const token = JSON.parse(localStorage.getItem('accesstoken'));
+    if(token) {
       req = req.clone({
         setHeaders: {
-          //Authorization: `${JSON.parse(localStorage.getItem('accesstoken'))}`,
-          'httpx-thetatech-accesstoken': `${JSON.parse(localStorage.getItem('accesstoken'))}`
-          // 'language': localStorage.getItem("lan")
+          //httpx-thetatech-accesstoken: `${JSON.parse(localStorage.getItem('accesstoken'))}`,
+           'httpx-thetatech-accesstoken': token,
         }
       });
     } else {
-      this.router.navigate(['/']);
+      return next.handle(req);
     }
     return next.handle(req);
   }

@@ -64,6 +64,7 @@ export class DefaultComponent implements OnInit {
   Logout()
   {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('accesstoken');
     $('#logoutModal').modal('hide');
     this.router.navigate(['/']);
   }

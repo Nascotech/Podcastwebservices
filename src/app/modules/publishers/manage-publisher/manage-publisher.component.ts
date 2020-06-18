@@ -27,14 +27,6 @@ export class ManagePublisherComponent implements OnInit {
   rgbaColor: Object;
   imageChangedEvent: any = '';
   publisherForm:FormGroup;
-  sgrecastForm:FormGroup;
-  leaderboardForm:FormGroup;
-  manageheaderForm:FormGroup;
-  sidebar4Form:FormGroup;
-  sidebar3Form:FormGroup;
-  sidebar2Form:FormGroup;
-  themeForm:FormGroup;
-  sidebar1Form:FormGroup;
   submitted = false;
   errorMessage: string;
   validationMessage = [];
@@ -72,11 +64,7 @@ export class ManagePublisherComponent implements OnInit {
         domain:['',[Validators.required,Validators.pattern(this.reg)]],
         image:['',Validators.required],
         isActive:[1],
-        registeredDate:['']
-
-      });
-
-      this.sgrecastForm= this.fb.group({
+        registeredDate:[''],
         sgBaseUrl:['',[Validators.required,Validators.pattern(this.reg)]],
         sgUsername:['',Validators.required],
         sgClientSecret:['',Validators.required],
@@ -84,46 +72,27 @@ export class ManagePublisherComponent implements OnInit {
         sgClientId:['',Validators.required],
         sgScope:['',Validators.required],
         password:['',Validators.required],
-        sgTokenType:['',Validators.required]
+        sgTokenType:['',Validators.required],
+        leaderboard1:[],
+        manageheader:[],
+        sidebar4:[],
+        sidebar3:[],
+        sidebar2:[],
+        sidebar1:[],
+        headerColor:['',Validators.required]
       });
-      this.leaderboardForm= this.fb.group({
-        leaderboard1:[]
-      });
-      this.manageheaderForm=this.fb.group({
-        manageheader:[]
-      });
-      this.sidebar4Form=this.fb.group({
-        sidebar4:[]
-      });
-      this.sidebar3Form=this.fb.group({
-        sidebar3:[]
-      });
-      this.sidebar2Form=this.fb.group({
-        sidebar2:[]
-      });
-      this.sidebar1Form=this.fb.group({
-        sidebar1:[]
-      });
-      this.themeForm=this.fb.group({
-        headerColor:['',Validators.required],
-        
-      })
      }
 
 
   ngOnInit() {
-    this.imgURL=environment.img_uri;
-    
+    this.imgURL=environment.img_uri; 
     this.route.paramMap.subscribe( paramMap => {
-
       this.editid = paramMap.get('id');
       this.publisherInfo=JSON.parse(localStorage.getItem('publisherdetail'));
-      
       if(this.editid != null && this.publisherInfo != null)
       {
         this.croppedImage= this.imgURL+this.publisherInfo.photo.path;
         this.getDateFormat(this.publisherInfo.registeredDate);
-        //this.finaldate=moment(this.publisherInfo.registeredDate).format('DD-MM-YYYY');
         this.finalcolor=this.publisherInfo.headerColor;
         this.publisherForm.patchValue({
           "publisherName":this.publisherInfo.publisherName,
@@ -132,9 +101,6 @@ export class ManagePublisherComponent implements OnInit {
           "domain":this.publisherInfo.domain,
           "isActive":this.publisherInfo.isActive,
           "image":this.publisherInfo.photo ? this.publisherInfo.photo.fileName : 'assets/img/noavatar.png',
-          // "registeredDate":moment(this.publisherInfo.registeredDate).format('DD-MM-YYYY')
-        });
-        this.sgrecastForm.patchValue({
           "sgBaseUrl":this.publisherInfo.sgBaseUrl,
           "sgUsername":this.publisherInfo.sgUsername,
           "sgClientSecret":this.publisherInfo.sgClientSecret,
@@ -142,56 +108,29 @@ export class ManagePublisherComponent implements OnInit {
           "sgClientId":this.publisherInfo.sgClientId,
           "sgScope":this.publisherInfo.sgScope,
           "sgTokenType":this.publisherInfo.sgTokenType,
-          "password":this.publisherInfo.password
-        });
-        this.themeForm.patchValue({
-          "headerColor":this.publisherInfo.headerColor
-        });
-        this.manageheaderForm.patchValue({
-          "manageheader":atob(this.publisherInfo.headerScript)
-        });
-        this.sidebar1Form.patchValue({
-          "sidebar1":atob(this.publisherInfo.sidebar1)
-        });
-        this.sidebar2Form.patchValue({
-          "sidebar2":atob(this.publisherInfo.sidebar2)
-        });
-        this.sidebar3Form.patchValue({
-          "sidebar3":atob(this.publisherInfo.sidebar3)
-        });
-        this.sidebar4Form.patchValue({
-          "sidebar4":atob(this.publisherInfo.sidebar4)
-        });
-        this.leaderboardForm.patchValue({
+          "password":this.publisherInfo.password,
+          "headerColor":this.publisherInfo.headerColor,
+          "manageheader":atob(this.publisherInfo.headerScript),
+          "sidebar1":atob(this.publisherInfo.sidebar1),
+          "sidebar2":atob(this.publisherInfo.sidebar2),
+          "sidebar3":atob(this.publisherInfo.sidebar3),
+          "sidebar4":atob(this.publisherInfo.sidebar4),
           "leaderboard1":atob(this.publisherInfo.leaderboard1)
-        })
+        });
       }
-     
-     // this.finaldate=moment(this.publisherForm.get('registeredDate').value).format('YYYY-MM-DD')
-
   })
   }
-
 
   get f(){
     return this.publisherForm.controls;
   }
 
-  get p(){
-    return this.sgrecastForm.controls;
-  }
-  get t()
-  {
-    return this.themeForm.controls;
-  }
-
- 
   onSubmit()
   {
     if(this.editid === null)
     {
       this.submitted = true;   
-      if (!this.publisherForm.valid || !this.sgrecastForm.valid || !this.themeForm.valid) {
+      if (!this.publisherForm.valid) {
         return;
       }
       else
@@ -205,22 +144,22 @@ export class ManagePublisherComponent implements OnInit {
           domain:this.publisherForm.get('domain').value,
           isActive:this.publisherForm.get('isActive').value,
           registeredDate:this.registeredDate,
-          sgBaseUrl:this.sgrecastForm.get('sgBaseUrl').value,
-          sgClientId:this.sgrecastForm.get('sgClientId').value,
-          sgScope:this.sgrecastForm.get('sgScope').value,
-          sgGrantType:this.sgrecastForm.get('sgGrantType').value,
-          sgClientSecret:this.sgrecastForm.get('sgClientSecret').value,
-          password:this.sgrecastForm.get('password').value,
-          sgUsername:this.sgrecastForm.get('sgUsername').value,
-          sgTokenType:this.sgrecastForm.get('sgTokenType').value,
+          sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
+          sgClientId:this.publisherForm.get('sgClientId').value,
+          sgScope:this.publisherForm.get('sgScope').value,
+          sgGrantType:this.publisherForm.get('sgGrantType').value,
+          sgClientSecret:this.publisherForm.get('sgClientSecret').value,
+          password:this.publisherForm.get('password').value,
+          sgUsername:this.publisherForm.get('sgUsername').value,
+          sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-          headerScript:btoa(this.manageheaderForm.get('manageheader').value),
-          leaderboard1:btoa(this.leaderboardForm.get('leaderboard1').value),
-          sidebar1:btoa(this.sidebar1Form.get('sidebar1').value),
-          sidebar2:btoa(this.sidebar2Form.get('sidebar2').value),
-          sidebar3:btoa(this.sidebar3Form.get('sidebar3').value),
-          sidebar4:btoa(this.sidebar4Form.get('sidebar4').value)
+          headerScript:btoa(this.publisherForm.get('manageheader').value),
+          leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
+          sidebar1:btoa(this.publisherForm.get('sidebar1').value),
+          sidebar2:btoa(this.publisherForm.get('sidebar2').value),
+          sidebar3:btoa(this.publisherForm.get('sidebar3').value),
+          sidebar4:btoa(this.publisherForm.get('sidebar4').value)
   
         }
         this.publisherService.savePublisher(data,this.finalImage,this.registeredDate).subscribe((data:any)=>{
@@ -246,7 +185,6 @@ export class ManagePublisherComponent implements OnInit {
             this.submitted = false;
             this.router.navigate(['/dashboard/1']);
           } else {
-           // this.errorMessage = error.error.errorMsg;
           }
         })
       }
@@ -268,22 +206,22 @@ export class ManagePublisherComponent implements OnInit {
           email:this.publisherForm.get('email').value,
           domain:this.publisherForm.get('domain').value,
           isActive:this.publisherForm.get('isActive').value,
-          sgBaseUrl:this.sgrecastForm.get('sgBaseUrl').value,
-          sgClientId:this.sgrecastForm.get('sgClientId').value,
-          sgScope:this.sgrecastForm.get('sgScope').value,
-          sgGrantType:this.sgrecastForm.get('sgGrantType').value,
-          sgClientSecret:this.sgrecastForm.get('sgClientSecret').value,
-          password:this.sgrecastForm.get('password').value,
-          sgUsername:this.sgrecastForm.get('sgUsername').value,
-          sgTokenType:this.sgrecastForm.get('sgTokenType').value,
+          sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
+          sgClientId:this.publisherForm.get('sgClientId').value,
+          sgScope:this.publisherForm.get('sgScope').value,
+          sgGrantType:this.publisherForm.get('sgGrantType').value,
+          sgClientSecret:this.publisherForm.get('sgClientSecret').value,
+          password:this.publisherForm.get('password').value,
+          sgUsername:this.publisherForm.get('sgUsername').value,
+          sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-          headerScript:btoa(this.manageheaderForm.get('manageheader').value),
-          leaderboard1:btoa(this.leaderboardForm.get('leaderboard1').value),
-          sidebar1:btoa(this.sidebar1Form.get('sidebar1').value),
-          sidebar2:btoa(this.sidebar2Form.get('sidebar2').value),
-          sidebar3:btoa(this.sidebar3Form.get('sidebar3').value),
-          sidebar4:btoa(this.sidebar4Form.get('sidebar4').value)
+          headerScript:btoa(this.publisherForm.get('manageheader').value),
+          leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
+          sidebar1:btoa(this.publisherForm.get('sidebar1').value),
+          sidebar2:btoa(this.publisherForm.get('sidebar2').value),
+          sidebar3:btoa(this.publisherForm.get('sidebar3').value),
+          sidebar4:btoa(this.publisherForm.get('sidebar4').value)
   
         }
         this.publisherService.editPublisher(data,this.finalImage,this.editid,this.registeredDate).subscribe((data:any)=>{
@@ -314,10 +252,7 @@ export class ManagePublisherComponent implements OnInit {
         })
       }
     }
-
-    
   }
-
 
   getDateFormat(date) {
     this.registeredDate = date;
@@ -389,13 +324,13 @@ export class ManagePublisherComponent implements OnInit {
     this.finalcolor=data; 
     if(this.finalcolor?.color == '' || null)
     {
-      this.themeForm.get('headerColor').setValidators(Validators.required);
-      this.themeForm.get('headerColor').updateValueAndValidity(); 
+      this.publisherForm.get('headerColor').setValidators(Validators.required);
+      this.publisherForm.get('headerColor').updateValueAndValidity(); 
 
     }
     else{
-      this.themeForm.get('headerColor').clearValidators();
-      this.themeForm.get('headerColor').updateValueAndValidity(); 
+      this.publisherForm.get('headerColor').clearValidators();
+      this.publisherForm.get('headerColor').updateValueAndValidity(); 
 
     }
 
