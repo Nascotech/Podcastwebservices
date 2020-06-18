@@ -1,6 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreHttpService } from '../services/core-http.service';
+import { AuthGuard } from './guard/auth.guard';
 
 
 
@@ -10,7 +11,7 @@ import { CoreHttpService } from '../services/core-http.service';
     
   ],
   providers: [
- 
+    AuthGuard
  
   ]
 })
