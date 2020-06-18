@@ -17,10 +17,12 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = JSON.parse(localStorage.getItem('accesstoken'));
     if(token) {
       req = req.clone({
-        setHeaders: {
-          //httpx-thetatech-accesstoken: `${JSON.parse(localStorage.getItem('accesstoken'))}`,
-           'httpx-thetatech-accesstoken': token,
-        }
+        headers:req.headers.set('httpx-thetatech-accesstoken',token) 
+        // setHeaders: {
+        //   'httpx-thetatech-accesstoken': `${JSON.parse(localStorage.getItem('accesstoken'))}`,
+        //   //  'httpx-thetatech-accesstoken': token,
+        //   //  'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With, access_token'
+        // }
       });
     } else {
       return next.handle(req);
