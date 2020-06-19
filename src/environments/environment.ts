@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  base_url: 'https://api.atunwapodcasts.com:7000',
-  img_uri: 'https://api.atunwapodcasts.com/'
+  base_url: 'https://atunwapodcasts.com:7000',
+  img_uri: 'https://atunwapodcasts.com/api/'
 };
 
 /*
