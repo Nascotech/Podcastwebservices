@@ -72,8 +72,8 @@
                   <img [src]="publisher?.photo ? photoUrl + publisher?.photo?.path : 'assets/img/noavatar.png'" onError="this.src='assets/img/noavatar.png'" class="td-img rounded-circle" alt="Publisher Podcast">
                 </div>
               </td>
-              <td class="product-name ">
-                <a (click)="gotodetailpage(publisher)">
+              <td class="product-name">
+                <a href="javascript:void(0)" (click)="gotodetailpage(publisher)">
                  {{publisher?.publisherName}}
                 </a>
               </td>
@@ -106,24 +106,20 @@
                 </div>
               </td>
               <td>
-                
+
                 <span *ngIf="publisher?.registeredDate" class="text-superscript">
                   {{publisher?.registeredDate  | date: "d"}}
                   <sup>{{(publisher?.registeredDate | date: "d") | dateSuffix}}</sup>
                   {{publisher?.registeredDate  | date: "MMM"}},
                   {{publisher?.registeredDate  | date: "yyyy"}}
-              </span>
+                </span>
                 <!-- 28<sup>th</sup> Apr, 2020 -->
               </td>
               <td class="product-action">
-                <!-- <a (click)="gotoeditpage(publisher)"><span class="action-edit"><i class="feather icon-edit"></i></span></a> -->
                 <button (click)="gotoeditpage(publisher)" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
-                <button (click)="removePublisher(publisher.id)" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-trash"></i></button>
-
-                <!-- <a (click)="removePublisher(publisher.id)" class="action-delete"><i class="feather icon-trash"></i></a> -->
+                <button (click)="removePublisher(publisher.id)" type="button" class="btn btn-icon btn-outline-danger mr-1 mb-1 waves-effect waves-light"><i class="feather icon-trash"></i></button>
               </td>
-            </tr>
-
+              </tr>
             </tbody>
           </table>
         </div>
@@ -131,22 +127,14 @@
 
         <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
           <ngb-pagination [maxSize]="5" [rotate]="true"
-                                  [(page)]="finalPage"
-                                  [pageSize]="pageSize"
-                                  [collectionSize]="totalLength"
-                                  (pageChange)="setPaginationPage($event)">
-                              </ngb-pagination>
-          <!-- <ul class="pagination">
-            <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-            <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-            <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-            <li class="paginate_button page-item next" id="DataTables_Table_0_next"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
-          </ul> -->
+            [(page)]="finalPage"
+            [pageSize]="pageSize"
+            [collectionSize]="totalLength"
+            (pageChange)="setPaginationPage($event)">
+          </ngb-pagination>
         </div>
-
       </section>
       <!-- Data list view end -->
-
     </div>
   </div>
 </div>

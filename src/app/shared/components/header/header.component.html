@@ -1,39 +1,35 @@
 <!-- BEGIN: Header-->
-<body class="vertical-layout vertical-menu-modern 2-columns footer-static pace-done navbar-static menu-expanded">
 <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-light navbar-shadow fixed-top">
   <div class="navbar-wrapper">
     <div class="navbar-container content">
       <div class="navbar-collapse" id="navbar-mobile">
         <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
-          <div class="navbar-header expanded">
-            <ul class="nav navbar-nav flex-row">
-              <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html">
-                  <div class="brand-logo"></div>
-                  <h2 class="brand-text mb-0">Vuexy</h2></a></li>
-              <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0 shepherd-modal-target" data-toggle="collapse"><i class="icon-x d-block d-xl-none font-medium-4 primary toggle-icon feather icon-disc"></i><i class="toggle-icon font-medium-4 d-none d-xl-block collapse-toggle-icon primary feather icon-disc" data-ticon="icon-disc" tabindex="0"></i></a></li>
-            </ul>
-          </div>
-          <!-- <ul class="nav navbar-nav">
-            <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
-              class="ficon feather icon-menu"></i></a></li>
-          </ul> -->
-         
+          <ul class="nav navbar-nav">
+            <li class="nav-item mobile-menu d-xl-none mr-auto">
+              <a class="nav-link nav-menu-main menu-toggle hidden-xs is-active" href="javascript:void(0);">
+                Atunwa Digital
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav flex-row">
+          <li class="nav-item mr-auto"><a class="navbar-brand" href="javascript:void(0);">
+          <div class="brand-logo"></div>
+          <h2 class="brand-text mb-0">Atunwa Digital</h2></a></li>
+        </ul>
         </div>
         <ul class="nav navbar-nav float-right">
           <li class="dropdown dropdown-user nav-item">
-            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+            <a class="dropdown-toggle nav-link dropdown-user-link" data-toggle="dropdown">
               <div class="user-nav d-sm-flex d-none">
-                <span class="user-name text-bold-600">John Doe</span>
-                <span class="user-status">Available</span>
+                <span class="user-name text-bold-600">{{currentuser.response.userInfo.firstName}} {{currentuser.response.userInfo.lastName}}</span>
+                <span class="user-status">{{currentuser.response.userInfo.email}}</span>
               </div>
-              <span><img class="round" src="assets/app-assets/images/portrait/small/avatar-s-11.jpg"
-                         alt="avatar" height="40" width="40"></span>
+              <span><img class="round" src="assets/img/noavatar.png" alt="avatar" height="40" width="40"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a><a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My
-              Inbox</a><a class="dropdown-item" href="app-todo.html"><i
-              class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a>
-              <div class="dropdown-divider"></div><a class="dropdown-item" ><i
-                class="feather icon-power"></i> Logout</a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a  data-toggle="modal" data-target="#changeAdminPassword"  class="dropdown-item"><i class="feather icon-lock"></i> Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="feather icon-power"></i> Logout</a>
             </div>
           </li>
         </ul>
@@ -41,5 +37,89 @@
     </div>
   </div>
 </nav>
-</body>
-<!-- END: Header-->
+
+<!-- Change admin password model-->
+<div class="modal fade" id="changeAdminPassword" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="changePasswordForm">
+          <div class="form-group">
+            <label>Old Password</label>
+            <input type="password" class="form-control" formControlName="oldPassword">
+            <div class="text-danger" *ngIf="(submitted || changePasswordForm.controls['oldPassword'].touched) && changePasswordForm.controls['oldPassword'].hasError('required')">Password is required.</div>
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" class="form-control" formControlName="newPassword" aria-describedby="passwordHelpBlock" [ngClass]="{'is-invalid':newPassword.invalid && (newPassword.dirty || newPassword.touched)}">
+            <password-strength-meter [password]="newPassword.value" [enableFeedback]="true"></password-strength-meter>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('minlength') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must be at least 8 characters!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasNumber') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 number!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasCapitalCase') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 in Capital Case!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSmallCase') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 Letter in Small Case!
+            </label>
+            <label class="col" [ngClass]="changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+              <i class="{{ changePasswordForm.controls['newPassword'].hasError('required') || changePasswordForm.controls['newPassword'].hasError('hasSpecialCharacters') ? 'fas fa-times-circle' : 'fas fa-check-circle' }}"></i>
+              Must contain at least 1 Special Character!
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{'is-invalid':confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)}">
+            <div class="text-danger" *ngIf="(changePasswordForm.controls['confirmPassword'].touched) && changePasswordForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
+            <div class="text-danger" *ngIf="(changePasswordForm.controls['confirmPassword'].touched) && changePasswordForm.controls['confirmPassword'].hasError('mustMatch')">Passwords does't match with confirm password.</div>
+          </div>
+        </form>
+      </div>
+      <div class="alert alert-danger mt-2" *ngIf="errorMessage" role="alert">
+        <p class="text-center text-danger">{{errorMessage}}</p>
+      </div>
+      <div class="alert alert-danger mt-2" *ngIf="validationMessage.length >= 1" role="alert">
+        <ul>
+          <li *ngFor="let message of validationMessage;">{{message}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" id="submit" class="btn btn-primary float-right" (click)="changePassword()" value="Change Password">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" (click)="Logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

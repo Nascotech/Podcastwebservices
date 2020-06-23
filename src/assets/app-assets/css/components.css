@@ -22,7 +22,7 @@ html body .content {
   -webkit-backface-visibility : hidden;
           backface-visibility : hidden;
   min-height : calc(100% - 4rem);
-  margin-left : 260px;
+  margin-left : 0px;
 }
 html body .content.app-content {
   overflow : hidden;

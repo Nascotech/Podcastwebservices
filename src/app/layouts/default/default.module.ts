@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
-
 import {DefaultComponent} from './default.component';
 import { DashboardComponent } from '../../modules/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from '../../modules/forgot-password/forgot-password.component';
@@ -11,9 +10,7 @@ import { PublishersComponent } from '../../modules/publishers/publishers.compone
 import { ManagePublisherComponent } from '../../modules/publishers/manage-publisher/manage-publisher.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { PublishersModule } from 'src/app/modules/publishers/publishers.module';
-
 
 @NgModule({
   declarations: [
@@ -21,9 +18,6 @@ import { PublishersModule } from 'src/app/modules/publishers/publishers.module';
     DashboardComponent,
     ForgotPasswordComponent,
     DateSuffix
-    
-    
-    
   ],
   imports: [
     CommonModule,
@@ -32,9 +26,6 @@ import { PublishersModule } from 'src/app/modules/publishers/publishers.module';
     ReactiveFormsModule,
     SharedModule,
     NgbModule,
-    PasswordStrengthMeterModule,
-    
-    
   ],
   exports:[
     DateSuffix

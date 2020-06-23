@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit {
 
   redirectToPage(link:string) {
     if(!link) return '';
-      return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;    
-    
+      return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;
+
   }
 
   gotodetailpage(publisher)
@@ -61,16 +61,9 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('publisherdetail',JSON.stringify(publisher))
   }
 
-  getPublishers()
-  {
+  getPublishers() {
     this.publisherService.getPublisherlist(this.selectedPage, this.pageSize, this.keyword).subscribe(data=>{
-      this.publisherList=data.response.list;
-      // console.log(this.publisherList);
-      // for(var i=0;i<this.publisherList.length;i++)
-      // {
-      //    this.finaldate = moment(this.publisherList[i].registeredDate).format('YYYY-MM-DD');
-        
-      // }
+      this.publisherList = data.response.list;
       this.totalLength = data.response.count;
       this.finalPage = this.selectedPage;
       this.collectionSize = data.response.list.length;
@@ -96,9 +89,8 @@ export class DashboardComponent implements OnInit {
     this.getPublishers();
   }
 
-  removePublisher(publisherId)
-  {
-    this.selectedPublisherId=publisherId;
+  removePublisher(publisherId) {
+    this.selectedPublisherId = publisherId;
     $('#removePublisherModal').modal('show');
   }
 
@@ -108,30 +100,25 @@ export class DashboardComponent implements OnInit {
       this.getPublishers();
       if (data.errorMsg === "") {
         this.toastr.success('Publisher Deleted successfully.', 'Success');
-        this.getPublishers();
+        this.ngOnInit();
       } else {
         this.toastr.error(data.errorMsg, 'Failure');
       }
-    }, 
+    },
     (error) => {
       this.tostrService.error(error);
     })
   }
 
-  gotoeditpage(publisher)
-  {
-    let id= publisher.id;
+  gotoeditpage(publisher) {
+    let id = publisher.id;
     this.router.navigate(['/edit/'+id]);
     localStorage.setItem("publisherdetail",JSON.stringify(publisher));
-    
   }
 
-  gotoviewPage(publisher)
-  {
+  gotoviewPage(publisher) {
     let pid = publisher.id;
     this.router.navigate(['/view/'+pid]);
     localStorage.setItem("publisherdetail",JSON.stringify(publisher));
-
   }
-
 }

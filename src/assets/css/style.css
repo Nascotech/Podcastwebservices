@@ -198,3 +198,7 @@ table.dataTable tbody td.selected a {
 
 
 /* END Card */
+
+.header-navbar.fixed-top {
+  left: 0px !important;
+}

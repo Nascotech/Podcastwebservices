@@ -12,7 +12,7 @@ import { CommonService } from './common.service';
 })
 export class PublisherService {
   private baseURL = environment.base_url;
-   getPublisherURL = this.baseURL + '/api/publisher'; 
+   getPublisherURL = this.baseURL + '/api/publisher';
    savePublisherURL = this.baseURL + '/api/publisher';
    removePublisherURL = this.baseURL + '/api/removePublisher/';
    editPublisherURL = this.baseURL + '/api/publisher';
@@ -21,14 +21,14 @@ export class PublisherService {
     private corehttpService:CoreHttpService,
     private http: HttpClient){}
 
-  getPublisherlist(pageNumber, size, keyWord, pagination = 6):Observable<any> {
+  getPublisherlist(pageNumber, size, keyWord, pagination = true):Observable<any> {
     return this.corehttpService.httpGetRequest<any>(this.getPublisherURL + '?pageNo=' +pageNumber + '&pageSize=' +size + '&keyword=' +keyWord + '&isPagination=' +pagination);
   }
 
   // savePublisher(data,image):Observable<any>{
   //   data.append('image',image);
   //   console.log(data);
-    
+
   //   return this.corehttpService.httpPostRequest(this.savePublisherURL,data)
   // }
 
@@ -102,8 +102,8 @@ export class PublisherService {
 
   removePublisher(id):Observable<any>{
     return this.corehttpService.httpGetRequest(this.removePublisherURL+id)
-    
-    
+
+
   }
 
 

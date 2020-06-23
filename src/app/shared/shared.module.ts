@@ -5,11 +5,11 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {RouterModule} from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    
     FooterComponent
   ],
   imports: [
@@ -17,10 +17,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    PasswordStrengthMeterModule,
   ],
   exports: [
     HeaderComponent,
-    
     FooterComponent
   ]
 })
