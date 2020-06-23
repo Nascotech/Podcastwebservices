@@ -5,6 +5,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { PublisherService } from 'src/app/services/publisher.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 declare var $: any;
 
 
@@ -26,11 +27,13 @@ export class DashboardComponent implements OnInit {
   model: any = {};
   selectedPublisherId: string;
   photoUrl: string;
+  finaldate:any;
   constructor(private toastr: ToastrService,
     private router:Router,
     private commonService:CommonService,
     private route:ActivatedRoute,
-    private publisherService:PublisherService) { }
+    private publisherService:PublisherService,
+    private tostrService:ToastrService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => this.pageNumber = params['page']);
@@ -46,22 +49,36 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/publisher/add'])
   }
 
+  redirectToPage(link:string) {
+    if(!link) return '';
+      return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;    
+    
+  }
+
+  gotodetailpage(publisher)
+  {
+    this.router.navigate(['/view/'+publisher.id]);
+    localStorage.setItem('publisherdetail',JSON.stringify(publisher))
+  }
+
   getPublishers()
   {
     this.publisherService.getPublisherlist(this.selectedPage, this.pageSize, this.keyword).subscribe(data=>{
       this.publisherList=data.response.list;
+      // console.log(this.publisherList);
+      // for(var i=0;i<this.publisherList.length;i++)
+      // {
+      //    this.finaldate = moment(this.publisherList[i].registeredDate).format('YYYY-MM-DD');
+        
+      // }
       this.totalLength = data.response.count;
       this.finalPage = this.selectedPage;
       this.collectionSize = data.response.list.length;
       this.isLoading = false;
     },
-    (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/']);
-      }
+    (error) => {
+      this.tostrService.error(error);
     })
-
-    
   }
 
   setPaginationPage(event) {
@@ -91,17 +108,14 @@ export class DashboardComponent implements OnInit {
       this.getPublishers();
       if (data.errorMsg === "") {
         this.toastr.success('Publisher Deleted successfully.', 'Success');
+        this.getPublishers();
       } else {
         this.toastr.error(data.errorMsg, 'Failure');
       }
-    }, (error: HttpErrorResponse) => {
-      if (error.status === 401) {
-        this.router.navigate(['/dashboard/1']);
-      } else {
-        this.getPublishers();
-        this.toastr.error(error.error.errorMsg, 'Error');
-      }
-    });
+    }, 
+    (error) => {
+      this.tostrService.error(error);
+    })
   }
 
   gotoeditpage(publisher)
@@ -110,6 +124,14 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/edit/'+id]);
     localStorage.setItem("publisherdetail",JSON.stringify(publisher));
     
+  }
+
+  gotoviewPage(publisher)
+  {
+    let pid = publisher.id;
+    this.router.navigate(['/view/'+pid]);
+    localStorage.setItem("publisherdetail",JSON.stringify(publisher));
+
   }
 
 }

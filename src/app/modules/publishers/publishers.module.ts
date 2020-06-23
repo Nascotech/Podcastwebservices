@@ -9,6 +9,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BsDatepickerModule.forRoot(),
     ImageCropperModule,
     ColorPickerModule,
-    NgbModule
+    NgbModule,
+    
 
      // Added
   ],

@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'dateSuffix' })
 export class DateSuffix implements PipeTransform {
     transform(value: string): string {
-        if(value == null || value == undefined || value == 'Invalid date')
+        if(value == null || value == undefined || value == 'Invalid date' || value == '[object Object]')
         {
             return '';
         }

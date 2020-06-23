@@ -1,1 +1,295 @@
-<p>publishers works!</p>
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- page users view start -->
+                <section class="page-users-view">
+                    <div class="row">
+                        <!-- Back Button Row -->
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header c-title-header">
+                                    <div class="col-8 col-md-6 px-0">
+                                        <div class="card-title float-left">Publisher Details</div>
+                                    </div>
+                                    <div class="col-4 col-md-6 px-0">
+                                        <div class="card-title float-right">
+                                            <div class="actions action-btns float-left">
+                                                <div class="dt-buttons btn-group">
+                                                   
+                                                        <button class="btn btn-outline-primary" (click)="gotobackpage()"><span><i class="feather icon-chevron-left"></i> Back</span>
+                                                        </button>
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END Back Button Row -->
+
+                        <!-- Publisher Information start -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Publisher Information</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="users-view-image">
+                                            <img [src]="publisherdata?.photo ? photoUrl + publisherdata?.photo?.path : 'assets/img/noavatar.png'" onError="this.src='assets/img/noavatar.png'" class="users-avatar-shadow w-100 rounded mb-2 pr-2 ml-1" alt="avatar">
+                                        </div>
+                                        <div class="col-12 col-sm-9 col-md-6 col-lg-5">
+                                            <table>
+                                                <tr>
+                                                    <td class="font-weight-bold">Publisher Name</td>
+                                                    <td>{{publisherdata?.publisherName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Contact Name</td>
+                                                    <td>{{publisherdata?.fullName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Contact Info</td>
+                                                    <td>{{publisherdata?.email}}</td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-5">
+                                            <table class="ml-0 ml-sm-0 ml-lg-0">
+                                                <tr>
+                                                    <td class="font-weight-bold">Domain</td>
+                                                    <td>{{publisherdata?.domain}}
+                                                        <a [href]="redirectToPage(publisherdata?.domain)" target="_blank">
+                                                            <span class="d-ex-link"><i class="fa fa-external-link" aria-hidden="true"></i></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Status</td>
+                                                    <td>
+                                                        <div *ngIf="publisherdata?.isActive == 1" class="chip chip-success">
+                                                            <div class="chip-body">
+                                                                <div class="chip-text">Active</div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="publisherdata?.isActive == 0" class="chip chip-danger">
+                                                            <div class="chip-body">
+                                                              <div class="chip-text">Inactive</div>
+                                                            </div>
+                                                          </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="font-weight-bold">Registered Date</td>
+                                                    <td>
+                                                        <span *ngIf="publisherdata?.registeredDate" class="text-superscript">
+                                                            {{publisherdata?.registeredDate  | date: "d"}}
+                                                            <sup>{{(publisherdata?.registeredDate | date: "d") | dateSuffix}}</sup>
+                                                            {{publisherdata?.registeredDate  | date: "MMM"}},
+                                                            {{publisherdata?.registeredDate  | date: "yyyy"}}
+                                                        </span>
+                                                    </td>
+                                                    <!-- <td>28<sup>th</sup> Apr, 2020</td> -->
+                                                </tr>
+                           
+                                            </table>
+                                        </div>
+                                        <div class="col-12">
+                                            <button (click)="gotoeditpage(publisherdata)" class="btn btn-primary mr-1"> Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- publisher Information end -->
+
+                        <!-- sgRecast Credentials start -->
+                        <div class="col-md-6 col-12 ">
+                            <div class="card c-card-info">
+                                <div class="card-header">
+                                    <div class="card-title mb-2">sgRecast Credentials</div>
+                                </div>
+                                <div class="card-body">
+                                    <table>
+                                        <tr>
+                                            <td class="font-weight-bold">sgBaseURL </td>
+                                            <td>
+                                                <a href="javascript:void(0)">{{publisherdata?.sgBaseUrl}}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgUsername</td>
+                                            <td>
+                                                {{publisherdata?.sgUsername}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgClienSecret</td>
+                                            <td>{{publisherdata?.sgClientSecret}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgGrantType</td>
+                                            <td>{{publisherdata?.sgGrantType}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgClientId</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgScope</td>
+                                            <td>{{publisherdata?.sgScope}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgPassword</td>
+                                            <td>{{publisherdata?.sgPassword}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">sgTokenType</td>
+                                            <td>{{publisherdata?.sgTokenType}}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sgRecast Credentials end -->
+
+                        <!-- theme info starts -->
+                        <div class="col-md-6 col-12 ">
+                            <div class="card c-card-info">
+                                <div class="card-header">
+                                    <div class="card-title mb-2">Theme Info</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-md-12 col-12">
+                                        <table class="">
+                                            <tr>
+                                                <td class="font-weight-bold">Primary Color</td>
+                                                <td class="w-100">
+                                                    <div  class="p-3" [style.background-color]="publisherdata.headerColor"></div>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td class="font-weight-bold">Footer</td>
+                                                <td class="w-100">
+                                                    <div class="p-3 bg-success"></div>
+                                                </td>
+                                            </tr> -->
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- theme info end -->
+                        <!-- permissions start -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header border-bottom mx-2 px-0">
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2">Ad Manager Header Script Tag
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                   {{manageheader}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- permissions end -->
+
+                        <!-- Sidebar 1 start -->
+                        <div class="col-12 col-md-3">
+                            <div class="card ">
+                                <div class="card-header border-bottom mx-2 px-0">
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2">Sidebar 1
+                                    </h6>
+                                </div>
+                                <div class="card-body card-sidebar">
+                                    {{sidebar1}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar 1 End -->
+
+                        <!-- Sidebar 2 start -->
+                        <div class="col-12 col-md-3">
+                            <div class="card ">
+                                <div class="card-header border-bottom mx-2 px-0">
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2">Sidebar 2
+                                    </h6>
+                                </div>
+                                <div class="card-body card-sidebar">
+                                   {{sidebar2}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar 2 End -->
+
+                        <!-- Sidebar 3 start -->
+                        <div class="col-12 col-md-3">
+                            <div class="card ">
+                                <div class="card-header border-bottom mx-2 px-0">
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2">Sidebar 3
+                                    </h6>
+                                </div>
+                                <div class="card-body card-sidebar">
+                                   {{sidebar3}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar 3 End -->
+
+                        <!-- Sidebar 4 start -->
+                        <div class="col-12 col-md-3">
+                            <div class="card ">
+                                <div class="card-header border-bottom mx-2 px-0">
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2">Sidebar 4
+                                    </h6>
+                                </div>
+                                <div class="card-body card-sidebar">
+                                    {{sidebar4}}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar 4 End -->
+
+
+                        <!-- Leaderboard start -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header border-bottom mx-2 px-0">
+                                    <h6 class="border-bottom py-1 mb-0 font-medium-2">Leaderboard 1
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                           {{leaderboard}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Leaderboard end -->
+                    </div>
+                </section>
+                <!-- page users view end -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+ 

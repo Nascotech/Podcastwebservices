@@ -12,6 +12,7 @@ import { ManagePublisherComponent } from '../../modules/publishers/manage-publis
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { PublishersModule } from 'src/app/modules/publishers/publishers.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     DateSuffix
     
     
+    
   ],
   imports: [
     CommonModule,
@@ -30,9 +32,13 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     ReactiveFormsModule,
     SharedModule,
     NgbModule,
-    PasswordStrengthMeterModule
+    PasswordStrengthMeterModule,
+    
     
   ],
+  exports:[
+    DateSuffix
+  ]
 
 })
 export class DefaultModule { }

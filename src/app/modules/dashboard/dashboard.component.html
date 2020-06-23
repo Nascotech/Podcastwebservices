@@ -21,14 +21,14 @@
             <div class="col-4">
               <div class="actions action-btns float-left">
                 <div class="dt-buttons btn-group">
-                  <button   (click)="gotoaddPage()" class="btn btn-outline-primary"><span><i class="feather icon-plus"></i> Add New</span></button>
+                  <button (click)="gotoaddPage()" class="btn btn-outline-primary"><span><i class="feather icon-plus"></i> Add New</span></button>
                 </div>
               </div>
             </div>
             <div class="col-8">
               <div class="action-filters c-action-filters float-right">
 
-                <div class="dataTables_length" id="DataTables_Table_0_length"><label><select (change)="onPageSizeChange($event)" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm"><option value="4">4</option><option value="10">10</option><option value="15">15</option><option value="20">20</option></select></label></div>
+                <div class="dataTables_length" id="DataTables_Table_0_length"><label><select (change)="onPageSizeChange($event)" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select></label></div>
 
                 <div class="form-group has-search">
                   <span class="fa fa-search form-control-search"></span>
@@ -67,13 +67,13 @@
               </tr>
             <!-- Row 1 -->
             <tr *ngFor="let publisher of publisherList;let i = index">
-              <td class="d-sm-none d-md-none d-lg-block">
+              <td (click)="gotoviewPage(publisher)" class="d-sm-none d-md-none d-lg-block">
                 <div class="p-img">
-                  <img [src]="publisher?.photo ? photoUrl + publisher?.photo?.path : 'assets/img/noavatar.png'" class="td-img rounded-circle" alt="Publisher Podcast">
+                  <img [src]="publisher?.photo ? photoUrl + publisher?.photo?.path : 'assets/img/noavatar.png'" onError="this.src='assets/img/noavatar.png'" class="td-img rounded-circle" alt="Publisher Podcast">
                 </div>
               </td>
               <td class="product-name ">
-                <a href="app-user-view.html">
+                <a (click)="gotodetailpage(publisher)">
                  {{publisher?.publisherName}}
                 </a>
               </td>
@@ -88,7 +88,7 @@
               <td>
                 <div class="d-flex">
                   {{publisher?.domain}}
-                  <a style="color:'#7367F0'" target="_blank">
+                  <a [href]="redirectToPage(publisher?.domain)" style="color:'#7367F0'" target="_blank">
                     <span class="d-ex-link"><i class="fa fa-external-link" aria-hidden="true"></i></span>
                 </a>
                 </div>
@@ -107,7 +107,7 @@
               </td>
               <td>
                 
-                <span *ngIf="publisher?.registeredDate != 'Invalid date'" class="text-superscript">
+                <span *ngIf="publisher?.registeredDate" class="text-superscript">
                   {{publisher?.registeredDate  | date: "d"}}
                   <sup>{{(publisher?.registeredDate | date: "d") | dateSuffix}}</sup>
                   {{publisher?.registeredDate  | date: "MMM"}},
@@ -116,8 +116,11 @@
                 <!-- 28<sup>th</sup> Apr, 2020 -->
               </td>
               <td class="product-action">
-                <a (click)="gotoeditpage(publisher)"><span class="action-edit"><i class="feather icon-edit"></i></span></a>
-                <a (click)="removePublisher(publisher.id)" class="action-delete"><i class="feather icon-trash"></i></a>
+                <!-- <a (click)="gotoeditpage(publisher)"><span class="action-edit"><i class="feather icon-edit"></i></span></a> -->
+                <button (click)="gotoeditpage(publisher)" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
+                <button (click)="removePublisher(publisher.id)" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-trash"></i></button>
+
+                <!-- <a (click)="removePublisher(publisher.id)" class="action-delete"><i class="feather icon-trash"></i></a> -->
               </td>
             </tr>
 

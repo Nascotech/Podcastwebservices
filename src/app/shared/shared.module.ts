@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     HeaderComponent,
-    SidebarComponent,
+    
     FooterComponent
   ],
   imports: [
@@ -20,7 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     HeaderComponent,
-    SidebarComponent,
+    
     FooterComponent
   ]
 })

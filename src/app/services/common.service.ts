@@ -20,14 +20,14 @@ export class CommonService {
     private  router: Router,
     private deviceService: DeviceDetectorService
   ) {
-    this.epicFunction();
+    this.getDevicedetails();
   }
 
   PAGINATION = {
     default_page_size: 10,
   };
 
-  epicFunction() {
+  getDevicedetails() {
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.os=this.deviceInfo.os;
     this.deviceModel=this.deviceInfo.browser;

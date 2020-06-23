@@ -8,6 +8,7 @@ import {ForgotPasswordComponent} from './modules/forgot-password/forgot-password
 import {ManagePublisherComponent} from './modules/publishers/manage-publisher/manage-publisher.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { NotFoundComponent } from './modules/not-found/notfound.component';
+import { PublishersComponent } from './modules/publishers/publishers.component';
 
 
 const routes: Routes = [
@@ -37,8 +38,9 @@ const routes: Routes = [
     path: '', 
     component: DefaultComponent,
     children: [
-        { path: 'add', component: ManagePublisherComponent,canActivate: [AuthGuard]},
-        { path: 'edit/:id', component: ManagePublisherComponent,canActivate: [AuthGuard]}
+        { path: 'publisher/add', component: ManagePublisherComponent,canActivate: [AuthGuard]},
+        { path: 'edit/:id', component: ManagePublisherComponent,canActivate: [AuthGuard]},
+        { path: 'view/:id', component: PublishersComponent,canActivate: [AuthGuard]}
     ]
   },
   { path: '**', component: NotFoundComponent }
