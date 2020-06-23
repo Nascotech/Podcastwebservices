@@ -7,6 +7,7 @@ import {LoginComponent} from './modules/login/login.component';
 import {ForgotPasswordComponent} from './modules/forgot-password/forgot-password.component';
 import {ManagePublisherComponent} from './modules/publishers/manage-publisher/manage-publisher.component';
 import { AuthGuard } from './core/guard/auth.guard';
+import { NotFoundComponent } from './modules/not-found/notfound.component';
 
 
 const routes: Routes = [
@@ -33,17 +34,14 @@ const routes: Routes = [
     ]
   },
   {
-    path:'publisher',
-    loadChildren: 'src/app/modules/publishers/publishers.module#PublishersModule'
+    path: '', 
+    component: DefaultComponent,
+    children: [
+        { path: 'add', component: ManagePublisherComponent,canActivate: [AuthGuard]},
+        { path: 'edit/:id', component: ManagePublisherComponent,canActivate: [AuthGuard]}
+    ]
   },
-  // {
-  //   path: 'publisher',
-  //   component: DefaultComponent,
-  //   children: [
-  //     { path: 'add', component: ManagePublisherComponent},
-  //     { path: 'edit/:id', component: ManagePublisherComponent}
-  //   ]
-  // }
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
