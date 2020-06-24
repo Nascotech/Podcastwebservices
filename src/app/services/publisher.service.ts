@@ -21,7 +21,7 @@ export class PublisherService {
     private corehttpService:CoreHttpService,
     private http: HttpClient){}
 
-  getPublisherlist(pageNumber, size, keyWord, pagination = true):Observable<any> {
+  getPublisherlist(pageNumber, size, keyWord, pagination = 1):Observable<any> {
     return this.corehttpService.httpGetRequest<any>(this.getPublisherURL + '?pageNo=' +pageNumber + '&pageSize=' +size + '&keyword=' +keyWord + '&isPagination=' +pagination);
   }
 

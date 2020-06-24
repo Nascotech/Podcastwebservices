@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         if(res.errorMsg === ""){
           localStorage.setItem('currentUser', JSON.stringify(res));
           localStorage.setItem('accesstoken',JSON.stringify(res.response.deviceInfo.deviceAccessToken));
-          this.router.navigate(['dashboard/1']);
+          this.router.navigate(['dashboard']);
         } else if (res.errorMsg === "ValidationError") {
           let messages = res.response.message;
           if (messages.length > 1) {

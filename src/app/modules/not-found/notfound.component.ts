@@ -7,14 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./notfound.component.css']
 })
 export class NotFoundComponent implements OnInit {
-
+  token:any;
   constructor(private router:Router) { }
 
   ngOnInit() {
+    this.token = localStorage.getItem('accesstoken')
   }
 
   gotobackpage()
   {
-    this.router.navigate(['/'])
+    if(this.token)
+    {
+      this.router.navigate(['/dashboard'])
+    }
+    else
+    {
+      this.router.navigate(['/'])
+    }
   }
 }

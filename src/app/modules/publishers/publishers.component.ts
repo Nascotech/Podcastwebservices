@@ -35,7 +35,7 @@ export class PublishersComponent implements OnInit {
 
   gotobackpage()
   {
-    this.router.navigate(['/dashboard/1'])
+    this.router.navigate(['/dashboard'])
   }
 
   redirectToPage(link:string) {

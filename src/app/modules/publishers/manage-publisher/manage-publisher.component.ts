@@ -38,6 +38,7 @@ export class ManagePublisherComponent implements OnInit {
   imgURL:string;
   maxDate: any = {};
   registeredDate:string;
+  finaldomain:any;
   Publisherstatus:any=[
     {
       value:1,
@@ -91,8 +92,14 @@ export class ManagePublisherComponent implements OnInit {
       this.publisherInfo=JSON.parse(localStorage.getItem('publisherdetail'));
       if(this.editid != null && this.publisherInfo != null)
       {
-        this.croppedImage= this.imgURL+this.publisherInfo.photo.path;
-        this.getDateFormat(this.publisherInfo.registeredDate);
+        if(this.publisherInfo.photo)
+        {
+          this.croppedImage= this.imgURL+this.publisherInfo.photo.path;
+        }
+        if(this.publisherInfo.registeredDate)
+        {
+          this.getDateFormat(this.publisherInfo.registeredDate);
+        }
         this.finalcolor=this.publisherInfo.headerColor;
         this.publisherForm.patchValue({
           "publisherName":this.publisherInfo.publisherName,
@@ -137,11 +144,13 @@ export class ManagePublisherComponent implements OnInit {
       {
         const date = this.publisherForm.value.registeredDate;
         this.registeredDate = date.year + '-' + date.month + '-' + date.day;
+        const domainstring = this.publisherForm.get('domain').value;
+        this.domainremoveLastcharacter();
         const data={
           publisherName:this.publisherForm.get('publisherName').value,
           fullName:this.publisherForm.get('fullName').value,
           email:this.publisherForm.get('email').value,
-          domain:this.publisherForm.get('domain').value,
+          domain:this.finaldomain,
           isActive:this.publisherForm.get('isActive').value,
           registeredDate:this.registeredDate,
           sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
@@ -160,12 +169,12 @@ export class ManagePublisherComponent implements OnInit {
           sidebar2:btoa(this.publisherForm.get('sidebar2').value),
           sidebar3:btoa(this.publisherForm.get('sidebar3').value),
           sidebar4:btoa(this.publisherForm.get('sidebar4').value)
-  
         }
+        
         this.publisherService.savePublisher(data,this.finalImage,this.registeredDate).subscribe((data:any)=>{
           this.submitted = false;
           if (data.errorMsg === "")  {
-            this.router.navigate(['/dashboard/1']);
+            this.router.navigate(['/dashboard']);
             this.tostrService.success('New record added successfully.', 'Success');
           } else if (data.errorMsg === "ValidationError") {
             let messages = data.response.message;
@@ -183,7 +192,7 @@ export class ManagePublisherComponent implements OnInit {
             this.errorMessage = "Server can't be connect try again.";
           } else if (error.status === 401) {
             this.submitted = false;
-            this.router.navigate(['/dashboard/1']);
+            this.router.navigate(['/dashboard']);
           } else {
           }
         })
@@ -199,12 +208,13 @@ export class ManagePublisherComponent implements OnInit {
       {
         const date = this.publisherForm.value.registeredDate;
         this.registeredDate = date.year + '-' + date.month + '-' + date.day;
+        this.domainremoveLastcharacter()
         const data={
           publisherId:this.editid,
           publisherName:this.publisherForm.get('publisherName').value,
           fullName:this.publisherForm.get('fullName').value,
           email:this.publisherForm.get('email').value,
-          domain:this.publisherForm.get('domain').value,
+          domain:this.finaldomain,
           isActive:this.publisherForm.get('isActive').value,
           sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
           sgClientId:this.publisherForm.get('sgClientId').value,
@@ -227,7 +237,7 @@ export class ManagePublisherComponent implements OnInit {
         this.publisherService.editPublisher(data,this.finalImage,this.editid,this.registeredDate).subscribe((data:any)=>{
           this.submitted = false;
           if (data.errorMsg === "")  {
-            this.router.navigate(['/dashboard/1']);
+            this.router.navigate(['/dashboard']);
             this.tostrService.success('New record edited successfully.', 'Success');
           } else if (data.errorMsg === "ValidationError") {
             let messages = data.response.message;
@@ -245,7 +255,7 @@ export class ManagePublisherComponent implements OnInit {
             this.errorMessage = "Server can't be connect try again.";
           } else if (error.status === 401) {
             this.submitted = false;
-            this.router.navigate(['/dashboard/1']);
+            this.router.navigate(['/dashboard']);
           } else {
            // this.errorMessage = error.error.errorMsg;
           }
@@ -272,12 +282,12 @@ export class ManagePublisherComponent implements OnInit {
 
   gotobackpage()
   {
-    this.router.navigate(['/dashboard/1'])
+    this.router.navigate(['/dashboard'])
   }
 
   reset()
   {
-    this.router.navigate(['/dashboard/1'])
+    this.router.navigate(['/dashboard'])
   }
 
   removeImage() {
@@ -317,6 +327,23 @@ export class ManagePublisherComponent implements OnInit {
     }
 
     return new Blob([ia], {type:mimeString});
+  }
+
+  domainremoveLastcharacter()
+  {
+    const domainstring = this.publisherForm.get('domain').value;
+    if(domainstring.substr(domainstring.length - 1))
+    {
+      var lastcharacter = domainstring.substr(domainstring.length - 1);
+      if(lastcharacter === '/')
+      {
+        this.finaldomain = this.publisherForm.get('domain').value.slice(0,-1);
+      }
+      else
+      {
+        this.finaldomain = this.publisherForm.get('domain').value;
+      }
+    }
   }
 
 

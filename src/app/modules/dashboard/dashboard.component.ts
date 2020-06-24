@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   totalLength: number;
   pageSize: number;
   finalPage = 1;
-  pageNumber: number;
+  pageNumber=1;
   keyword='';
   publisherList:any=[];
   collectionSize: number;
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     private tostrService:ToastrService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => this.pageNumber = params['page']);
+    //this.route.params.subscribe(params => this.pageNumber = params['page']);
     this.selectedPage = this.pageNumber;
     this.pageSize = this.commonService.PAGINATION.default_page_size;
     this.getPublishers();
@@ -50,6 +50,8 @@ export class DashboardComponent implements OnInit {
   }
 
   redirectToPage(link:string) {
+    console.log(link);
+    
     if(!link) return '';
       return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;
 

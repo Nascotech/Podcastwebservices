@@ -76,13 +76,20 @@
                 <a href="javascript:void(0)" (click)="gotodetailpage(publisher)">
                  {{publisher?.publisherName}}
                 </a>
+                <a *ngIf="!publisher.publisherName">
+                 N-A
+                 </a>
               </td>
               <td class="product-category">
                 <div class="p-em-name">
                   <p><strong>{{publisher?.fullName}}</strong></p>
+                  <p *ngIf="!publisher?.fullName"><strong>N-A</strong></p>
                 </div>
                 <div class="p-email">
                   {{publisher?.email}}
+                </div>
+                <div *ngIf="!publisher?.email" class="p-email">
+                  N-A
                 </div>
               </td>
               <td>
@@ -91,6 +98,9 @@
                   <a [href]="redirectToPage(publisher?.domain)" style="color:'#7367F0'" target="_blank">
                     <span class="d-ex-link"><i class="fa fa-external-link" aria-hidden="true"></i></span>
                 </a>
+                </div>
+                <div  *ngIf="!publisher.domain" class="d-flex">
+                  {{publisher?.domain}}
                 </div>
               </td>
               <td>
@@ -112,6 +122,9 @@
                   <sup>{{(publisher?.registeredDate | date: "d") | dateSuffix}}</sup>
                   {{publisher?.registeredDate  | date: "MMM"}},
                   {{publisher?.registeredDate  | date: "yyyy"}}
+                </span>
+                <span *ngIf="!publisher.registeredDate" class="text-superscript">
+                  N-A
                 </span>
                 <!-- 28<sup>th</sup> Apr, 2020 -->
               </td>
