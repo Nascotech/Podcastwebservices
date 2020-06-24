@@ -77,19 +77,19 @@
                  {{publisher?.publisherName}}
                 </a>
                 <a *ngIf="!publisher.publisherName">
-                 N-A
+                 N/A
                  </a>
               </td>
               <td class="product-category">
                 <div class="p-em-name">
                   <p><strong>{{publisher?.fullName}}</strong></p>
-                  <p *ngIf="!publisher?.fullName"><strong>N-A</strong></p>
+                  <p *ngIf="!publisher?.fullName"><strong>N/A</strong></p>
                 </div>
                 <div class="p-email">
                   {{publisher?.email}}
                 </div>
                 <div *ngIf="!publisher?.email" class="p-email">
-                  N-A
+                  N/A
                 </div>
               </td>
               <td>
@@ -100,7 +100,7 @@
                 </a>
                 </div>
                 <div  *ngIf="!publisher.domain" class="d-flex">
-                  {{publisher?.domain}}
+                  N/A
                 </div>
               </td>
               <td>
@@ -124,7 +124,7 @@
                   {{publisher?.registeredDate  | date: "yyyy"}}
                 </span>
                 <span *ngIf="!publisher.registeredDate" class="text-superscript">
-                  N-A
+                  N/A
                 </span>
                 <!-- 28<sup>th</sup> Apr, 2020 -->
               </td>
