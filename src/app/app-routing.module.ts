@@ -9,6 +9,7 @@ import {ManagePublisherComponent} from './modules/publishers/manage-publisher/ma
 import { AuthGuard } from './core/guard/auth.guard';
 import { NotFoundComponent } from './modules/not-found/notfound.component';
 import { PublishersComponent } from './modules/publishers/publishers.component';
+import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,13 @@ const routes: Routes = [
     component: FullWidthComponent,
     children: [
       { path: '', component: ForgotPasswordComponent},
+    ]
+  },
+  {
+    path: 'reset-password/:resetToken',
+    component: DefaultComponent,
+    children: [
+      { path: '', component: ResetPasswordComponent},
     ]
   },
   {

@@ -11,12 +11,14 @@ import { ManagePublisherComponent } from '../../modules/publishers/manage-publis
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
 import { PublishersModule } from 'src/app/modules/publishers/publishers.module';
+import { ResetPasswordComponent } from 'src/app/modules/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     DefaultComponent,
     DashboardComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
     DateSuffix
   ],
   imports: [

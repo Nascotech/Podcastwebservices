@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class AuthService {
     private baseURL = environment.base_url;
     changepasswordURL = this.baseURL + '/api/changePassword';
+    forgotpasswordURL = this.baseURL + '/api/forgotPassword';
+    checkresettokenURL = this.baseURL + '/api/checkResetToken';
+    resetpasswordURL = this.baseURL + '/api/resetPassword';
     constructor(private httpService: CoreHttpService,private router:Router) {
     }
 
@@ -25,6 +28,25 @@ export class AuthService {
     changeAdminPassword(data) {
       return this.httpService.httpPostRequest(this.changepasswordURL,data);
     }
+
+    forgotPassword(data){
+      return this.httpService.httpPostRequest(this.forgotpasswordURL,data);
+    }
+
+    checkResetToken(resetToken) {
+      return this.httpService.httpPostRequest(this.checkresettokenURL, {
+        passwordResetToken: resetToken,
+      });
+    }
+
+    resetPassword(data, resetToken) {
+      return this.httpService.httpPostRequest(this.resetpasswordURL, {
+        passwordResetToken: resetToken,
+        newPassword : data.password,
+        confirmPassword: data.confirmPassword
+      });
+    }
+
 
     logout() {
       localStorage.removeItem('currentUser');
