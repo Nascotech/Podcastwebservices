@@ -39,6 +39,7 @@ export class ManagePublisherComponent implements OnInit {
   maxDate: any = {};
   registeredDate:string;
   finaldomain:any;
+  finalhomedomain:any;
   Publisherstatus:any=[
     {
       value:1,
@@ -63,6 +64,7 @@ export class ManagePublisherComponent implements OnInit {
         fullName:['',Validators.required],
         email:['',[Validators.required,Validators.email]],
         domain:['',[Validators.required,Validators.pattern(this.reg)]],
+        homeDomain:['',[Validators.required,Validators.pattern(this.reg)]],
         image:['',Validators.required],
         isActive:[1],
         registeredDate:[''],
@@ -106,6 +108,7 @@ export class ManagePublisherComponent implements OnInit {
           "fullName":this.publisherInfo.fullName,
           "email":this.publisherInfo.email,
           "domain":this.publisherInfo.domain,
+          "homeDomain":this.publisherInfo.homeDomain,
           "isActive":this.publisherInfo.isActive,
           "image":this.publisherInfo.photo ? this.publisherInfo.photo.fileName : 'assets/img/noavatar.png',
           "sgBaseUrl":this.publisherInfo.sgBaseUrl,
@@ -145,12 +148,14 @@ export class ManagePublisherComponent implements OnInit {
         const date = this.publisherForm.value.registeredDate;
         this.registeredDate = date.year + '-' + date.month + '-' + date.day;
         const domainstring = this.publisherForm.get('domain').value;
+        const domainhomestring =this.publisherForm.get('homeDomain').value;
         this.domainremoveLastcharacter();
         const data={
           publisherName:this.publisherForm.get('publisherName').value,
           fullName:this.publisherForm.get('fullName').value,
           email:this.publisherForm.get('email').value,
           domain:this.finaldomain,
+          homeDomain:this.finalhomedomain,
           isActive:this.publisherForm.get('isActive').value,
           registeredDate:this.registeredDate,
           sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
@@ -215,6 +220,7 @@ export class ManagePublisherComponent implements OnInit {
           fullName:this.publisherForm.get('fullName').value,
           email:this.publisherForm.get('email').value,
           domain:this.finaldomain,
+          homeDomain:this.finalhomedomain,
           isActive:this.publisherForm.get('isActive').value,
           sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
           sgClientId:this.publisherForm.get('sgClientId').value,
@@ -332,6 +338,7 @@ export class ManagePublisherComponent implements OnInit {
   domainremoveLastcharacter()
   {
     const domainstring = this.publisherForm.get('domain').value;
+    const homedomainstring = this.publisherForm.get('homeDomain').value;
     if(domainstring.substr(domainstring.length - 1))
     {
       var lastcharacter = domainstring.substr(domainstring.length - 1);
@@ -342,6 +349,18 @@ export class ManagePublisherComponent implements OnInit {
       else
       {
         this.finaldomain = this.publisherForm.get('domain').value;
+      }
+    }
+    if(homedomainstring.substr(homedomainstring.length - 1))
+    {
+      var lastcharacter = homedomainstring.substr(homedomainstring.length - 1);
+      if(lastcharacter === '/')
+      {
+        this.finalhomedomain = this.publisherForm.get('homeDomain').value.slice(0,-1);
+      }
+      else
+      {
+        this.finalhomedomain = this.publisherForm.get('homeDomain').value;
       }
     }
   }

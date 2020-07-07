@@ -47,6 +47,7 @@ export class PublisherService {
     frmData.append('fullName',data.fullName);
     frmData.append('email',data.email);
     frmData.append('domain',data.domain);
+    frmData.append('homeDomain',data.homeDomain);
     frmData.append('isActive',data.isActive);
     frmData.append('registeredDate',dob);
     frmData.append('sgBaseUrl',data.sgBaseUrl);
@@ -79,6 +80,7 @@ export class PublisherService {
     frmData.append('fullName',data.fullName);
     frmData.append('email',data.email);
     frmData.append('domain',data.domain);
+    frmData.append('homeDomain',data.homeDomain);
     frmData.append('isActive',data.isActive);
     frmData.append('registeredDate',dob);
     frmData.append('sgBaseUrl',data.sgBaseUrl);

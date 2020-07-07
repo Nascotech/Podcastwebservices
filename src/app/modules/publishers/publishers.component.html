@@ -76,6 +76,14 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <td class="font-weight-bold">Home Domain</td>
+                                                    <td>{{publisherdata?.homeDomain}}
+                                                        <a [href]="redirectToPage(publisherdata?.homeDomain)" target="_blank">
+                                                            <span class="d-ex-link"><i class="fa fa-external-link" aria-hidden="true"></i></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <td class="font-weight-bold">Status</td>
                                                     <td>
                                                         <div *ngIf="publisherdata?.isActive == 1" class="chip chip-success">
