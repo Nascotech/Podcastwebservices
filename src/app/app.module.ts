@@ -18,9 +18,7 @@ import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { ErrorInterceptor } from './core/interceptor/error.interceptor';
 import { PublishersModule } from './modules/publishers/publishers.module';
 import { NgxProgressiveImageLoaderModule, IImageLoaderOptions } from 'ngx-progressive-image-loader';
-import { DateSuffix } from './pipes/datesuffix.pipe';
 import { AuthGuard } from './core/guard/auth.guard';
-import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
 
 
 @NgModule({
