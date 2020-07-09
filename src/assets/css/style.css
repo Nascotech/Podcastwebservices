@@ -202,3 +202,34 @@ table.dataTable tbody td.selected a {
 .header-navbar.fixed-top {
   left: 0px !important;
 }
+
+select.form-control:not([multiple='multiple']) {
+    width: 100% !important;
+}
+.ngb-dp-weekday {
+  color: #000000 !important;
+  color: #000000 !important;
+}
+
+.ngb-dp-weekdays {
+  background-color: #ffffff !important;
+}
+
+.ngb-dp-header {
+  background-color: #ffffff !important;
+}
+
+.btn-light {
+  border-color: !important;
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
+.btn-light:focus, .btn-light:hover {
+  color: #7265ef!important;
+}
+
+.btn-light:active {
+  background: #7265ed !important;
+  color: #fff !important;
+}
