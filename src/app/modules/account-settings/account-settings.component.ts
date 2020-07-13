@@ -44,6 +44,7 @@ export class AccountSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.getSettingsValues();
   }
+  
 
 
   getSettingsValues()
