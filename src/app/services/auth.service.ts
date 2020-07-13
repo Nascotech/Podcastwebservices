@@ -15,6 +15,8 @@ export class AuthService {
     forgotpasswordURL = this.baseURL + '/api/forgotPassword';
     checkresettokenURL = this.baseURL + '/api/checkResetToken';
     resetpasswordURL = this.baseURL + '/api/resetPassword';
+    settingsvaluesURL = this.baseURL + '/api/defaultConfig';
+    savesettingskeysURL = this.baseURL + '/api/defaultConfig';
     constructor(private httpService: CoreHttpService,private router:Router) {
     }
 
@@ -51,6 +53,17 @@ export class AuthService {
     logout() {
       localStorage.removeItem('currentUser');
       localStorage.removeItem('accesstoken');
+  }
+
+    getSettingskeys()
+    {
+      return this.httpService.httpGetRequest(this.settingsvaluesURL);
+    }
+
+
+  saveSettingsKeys(data)
+  {
+    return this.httpService.httpPostRequest(this.savesettingskeysURL,data)
   }
 
 

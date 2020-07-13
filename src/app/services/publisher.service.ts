@@ -60,12 +60,6 @@ export class PublisherService {
     frmData.append('sgTokenType',data.sgTokenType);
     frmData.append('headerColor',data.headerColor);
     frmData.append('footerColor',data.headerColor);
-    frmData.append('headerScript',data.headerScript);
-    frmData.append('leaderboard1',data.leaderboard1);
-    frmData.append('sidebar1',data.sidebar1);
-    frmData.append('sidebar2',data.sidebar2);
-    frmData.append('sidebar3',data.sidebar3);
-    frmData.append('sidebar4',data.sidebar4)
     return this.http.post(this.savePublisherURL, frmData);
   }
 
@@ -93,19 +87,11 @@ export class PublisherService {
     frmData.append('sgTokenType',data.sgTokenType);
     frmData.append('headerColor',data.headerColor);
     frmData.append('footerColor',data.footerColor);
-    frmData.append('headerScript',data.headerScript);
-    frmData.append('leaderboard1',data.leaderboard1);
-    frmData.append('sidebar1',data.sidebar1);
-    frmData.append('sidebar2',data.sidebar2);
-    frmData.append('sidebar3',data.sidebar3);
-    frmData.append('sidebar4',data.sidebar4)
     return this.http.put(this.editPublisherURL, frmData);
   }
 
   removePublisher(id):Observable<any>{
     return this.corehttpService.httpGetRequest(this.removePublisherURL+id)
-
-
   }
 
 

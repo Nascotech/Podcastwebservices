@@ -10,6 +10,7 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { NotFoundComponent } from './modules/not-found/notfound.component';
 import { PublishersComponent } from './modules/publishers/publishers.component';
 import { ResetPasswordComponent } from './modules/reset-password/reset-password.component';
+import { AccountSettingsComponent } from './modules/account-settings/account-settings.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,13 @@ const routes: Routes = [
     component: DefaultComponent,
     children: [
       { path: '', component: DashboardComponent,canActivate: [AuthGuard]}
+    ]
+  },
+  {
+    path: '',
+    component: DefaultComponent,
+    children: [
+      { path: 'account-settings', component: AccountSettingsComponent}
     ]
   },
   {

@@ -1,0 +1,149 @@
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+      <div class="content-overlay"></div>
+      <div class="header-navbar-shadow"></div>
+      <div class="content-wrapper">
+          <div class="content-header row">
+          </div>
+          <div class="content-body">
+              <!-- page users view start -->
+              <section class="page-users-view">
+                  <div class="row">
+                      <!-- Publisher Information start -->
+                      <div class="col-12">
+                          <div class="card">
+                              <div class="card-header">
+                                <div class="col-8 col-md-6 px-0">
+                                  <div class="card-title float-left">Account Settings Information</div>
+                                </div>
+                                <div class="col-4 col-md-6 px-0">
+                                  <div class="card-title float-right">
+                                      <div class="actions action-btns float-left">
+                                          <div class="dt-buttons btn-group">
+                                             
+                                                  <button class="btn btn-outline-primary" (click)="gotobackpage()"><span><i class="feather icon-chevron-left"></i> Back</span>
+                                                  </button>
+                                            
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="card-body">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">#</th>
+                                      <th scope="col">Account Key</th>
+                                      <th scope="col">Account value</th>
+                                      <th scope="col">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr class="t-loading" *ngIf="isLoading === true">
+                                      <td colspan="6" class="text-center">
+                                        <div class="spinner-grow" role="status">
+                                          <span class="sr-only">Loading...</span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr *ngIf="isLoading === false">
+                                      <th scope="row">1</th>
+                                      <td>Sidebar 1</td>
+                                      <td>{{sidebar1}}</td>
+                                      <td class="product-action">
+                                        <button (click)="opensidebar1editModal()" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
+                                      </td>
+                                    </tr>
+                                    <tr *ngIf="isLoading === false">
+                                      <th scope="row">2</th>
+                                      <td>Sidebar 2</td>
+                                      <td>{{sidebar2}}</td>
+                                      <td class="product-action">
+                                        <button  (click)="opensidebar2editModal()" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
+                                      </td>
+                                    </tr>
+                                    <tr *ngIf="isLoading === false">
+                                      <th scope="row">3</th>
+                                      <td>Sidebar 3</td>
+                                      <td>{{sidebar3}}</td>
+                                      <td class="product-action">
+                                        <button (click)="opensidebar3editModal()"  type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
+                                      </td>
+                                    </tr>
+                                    <tr *ngIf="isLoading === false">
+                                      <th scope="row">4</th>
+                                      <td>Sidebar 4</td>
+                                      <td>{{sidebar4}}</td>
+                                      <td class="product-action">
+                                        <button (click)="opensidebar4editModal()"  type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
+                                      </td>
+                                    </tr>
+                                    <tr *ngIf="isLoading === false">
+                                      <th scope="row">5</th>
+                                      <td>Leaderboard 1</td>
+                                      <td>{{leaderboard1}}</td>
+                                      <td class="product-action">
+                                        <button (click)="openleaderboardeditModal()" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- publisher Information end -->
+
+
+                  </div>
+              </section>
+              <!-- page users view end -->
+
+          </div>
+      </div>
+  </div>
+  <!-- END: Content-->
+
+  
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Account Settings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="settingsForm">
+            <div class="form-group" *ngIf="displaysidebar1 == true">
+              <label>Sidebar 1</label>
+              <input type="text" class="form-control" formControlName="sidebar1">
+            </div>
+            <div class="form-group" *ngIf="displaysidebar2 == true">
+              <label>Sidebar 2</label>
+              <input type="text" class="form-control" formControlName="sidebar2">
+            </div>
+            <div class="form-group" *ngIf="displaysidebar3 == true">
+              <label>Sidebar 3</label>
+              <input type="text" class="form-control" formControlName="sidebar3">
+            </div>
+            <div class="form-group" *ngIf="displaysidebar4 == true">
+              <label>Sidebar 4</label>
+              <input type="text" class="form-control" formControlName="sidebar4">
+            </div>
+            <div class="form-group" *ngIf="displayleaderboard == true">
+              <label>Leaderboard 1</label>
+              <input type="text" class="form-control" formControlName="leaderboard1">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="saveSettingsValue()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -76,12 +76,6 @@ export class ManagePublisherComponent implements OnInit {
         sgScope:['',Validators.required],
         password:['',Validators.required],
         sgTokenType:['',Validators.required],
-        leaderboard1:[],
-        manageheader:[],
-        sidebar4:[],
-        sidebar3:[],
-        sidebar2:[],
-        sidebar1:[],
         headerColor:['',Validators.required]
       });
      }
@@ -120,12 +114,12 @@ export class ManagePublisherComponent implements OnInit {
           "sgTokenType":this.publisherInfo.sgTokenType,
           "password":this.publisherInfo.password,
           "headerColor":this.publisherInfo.headerColor,
-          "manageheader":atob(this.publisherInfo.headerScript),
-          "sidebar1":atob(this.publisherInfo.sidebar1),
-          "sidebar2":atob(this.publisherInfo.sidebar2),
-          "sidebar3":atob(this.publisherInfo.sidebar3),
-          "sidebar4":atob(this.publisherInfo.sidebar4),
-          "leaderboard1":atob(this.publisherInfo.leaderboard1)
+          // "manageheader":atob(this.publisherInfo.headerScript),
+          // "sidebar1":atob(this.publisherInfo.sidebar1),
+          // "sidebar2":atob(this.publisherInfo.sidebar2),
+          // "sidebar3":atob(this.publisherInfo.sidebar3),
+          // "sidebar4":atob(this.publisherInfo.sidebar4),
+          // "leaderboard1":atob(this.publisherInfo.leaderboard1)
         });
       }
   })
@@ -168,12 +162,12 @@ export class ManagePublisherComponent implements OnInit {
           sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-          headerScript:btoa(this.publisherForm.get('manageheader').value),
-          leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
-          sidebar1:btoa(this.publisherForm.get('sidebar1').value),
-          sidebar2:btoa(this.publisherForm.get('sidebar2').value),
-          sidebar3:btoa(this.publisherForm.get('sidebar3').value),
-          sidebar4:btoa(this.publisherForm.get('sidebar4').value)
+          // headerScript:btoa(this.publisherForm.get('manageheader').value),
+          // leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
+          // sidebar1:btoa(this.publisherForm.get('sidebar1').value),
+          // sidebar2:btoa(this.publisherForm.get('sidebar2').value),
+          // sidebar3:btoa(this.publisherForm.get('sidebar3').value),
+          // sidebar4:btoa(this.publisherForm.get('sidebar4').value)
         }
         
         this.publisherService.savePublisher(data,this.finalImage,this.registeredDate).subscribe((data:any)=>{
@@ -232,12 +226,12 @@ export class ManagePublisherComponent implements OnInit {
           sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-          headerScript:btoa(this.publisherForm.get('manageheader').value),
-          leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
-          sidebar1:btoa(this.publisherForm.get('sidebar1').value),
-          sidebar2:btoa(this.publisherForm.get('sidebar2').value),
-          sidebar3:btoa(this.publisherForm.get('sidebar3').value),
-          sidebar4:btoa(this.publisherForm.get('sidebar4').value)
+          // headerScript:btoa(this.publisherForm.get('manageheader').value),
+          // leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
+          // sidebar1:btoa(this.publisherForm.get('sidebar1').value),
+          // sidebar2:btoa(this.publisherForm.get('sidebar2').value),
+          // sidebar3:btoa(this.publisherForm.get('sidebar3').value),
+          // sidebar4:btoa(this.publisherForm.get('sidebar4').value)
   
         }
         this.publisherService.editPublisher(data,this.finalImage,this.editid,this.registeredDate).subscribe((data:any)=>{
@@ -372,35 +366,28 @@ export class ManagePublisherComponent implements OnInit {
     {
       this.publisherForm.get('headerColor').setValidators(Validators.required);
       this.publisherForm.get('headerColor').updateValueAndValidity(); 
-
     }
     else{
       this.publisherForm.get('headerColor').clearValidators();
       this.publisherForm.get('headerColor').updateValueAndValidity(); 
-
     }
 
   }
 
   public onChangeColorCmyk(color: string): Cmyk {
     const hsva = this.cpService.stringToHsva(color);
-
     if (hsva) {
       const rgba = this.cpService.hsvaToRgba(hsva);
-
       return this.cpService.rgbaToCmyk(rgba);
     }
-
     return new Cmyk(0, 0, 0, 0);
   }
 
   public onChangeColorHex8(color: string): string {
     const hsva = this.cpService.stringToHsva(color, true);
-
     if (hsva) {
       return this.cpService.outputFormat(hsva, 'rgba', null);
     }
-
     return '';
   }
 

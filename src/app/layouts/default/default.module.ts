@@ -10,6 +10,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
 import { ResetPasswordComponent } from 'src/app/modules/reset-password/reset-password.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+import { AccountSettingsComponent } from 'src/app/modules/account-settings/account-settings.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     DashboardComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    DateSuffix
+    DateSuffix,
+    AccountSettingsComponent
   ],
   imports: [
     CommonModule,

@@ -49,9 +49,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/publisher/add'])
   }
 
-  redirectToPage(link:string) {
-    console.log(link);
-    
+  redirectToPage(link:string) {    
     if(!link) return '';
       return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;
 

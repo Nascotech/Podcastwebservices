@@ -23,7 +23,8 @@ import { AuthGuard } from './core/guard/auth.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
     
   ],
   imports: [
