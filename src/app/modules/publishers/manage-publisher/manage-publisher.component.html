@@ -119,6 +119,32 @@
                           <input class="form-control"  name="registeredDate" formControlName="registeredDate" (click)="d.toggle()" ngbDatepicker #d="ngbDatepicker">
                         </div>
                       </div>
+                      <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                              <div class="controls">
+                                <label>Privacy Policy	</label>
+                                <input type="text" class="form-control" placeholder="Privacy Policy" formControlName="privacyPolicy">
+                                <div class="text-danger">
+                                  <div  *ngIf="(submitted || publisherForm.get('privacyPolicy').touched) && publisherForm.controls['privacyPolicy'].hasError('required')">Please Enter Privacy Policy</div>
+                                  <div  *ngIf="f?.privacyPolicy?.errors?.pattern">Please Enter Valid Privacy Policy</div>
+                              </div>                             
+                             </div>
+                            </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="controls">
+                              <label>Terms Of Use	</label>
+                              <input type="text" class="form-control" placeholder="Terms Of Use" formControlName="termsOfUse">
+                              <div class="text-danger">
+                                  <div  *ngIf="(submitted || publisherForm.get('termsOfUse').touched) && publisherForm.controls['termsOfUse'].hasError('required')">Please Enter Terms Of Use</div>
+                                  <div  *ngIf="f?.termsOfUse?.errors?.pattern">Please Enter Valid Terms Of Use</div>
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        </div>
+                      </div>
 
                     </div>
                 

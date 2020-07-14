@@ -40,6 +40,8 @@ export class ManagePublisherComponent implements OnInit {
   registeredDate:string;
   finaldomain:any;
   finalhomedomain:any;
+  finalprivacyploicydomain:any;
+  finaltemsofusedomain:any;
   Publisherstatus:any=[
     {
       value:1,
@@ -76,7 +78,9 @@ export class ManagePublisherComponent implements OnInit {
         sgScope:['',Validators.required],
         password:['',Validators.required],
         sgTokenType:['',Validators.required],
-        headerColor:['',Validators.required]
+        headerColor:['',Validators.required],
+        privacyPolicy:['',[Validators.required,Validators.pattern(this.reg)]],
+        termsOfUse:['',[Validators.required,Validators.pattern(this.reg)]]
       });
      }
 
@@ -103,6 +107,8 @@ export class ManagePublisherComponent implements OnInit {
           "email":this.publisherInfo.email,
           "domain":this.publisherInfo.domain,
           "homeDomain":this.publisherInfo.homeDomain,
+          "privacyPolicy":this.publisherInfo.privacyPolicy,
+          "termsOfUse":this.publisherInfo.termsOfUse,
           "isActive":this.publisherInfo.isActive,
           "image":this.publisherInfo.photo ? this.publisherInfo.photo.fileName : 'assets/img/noavatar.png',
           "sgBaseUrl":this.publisherInfo.sgBaseUrl,
@@ -143,6 +149,8 @@ export class ManagePublisherComponent implements OnInit {
         this.registeredDate = date.year + '-' + date.month + '-' + date.day;
         const domainstring = this.publisherForm.get('domain').value;
         const domainhomestring =this.publisherForm.get('homeDomain').value;
+        const domainprivacypolicy = this.publisherForm.get('privacyPolicy').value;
+        const domaintermsofuse = this.publisherForm.get('termsOfUse').value;
         this.domainremoveLastcharacter();
         const data={
           publisherName:this.publisherForm.get('publisherName').value,
@@ -215,6 +223,8 @@ export class ManagePublisherComponent implements OnInit {
           email:this.publisherForm.get('email').value,
           domain:this.finaldomain,
           homeDomain:this.finalhomedomain,
+          privacyPolicy:this.finalprivacyploicydomain,
+          termsOfUse:this.finaltemsofusedomain,
           isActive:this.publisherForm.get('isActive').value,
           sgBaseUrl:this.publisherForm.get('sgBaseUrl').value,
           sgClientId:this.publisherForm.get('sgClientId').value,
@@ -333,6 +343,8 @@ export class ManagePublisherComponent implements OnInit {
   {
     const domainstring = this.publisherForm.get('domain').value;
     const homedomainstring = this.publisherForm.get('homeDomain').value;
+    const domainparivacypolicystring = this.publisherForm.get('privacyPolicy').value;
+    const domaintermsofusestring = this.publisherForm.get('termsOfUse').value;
     if(domainstring.substr(domainstring.length - 1))
     {
       var lastcharacter = domainstring.substr(domainstring.length - 1);
@@ -355,6 +367,30 @@ export class ManagePublisherComponent implements OnInit {
       else
       {
         this.finalhomedomain = this.publisherForm.get('homeDomain').value;
+      }
+    }
+    if(domainparivacypolicystring.substr(domainparivacypolicystring.length - 1))
+    {
+      var lastcharacter = domainparivacypolicystring.substr(domainparivacypolicystring.length - 1);
+      if(lastcharacter === '/')
+      {
+        this.finalprivacyploicydomain = this.publisherForm.get('privacyPolicy').value.slice(0,-1);
+      }
+      else
+      {
+        this.finalprivacyploicydomain = this.publisherForm.get('privacyPolicy').value;
+      }
+    }
+    if(domaintermsofusestring.substr(domaintermsofusestring.length - 1))
+    {
+      var lastcharacter = domaintermsofusestring.substr(domaintermsofusestring.length - 1);
+      if(lastcharacter === '/')
+      {
+        this.finaltemsofusedomain = this.publisherForm.get('termsOfUse').value.slice(0,-1);
+      }
+      else
+      {
+        this.finaltemsofusedomain = this.publisherForm.get('termsOfUse').value;
       }
     }
   }
