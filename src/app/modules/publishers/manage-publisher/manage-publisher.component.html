@@ -53,6 +53,20 @@
                         <!-- <a (click)="removeImage()" class="btn btn-outline-danger d-block d-sm-none"><i class="feather icon-trash-2"></i></a> -->
                       </div>
                     </div>
+                    <a class="mr-2 my-25" >
+                      <img class="img-thumbnail img-circle" [src]="croppedfavIcon" alt="" height="150" width="150">
+                      <input #favIcon type="file" (change)="onFavIconChanged($event)" style="display:none">
+                      <input type="hidden" class="form-control" formControlName="favIcon">
+                      <div class="text-danger" *ngIf="submitted && publisherForm.controls['favIcon'].hasError('required')">Please upload fav Icon</div>
+                      <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
+                       <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
+                    </a>
+                    <div class="media-body mt-50">
+                      <div class="col-12 d-flex mt-1 px-0">
+                        <button (click)="favIcon.click()" class="btn btn-primary d-none d-sm-block mr-75">Change</button>
+                        <a (click)="removefavIcon()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
+                      </div>
+                    </div>
                   </div>
                     <div class="row">
                       <div class="col-12 col-sm-12">
@@ -433,6 +447,29 @@
             [aspectRatio]="1 / 1"
             format="png"
             (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Crop Image</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- fav Icon Modal-->
+<div class="modal fade" id="favIconModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crop Image</h5>
+      </div>
+      <div class="modal-body">
+        <image-cropper
+            [imageChangedEvent]="favIconChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="1 / 1"
+            format="png"
+            (imageCropped)="favIconCropped($event)"
         ></image-cropper>
       </div>
       <div class="modal-footer">

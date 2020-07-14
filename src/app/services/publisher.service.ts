@@ -40,9 +40,10 @@ export class PublisherService {
 
 
 
-  savePublisher(data, image,dob) {
+  savePublisher(data, image,dob,icon) {
     const frmData = new FormData();
     frmData.append('image', image);
+    frmData.append('favIcon', icon);
     frmData.append('publisherName',data.publisherName);
     frmData.append('fullName',data.fullName);
     frmData.append('email',data.email);
@@ -66,10 +67,13 @@ export class PublisherService {
   }
 
 
-  editPublisher(data, image,editid,dob) {
+  editPublisher(data, image,editid,dob,icon) {
     const frmData = new FormData();
     if (image) {
       frmData.append('image', image);
+    }
+    if(icon){
+      frmData.append('favIcon',icon)
     }
     frmData.append('publisherId',editid);
     frmData.append('publisherName',data.publisherName);

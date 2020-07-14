@@ -26,12 +26,15 @@ export class ManagePublisherComponent implements OnInit {
   hexColor: String;
   rgbaColor: Object;
   imageChangedEvent: any = '';
+  favIconChangedEvent: any ='';
   publisherForm:FormGroup;
   submitted = false;
   errorMessage: string;
   validationMessage = [];
   croppedImage: any = 'assets/img/150.png';
+  croppedfavIcon:any = 'assets/img/150.png';
   finalImage: any = {};
+  finalfavIcon: any ={};
   finalcolor:any;
   editid:any;
   publisherInfo:any;
@@ -42,6 +45,7 @@ export class ManagePublisherComponent implements OnInit {
   finalhomedomain:any;
   finalprivacyploicydomain:any;
   finaltemsofusedomain:any;
+  selectedfavIcon: File;
   Publisherstatus:any=[
     {
       value:1,
@@ -68,6 +72,7 @@ export class ManagePublisherComponent implements OnInit {
         domain:['',[Validators.required,Validators.pattern(this.reg)]],
         homeDomain:['',[Validators.required,Validators.pattern(this.reg)]],
         image:['',Validators.required],
+        favIcon:['',Validators.required],
         isActive:[1],
         registeredDate:[''],
         sgBaseUrl:['',[Validators.required,Validators.pattern(this.reg)]],
@@ -96,6 +101,10 @@ export class ManagePublisherComponent implements OnInit {
         {
           this.croppedImage= this.imgURL+this.publisherInfo.photo.path;
         }
+        if(this.publisherInfo.favIcon)
+        {
+          this.croppedfavIcon = this.imgURL + this.publisherInfo.favIcon.path;
+        }
         if(this.publisherInfo.registeredDate)
         {
           this.getDateFormat(this.publisherInfo.registeredDate);
@@ -110,6 +119,7 @@ export class ManagePublisherComponent implements OnInit {
           "privacyPolicy":this.publisherInfo.privacyPolicy,
           "termsOfUse":this.publisherInfo.termsOfUse,
           "isActive":this.publisherInfo.isActive,
+          "favIcon":this.publisherInfo.favIcon ? this.publisherInfo.favIcon.fileName : 'assets/img/noavatar.png',
           "image":this.publisherInfo.photo ? this.publisherInfo.photo.fileName : 'assets/img/noavatar.png',
           "sgBaseUrl":this.publisherInfo.sgBaseUrl,
           "sgUsername":this.publisherInfo.sgUsername,
@@ -120,12 +130,6 @@ export class ManagePublisherComponent implements OnInit {
           "sgTokenType":this.publisherInfo.sgTokenType,
           "password":this.publisherInfo.password,
           "headerColor":this.publisherInfo.headerColor,
-          // "manageheader":atob(this.publisherInfo.headerScript),
-          // "sidebar1":atob(this.publisherInfo.sidebar1),
-          // "sidebar2":atob(this.publisherInfo.sidebar2),
-          // "sidebar3":atob(this.publisherInfo.sidebar3),
-          // "sidebar4":atob(this.publisherInfo.sidebar4),
-          // "leaderboard1":atob(this.publisherInfo.leaderboard1)
         });
       }
   })
@@ -170,15 +174,9 @@ export class ManagePublisherComponent implements OnInit {
           sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-          // headerScript:btoa(this.publisherForm.get('manageheader').value),
-          // leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
-          // sidebar1:btoa(this.publisherForm.get('sidebar1').value),
-          // sidebar2:btoa(this.publisherForm.get('sidebar2').value),
-          // sidebar3:btoa(this.publisherForm.get('sidebar3').value),
-          // sidebar4:btoa(this.publisherForm.get('sidebar4').value)
         }
         
-        this.publisherService.savePublisher(data,this.finalImage,this.registeredDate).subscribe((data:any)=>{
+        this.publisherService.savePublisher(data,this.finalImage,this.registeredDate,this.finalfavIcon).subscribe((data:any)=>{
           this.submitted = false;
           if (data.errorMsg === "")  {
             this.router.navigate(['/dashboard']);
@@ -236,15 +234,9 @@ export class ManagePublisherComponent implements OnInit {
           sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-          // headerScript:btoa(this.publisherForm.get('manageheader').value),
-          // leaderboard1:btoa(this.publisherForm.get('leaderboard1').value),
-          // sidebar1:btoa(this.publisherForm.get('sidebar1').value),
-          // sidebar2:btoa(this.publisherForm.get('sidebar2').value),
-          // sidebar3:btoa(this.publisherForm.get('sidebar3').value),
-          // sidebar4:btoa(this.publisherForm.get('sidebar4').value)
   
         }
-        this.publisherService.editPublisher(data,this.finalImage,this.editid,this.registeredDate).subscribe((data:any)=>{
+        this.publisherService.editPublisher(data,this.finalImage,this.editid,this.registeredDate,this.finalfavIcon).subscribe((data:any)=>{
           this.submitted = false;
           if (data.errorMsg === "")  {
             this.router.navigate(['/dashboard']);
@@ -306,9 +298,31 @@ export class ManagePublisherComponent implements OnInit {
     this.publisherForm.get('image').setValidators(Validators.required);
   }
 
+  removefavIcon()
+  {
+    this.publisherForm.patchValue({favIcon: ''});
+    this.croppedfavIcon =  'assets/img/150.png';
+    this.publisherForm.get('favIcon').setValidators(Validators.required);
+  }
+
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
     $('#publisherImageModel').modal('show');
+    
+  }
+
+  onFavIconChanged(event:any) :void{
+    this.favIconChangedEvent = event;
+    $('#favIconModel').modal('show');
+  }
+
+  favIconCropped(event: ImageCroppedEvent)
+  {
+    this.croppedfavIcon = event.base64;
+    let blobFile = this.dataURItoBlob(this.croppedfavIcon);
+    let imageName = new Date().valueOf() + '_' + "image" + '.jpeg';
+    this.publisherForm.patchValue({favIcon: imageName});
+    this.finalfavIcon = new File([blobFile], imageName, {type: "'image/jpeg'"});
   }
 
   imageCropped(event: ImageCroppedEvent) {
