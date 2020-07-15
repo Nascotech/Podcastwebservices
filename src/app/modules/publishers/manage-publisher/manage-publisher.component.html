@@ -45,8 +45,8 @@
                        <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
                     </a>
                     <div class="media-body mt-50">
-                      <!-- <h4 class="media-heading">Angelo Sashington</h4> -->
-                      <div class="col-12 d-flex mt-1 px-0">
+                      <p class="pub-title">Logo</p>
+                      <div class="col-12 d-flex px-0">
                         <button (click)="publisherImage.click()" class="btn btn-primary d-none d-sm-block mr-75">Change</button>
                         <!-- <button (click)="publisherImage.click()" class="btn btn-primary d-block d-sm-none mr-75"><i class="feather icon-edit-1"></i></button> -->
                         <a (click)="removeImage()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
@@ -61,8 +61,9 @@
                       <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
                        <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
                     </a>
-                    <div class="media-body mt-50">
-                      <div class="col-12 d-flex mt-1 px-0">
+                    <div class="media-body mt-25">
+                      <p class="pub-title">Favicon</p>
+                      <div class="col-12 d-flex px-0">
                         <button (click)="favIcon.click()" class="btn btn-primary d-none d-sm-block mr-75">Change</button>
                         <a (click)="removefavIcon()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
                       </div>
@@ -263,7 +264,7 @@
                         <div class="form-group">
                           <div class="controls">
                             <label>Primary Color</label>
-                            <input type="text" [style.background]="color" formControlName="headerColor"  [(colorPicker)]="color" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)" [value]="color" (colorPickerClose)="onEventLog('colorPickerClose', $event)" (cpInputChange)="onEventLog('cpInputChange', $event)" (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" class="form-control" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                            <input type="text" formControlName="headerColor"  [(colorPicker)]="color" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"  [style.background]="publisherInfo?.headerColor" [value]="color" (colorPickerClose)="onEventLog('colorPickerClose', $event)" (cpInputChange)="onEventLog('cpInputChange', $event)" (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" class="form-control" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('headerColor').touched) && publisherForm.controls['headerColor'].hasError('required')">Primary color Required</div>
 
                             <!-- <div class="text-danger" *ngIf="t?.headerColor?.errors?.required">Header Color Code Required</div> -->
