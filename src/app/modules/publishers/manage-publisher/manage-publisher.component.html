@@ -264,7 +264,7 @@
                         <div class="form-group">
                           <div class="controls">
                             <label>Primary Color</label>
-                            <input type="text" formControlName="headerColor"  [(colorPicker)]="color" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"  [style.background]="publisherInfo?.headerColor" [value]="color" (colorPickerClose)="onEventLog('colorPickerClose', $event)" (cpInputChange)="onEventLog('cpInputChange', $event)" (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" class="form-control" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                            <input type="text" formControlName="headerColor"  [(colorPicker)]="finalcolor" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"  [style.background]="publisherInfo?.headerColor" [value]="color" (colorPickerClose)="onEventLog('colorPickerClose', $event)" (cpInputChange)="onEventLog('cpInputChange', $event)" (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" class="form-control" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('headerColor').touched) && publisherForm.controls['headerColor'].hasError('required')">Primary color Required</div>
 
                             <!-- <div class="text-danger" *ngIf="t?.headerColor?.errors?.required">Header Color Code Required</div> -->
