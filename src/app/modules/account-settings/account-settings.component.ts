@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-account-settings',
@@ -13,43 +13,42 @@ declare var $:any;
 })
 export class AccountSettingsComponent implements OnInit {
   isLoading = true;
-  sidebar1:any;
-  sidebar2:any;
-  sidebar3:any;
-  sidebar4:any;
-  leaderboard1:any;
-  modalTitle:any;
-  settingsForm:FormGroup;
+  sidebar1: any;
+  sidebar2: any;
+  sidebar3: any;
+  sidebar4: any;
+  leaderboard1: any;
+  modalTitle: any;
+  settingsForm: FormGroup;
   submitted = false;
   errorMessage: string;
   validationMessage = [];
-  displaysidebar1:boolean=false;
-  displaysidebar2:boolean=false;
-  displaysidebar3:boolean=false;
-  displaysidebar4:boolean=false;
-  displayleaderboard:boolean=false;
-  constructor(private authService:AuthService,
-    private tostrService:ToastrService,
-    private fb:FormBuilder,
-    private router:Router) { 
-      this.settingsForm = this.fb.group({
-        sidebar1:[''],
-        sidebar2:[''],
-        sidebar3:[''],
-        sidebar4:[''],
-        leaderboard1:['']
-      })
-    }
+  displaysidebar1: boolean = false;
+  displaysidebar2: boolean = false;
+  displaysidebar3: boolean = false;
+  displaysidebar4: boolean = false;
+  displayleaderboard: boolean = false;
+  constructor(private authService: AuthService,
+    private tostrService: ToastrService,
+    private fb: FormBuilder,
+    private router: Router) {
+    this.settingsForm = this.fb.group({
+      sidebar1: [''],
+      sidebar2: [''],
+      sidebar3: [''],
+      sidebar4: [''],
+      leaderboard1: ['']
+    })
+  }
 
   ngOnInit(): void {
     this.getSettingsValues();
   }
-  
 
 
-  getSettingsValues()
-  {
-    this.authService.getSettingskeys().subscribe((data:any)=>{
+
+  getSettingsValues() {
+    this.authService.getSettingskeys().subscribe((data: any) => {
       this.sidebar1 = window.atob(data.response.sidebar1)
       this.sidebar2 = window.atob(data.response.sidebar2);
       this.sidebar3 = window.atob(data.response.sidebar3);
@@ -57,89 +56,81 @@ export class AccountSettingsComponent implements OnInit {
       this.leaderboard1 = window.atob(data.response.leaderboard1);
       this.isLoading = false;
     },
-    (error) => {
-      this.tostrService.error(error);
-    })
+      (error) => {
+        this.tostrService.error(error);
+      })
   }
 
-  opensidebar1editModal()
-  {
-    this.displaysidebar1=true;
-    this.displaysidebar2=false;
-    this.displaysidebar3=false;
-    this.displaysidebar4=false;
-    this.displayleaderboard=false;
+  opensidebar1editModal() {
+    this.displaysidebar1 = true;
+    this.displaysidebar2 = false;
+    this.displaysidebar3 = false;
+    this.displaysidebar4 = false;
+    this.displayleaderboard = false;
     $('#editModal').modal('show');
     this.settingsForm.controls['sidebar1'].setValue(this.sidebar1)
   }
 
-  opensidebar2editModal()
-  {
-    this.displaysidebar2=true;
-    this.displaysidebar1=false;
-    this.displaysidebar3=false;
-    this.displaysidebar4=false;
-    this.displayleaderboard=false;
+  opensidebar2editModal() {
+    this.displaysidebar2 = true;
+    this.displaysidebar1 = false;
+    this.displaysidebar3 = false;
+    this.displaysidebar4 = false;
+    this.displayleaderboard = false;
     $('#editModal').modal('show');
     this.settingsForm.controls['sidebar2'].setValue(this.sidebar2)
   }
 
-  opensidebar3editModal()
-  {
+  opensidebar3editModal() {
     this.displaysidebar3 = true;
-    this.displaysidebar1=false;
-    this.displaysidebar2=false;
-    this.displaysidebar4=false;
-    this.displayleaderboard=false;
+    this.displaysidebar1 = false;
+    this.displaysidebar2 = false;
+    this.displaysidebar4 = false;
+    this.displayleaderboard = false;
     $('#editModal').modal('show');
     this.settingsForm.controls['sidebar3'].setValue(this.sidebar3)
   }
 
-  opensidebar4editModal()
-  {
-    this.displaysidebar4=true;
-    this.displaysidebar1=false;
-    this.displaysidebar2=false;
-    this.displaysidebar3=false;
-    this.displayleaderboard=false;
+  opensidebar4editModal() {
+    this.displaysidebar4 = true;
+    this.displaysidebar1 = false;
+    this.displaysidebar2 = false;
+    this.displaysidebar3 = false;
+    this.displayleaderboard = false;
     $('#editModal').modal('show');
     this.settingsForm.controls['sidebar4'].setValue(this.sidebar4)
   }
 
-  openleaderboardeditModal()
-  {
-    this.displaysidebar3=false;
-    this.displaysidebar4=false;
-    this.displaysidebar2=false;
-    this.displaysidebar1=false;
-    this.displayleaderboard=true;
+  openleaderboardeditModal() {
+    this.displaysidebar3 = false;
+    this.displaysidebar4 = false;
+    this.displaysidebar2 = false;
+    this.displaysidebar1 = false;
+    this.displayleaderboard = true;
     $('#editModal').modal('show');
     this.settingsForm.controls['leaderboard1'].setValue(this.leaderboard1);
   }
 
-  gotobackpage()
-  {
+  gotobackpage() {
     this.router.navigate(['/dashboard'])
   }
 
-  saveSettingsValue()
-  {
+  saveSettingsValue() {
     this.submitted = true;
     if (this.settingsForm.invalid) {
       return;
     }
-    else
-    {
-      const data={
-        sidebar1:btoa(this.settingsForm.get('sidebar1').value),
-        sidebar2:btoa(this.settingsForm.get('sidebar2').value),
-        sidebar3:btoa(this.settingsForm.get('sidebar3').value),
-        sidebar4:btoa(this.settingsForm.get('sidebar4').value),
-        leaderboard1:btoa(this.settingsForm.get('leaderboard1').value)
+    else {
+      const data = {
+        sidebar1: btoa(this.removeProtocol(this.settingsForm.get('sidebar1').value)),
+        sidebar2: btoa(this.removeProtocol(this.settingsForm.get('sidebar2').value)),
+        sidebar3: btoa(this.removeProtocol(this.settingsForm.get('sidebar3').value)),
+        sidebar4: btoa(this.removeProtocol(this.settingsForm.get('sidebar4').value)),
+        leaderboard1: btoa(this.removeProtocol(this.settingsForm.get('leaderboard1').value))
       }
-      this.authService.saveSettingsKeys(data).subscribe((data:any)=>{
+      this.authService.saveSettingsKeys(data).subscribe((data: any) => {
         this.submitted = false;
-        if (data.errorMsg === "")  {
+        if (data.errorMsg === "") {
           $('#editModal').modal('hide');
           this.tostrService.success('record edited successfully.', 'Success');
           this.getSettingsValues()
@@ -160,10 +151,14 @@ export class AccountSettingsComponent implements OnInit {
         } else if (error.status === 401) {
           this.submitted = false;
         } else {
-         // this.errorMessage = error.error.errorMsg;
+          // this.errorMessage = error.error.errorMsg;
         }
       })
     }
   }
 
+  removeProtocol(script) {
+    let str1 = script.replace("http:", "");
+    return str1.replace("https:", "");
+  }
 }
