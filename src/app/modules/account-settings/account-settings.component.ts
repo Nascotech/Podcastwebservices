@@ -49,23 +49,22 @@ export class AccountSettingsComponent implements OnInit {
 
   getSettingsValues() {
     this.authService.getSettingskeys().subscribe((data: any) => {
-      this.sidebar1 = window.atob(data.response.sidebar1)
-      this.sidebar2 = window.atob(data.response.sidebar2);
-      this.sidebar3 = window.atob(data.response.sidebar3);
-      this.sidebar4 = window.atob(data.response.sidebar4);
-      this.leaderboard1 = window.atob(data.response.leaderboard1);
+      this.sidebar1 = window.atob(data.response.sidebar11);
+      this.sidebar2 = window.atob(data.response.sidebar22);
+      this.sidebar3 = window.atob(data.response.sidebar33);
+      this.sidebar4 = window.atob(data.response.sidebar44);
+      this.leaderboard1 = window.atob(data.response.leaderboard11);
       this.settingsForm.patchValue({
-        "sidebar1": window.atob(data.response.sidebar1),
-        "sidebar2": window.atob(data.response.sidebar2),
-        "sidebar3": window.atob(data.response.sidebar3),
-        "sidebar4": window.atob(data.response.sidebar4),
-        "leaderboard1": window.atob(data.response.leaderboard1)
+        "sidebar1": window.atob(data.response.sidebar11),
+        "sidebar2": window.atob(data.response.sidebar22),
+        "sidebar3": window.atob(data.response.sidebar33),
+        "sidebar4": window.atob(data.response.sidebar44),
+        "leaderboard1": window.atob(data.response.leaderboard11)
       });
       this.isLoading = false;
-    },
-      (error) => {
+    },(error) => {
         this.tostrService.error(error);
-      })
+    })
   }
 
   opensidebar1editModal() {
@@ -130,10 +129,15 @@ export class AccountSettingsComponent implements OnInit {
     else {
       const data = {
         sidebar1: btoa(this.removeProtocol(this.settingsForm.get('sidebar1').value)),
+        sidebar11: btoa(this.settingsForm.get('sidebar1').value),
         sidebar2: btoa(this.removeProtocol(this.settingsForm.get('sidebar2').value)),
+        sidebar22: btoa(this.settingsForm.get('sidebar2').value),
         sidebar3: btoa(this.removeProtocol(this.settingsForm.get('sidebar3').value)),
+        sidebar33: btoa(this.settingsForm.get('sidebar3').value),
         sidebar4: btoa(this.removeProtocol(this.settingsForm.get('sidebar4').value)),
-        leaderboard1: btoa(this.removeProtocol(this.settingsForm.get('leaderboard1').value))
+        sidebar44: btoa(this.settingsForm.get('sidebar4').value),
+        leaderboard1: btoa(this.removeProtocol(this.settingsForm.get('leaderboard1').value)),
+        leaderboard11: btoa(this.settingsForm.get('leaderboard1').value)
       }
       this.authService.saveSettingsKeys(data).subscribe((data: any) => {
         this.submitted = false;
