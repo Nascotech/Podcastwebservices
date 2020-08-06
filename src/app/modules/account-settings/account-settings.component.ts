@@ -54,6 +54,13 @@ export class AccountSettingsComponent implements OnInit {
       this.sidebar3 = window.atob(data.response.sidebar3);
       this.sidebar4 = window.atob(data.response.sidebar4);
       this.leaderboard1 = window.atob(data.response.leaderboard1);
+      this.settingsForm.patchValue({
+        "sidebar1": window.atob(data.response.sidebar1),
+        "sidebar2": window.atob(data.response.sidebar2),
+        "sidebar3": window.atob(data.response.sidebar3),
+        "sidebar4": window.atob(data.response.sidebar4),
+        "leaderboard1": window.atob(data.response.leaderboard1)
+      });
       this.isLoading = false;
     },
       (error) => {
