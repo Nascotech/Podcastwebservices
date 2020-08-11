@@ -88,7 +88,7 @@
                                   <div  *ngIf="(submitted || publisherForm.get('domain').touched) && publisherForm.controls['domain'].hasError('required')">Please Enter Domain</div>
                                   <div  *ngIf="f?.domain?.errors?.pattern">Please Enter Valid Domain</div>
                               </div>
-                            </div>  
+                            </div>
                           </div>
                           <div class="col-12 col-sm-4">
                             <div class="controls">
@@ -98,7 +98,7 @@
                                   <div  *ngIf="(submitted || publisherForm.get('homeDomain').touched) && publisherForm.controls['homeDomain'].hasError('required')">Please Enter Home Domain</div>
                                   <div  *ngIf="f?.homeDomain?.errors?.pattern">Please Enter Valid Home Domain</div>
                               </div>
-                            </div>  
+                            </div>
                           </div>
                         </div>
                         </div>
@@ -144,7 +144,7 @@
                                 <div class="text-danger">
                                   <div  *ngIf="(submitted || publisherForm.get('privacyPolicy').touched) && publisherForm.controls['privacyPolicy'].hasError('required')">Please Enter Privacy Policy</div>
                                   <div  *ngIf="f?.privacyPolicy?.errors?.pattern">Please Enter Valid Privacy Policy</div>
-                              </div>                             
+                              </div>
                              </div>
                             </div>
                           <div class="col-12 col-sm-6">
@@ -155,14 +155,14 @@
                                   <div  *ngIf="(submitted || publisherForm.get('termsOfUse').touched) && publisherForm.controls['termsOfUse'].hasError('required')">Please Enter Terms Of Use</div>
                                   <div  *ngIf="f?.termsOfUse?.errors?.pattern">Please Enter Valid Terms Of Use</div>
                               </div>
-                            </div>  
+                            </div>
                           </div>
                         </div>
                         </div>
                       </div>
 
                     </div>
-                
+
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@
                       <h4 class="mb-2 mt-1"><i class="fal fa-key"></i> sgRecast Credentials</h4>
                     </div>
                   </div>
-              
+
                     <div class="row">
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
@@ -264,7 +264,7 @@
                         <div class="form-group">
                           <div class="controls">
                             <label>Primary Color</label>
-                            <input type="text" formControlName="headerColor"  [(colorPicker)]="finalcolor" (colorPickerOpen)="onEventLog('colorPickerOpen', $event)"  [style.background]="publisherInfo?.headerColor" [value]="color" (colorPickerClose)="onEventLog('colorPickerClose', $event)" (cpInputChange)="onEventLog('cpInputChange', $event)" (cpSliderDragStart)="onEventLog('cpSliderDragStart', $event)" class="form-control" (cpSliderDragEnd)="onEventLog('cpSliderDragEnd', $event)"/>
+                            <input type="text" formControlName="headerColor" [cpPosition]="'top'" [(colorPicker)]="finalcolor" [style.background]="finalcolor" [value]="color" class="form-control"/>
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('headerColor').touched) && publisherForm.controls['headerColor'].hasError('required')">Primary color Required</div>
 
                             <!-- <div class="text-danger" *ngIf="t?.headerColor?.errors?.required">Header Color Code Required</div> -->

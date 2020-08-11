@@ -64,7 +64,7 @@ export class ManagePublisherComponent implements OnInit {
     private route:ActivatedRoute,
     private config: NgbDatepickerConfig) {
 
-     
+
       this.publisherForm=this.fb.group({
         publisherName:['',Validators.required],
         fullName:['',Validators.required],
@@ -91,7 +91,7 @@ export class ManagePublisherComponent implements OnInit {
 
 
   ngOnInit() {
-    this.imgURL=environment.img_uri; 
+    this.imgURL=environment.img_uri;
     this.route.paramMap.subscribe( paramMap => {
       this.editid = paramMap.get('id');
       this.publisherInfo=JSON.parse(localStorage.getItem('publisherdetail'));
@@ -143,7 +143,7 @@ export class ManagePublisherComponent implements OnInit {
   {
     if(this.editid === null)
     {
-      this.submitted = true;   
+      this.submitted = true;
       if (!this.publisherForm.valid) {
         return;
       }
@@ -175,7 +175,7 @@ export class ManagePublisherComponent implements OnInit {
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
         }
-        
+
         this.publisherService.savePublisher(data,this.finalImage,this.registeredDate,this.finalfavIcon).subscribe((data:any)=>{
           this.submitted = false;
           if (data.errorMsg === "")  {
@@ -234,7 +234,7 @@ export class ManagePublisherComponent implements OnInit {
           sgTokenType:this.publisherForm.get('sgTokenType').value,
           headerColor:this.finalcolor,
           footerColor:this.finalcolor,
-  
+
         }
         this.publisherService.editPublisher(data,this.finalImage,this.editid,this.registeredDate,this.finalfavIcon).subscribe((data:any)=>{
           this.submitted = false;
@@ -279,7 +279,7 @@ export class ManagePublisherComponent implements OnInit {
 
   onChange(value)
   {
-    
+
   }
 
   gotobackpage()
@@ -308,7 +308,7 @@ export class ManagePublisherComponent implements OnInit {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
     $('#publisherImageModel').modal('show');
-    
+
   }
 
   onFavIconChanged(event:any) :void{
@@ -411,42 +411,16 @@ export class ManagePublisherComponent implements OnInit {
 
 
   public onEventLog(event: string, data: any): void {
-    this.finalcolor=data; 
+    this.finalcolor=data;
     if(this.finalcolor?.color == '' || null)
     {
       this.publisherForm.get('headerColor').setValidators(Validators.required);
-      this.publisherForm.get('headerColor').updateValueAndValidity(); 
+      this.publisherForm.get('headerColor').updateValueAndValidity();
     }
     else{
       this.publisherForm.get('headerColor').clearValidators();
-      this.publisherForm.get('headerColor').updateValueAndValidity(); 
+      this.publisherForm.get('headerColor').updateValueAndValidity();
     }
 
   }
-
-  public onChangeColorCmyk(color: string): Cmyk {
-    const hsva = this.cpService.stringToHsva(color);
-    if (hsva) {
-      const rgba = this.cpService.hsvaToRgba(hsva);
-      return this.cpService.rgbaToCmyk(rgba);
-    }
-    return new Cmyk(0, 0, 0, 0);
-  }
-
-  public onChangeColorHex8(color: string): string {
-    const hsva = this.cpService.stringToHsva(color, true);
-    if (hsva) {
-      return this.cpService.outputFormat(hsva, 'rgba', null);
-    }
-    return '';
-  }
-
-
 }
-
-  
-
-  
-
-
-
