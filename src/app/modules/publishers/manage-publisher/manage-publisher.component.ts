@@ -128,7 +128,7 @@ export class ManagePublisherComponent implements OnInit {
           "sgClientId":this.publisherInfo.sgClientId,
           "sgScope":this.publisherInfo.sgScope,
           "sgTokenType":this.publisherInfo.sgTokenType,
-          "password":this.publisherInfo.password,
+          "password":this.publisherInfo.sgPassword,
           "headerColor":this.publisherInfo.headerColor,
         });
       }
