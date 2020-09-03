@@ -61,6 +61,7 @@ export class PublisherService {
     frmData.append('password',data.password);
     frmData.append('sgUsername',data.sgUsername);
     frmData.append('sgTokenType',data.sgTokenType);
+    frmData.append('googleCode',data.googleCode);
     frmData.append('headerColor',data.headerColor);
     frmData.append('footerColor',data.headerColor);
     return this.http.post(this.savePublisherURL, frmData);
@@ -93,6 +94,7 @@ export class PublisherService {
     frmData.append('password',data.password);
     frmData.append('sgUsername',data.sgUsername);
     frmData.append('sgTokenType',data.sgTokenType);
+    frmData.append('googleCode',data.googleCode);
     frmData.append('headerColor',data.headerColor);
     frmData.append('footerColor',data.footerColor);
     return this.http.put(this.editPublisherURL, frmData);
