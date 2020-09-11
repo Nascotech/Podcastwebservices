@@ -131,7 +131,7 @@
               <td class="product-action">
                 <button (click)="gotoeditpage(publisher)" type="button" class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i class="feather icon-edit"></i></button>
                 <button (click)="removePublisher(publisher.id)" type="button" class="btn btn-icon btn-outline-danger mr-1 mb-1 waves-effect waves-light"><i class="feather icon-trash"></i></button>
-                <button (click)="openGropModel(publisher.id, publisher.groupId)" type="button" class="btn btn-icon btn-outline-warning mr-1 mb-1 waves-effect waves-light"><i class="feather icon-settings"></i></button>
+                <button *ngIf="publisher.sgAccessToken && publisher.sgRefreshToken" (click)="openGropModel(publisher.id, publisher.groupId)" type="button" class="btn btn-icon btn-outline-warning mr-1 mb-1 waves-effect waves-light"><i class="feather icon-settings"></i></button>
               </td>
               </tr>
             </tbody>
