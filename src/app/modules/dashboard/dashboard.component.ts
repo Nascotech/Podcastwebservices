@@ -19,21 +19,24 @@ export class DashboardComponent implements OnInit {
   totalLength: number;
   pageSize: number;
   finalPage = 1;
-  pageNumber=1;
-  keyword='';
-  publisherList:any=[];
+  pageNumber = 1;
+  keyword = '';
+  publisherList: any = [];
   collectionSize: number;
   isLoading = true;
   model: any = {};
   selectedPublisherId: string;
   photoUrl: string;
-  finaldate:any;
+  finaldate: any;
+  groupList: any = [];
+  groupId: any;
+
   constructor(private toastr: ToastrService,
-    private router:Router,
-    private commonService:CommonService,
-    private route:ActivatedRoute,
-    private publisherService:PublisherService,
-    private tostrService:ToastrService) { }
+    private router: Router,
+    private commonService: CommonService,
+    private route: ActivatedRoute,
+    private publisherService: PublisherService,
+    private tostrService: ToastrService) { }
 
   ngOnInit() {
     //this.route.params.subscribe(params => this.pageNumber = params['page']);
@@ -43,33 +46,29 @@ export class DashboardComponent implements OnInit {
     this.photoUrl = environment.img_uri;
   }
 
-  gotoaddPage()
-  {
+  gotoaddPage() {
     localStorage.removeItem("publisherdetail");
     this.router.navigate(['/publisher/add'])
   }
 
-  redirectToPage(link:string) {    
-    if(!link) return '';
-      return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;
-
+  redirectToPage(link: string) {
+    if (!link) return '';
+    return !(link.startsWith("http://") || link.startsWith("https://")) ? "http://" + link : link;
   }
 
-  gotodetailpage(publisher)
-  {
-    this.router.navigate(['/view/'+publisher.id]);
-    localStorage.setItem('publisherdetail',JSON.stringify(publisher))
+  gotodetailpage(publisher) {
+    this.router.navigate(['/view/' + publisher.id]);
+    localStorage.setItem('publisherdetail', JSON.stringify(publisher))
   }
 
   getPublishers() {
-    this.publisherService.getPublisherlist(this.selectedPage, this.pageSize, this.keyword).subscribe(data=>{
+    this.publisherService.getPublisherlist(this.selectedPage, this.pageSize, this.keyword).subscribe(data => {
       this.publisherList = data.response.list;
       this.totalLength = data.response.count;
       this.finalPage = this.selectedPage;
       this.collectionSize = data.response.list.length;
       this.isLoading = false;
-    },
-    (error) => {
+    },(error) => {
       this.tostrService.error(error);
     })
   }
@@ -104,21 +103,46 @@ export class DashboardComponent implements OnInit {
       } else {
         this.toastr.error(data.errorMsg, 'Failure');
       }
-    },
-    (error) => {
+    },(error) => {
       this.tostrService.error(error);
     })
   }
 
+  openGropModel(publisherId, groupId) {
+    this.selectedPublisherId = publisherId;
+    this.groupId = groupId;
+    this.publisherService.getPublisherGroup(publisherId).subscribe((data: any) => {
+      this.groupList = data.response.data;
+      $('#stationModal').modal('show');
+    },(error) => {
+      this.tostrService.error(error);
+    });
+  }
+
   gotoeditpage(publisher) {
     let id = publisher.id;
-    this.router.navigate(['/edit/'+id]);
-    localStorage.setItem("publisherdetail",JSON.stringify(publisher));
+    this.router.navigate(['/edit/' + id]);
+    localStorage.setItem("publisherdetail", JSON.stringify(publisher));
   }
 
   gotoviewPage(publisher) {
     let pid = publisher.id;
-    this.router.navigate(['/view/'+pid]);
-    localStorage.setItem("publisherdetail",JSON.stringify(publisher));
+    this.router.navigate(['/view/' + pid]);
+    localStorage.setItem("publisherdetail", JSON.stringify(publisher));
+  }
+
+  onChangeGroup(value) {
+    this.groupId = value;
+  }
+
+  saveDefaultGroup() {
+    this.publisherService.defaultPublisherGroup(this.selectedPublisherId, this.groupId).subscribe((data: any) => {
+      this.groupId = '';
+      $('#stationModal').modal('hide');
+      this.toastr.success('Publisher default group updated successfully.', 'Success');
+      this.ngOnInit();
+    },(error) => {
+      this.tostrService.error(error);
+    });
   }
 }
