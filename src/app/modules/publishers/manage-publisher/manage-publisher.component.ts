@@ -58,6 +58,14 @@ export class ManagePublisherComponent implements OnInit {
     }
   ];
 
+  groupId : any;
+  groupList : any = [];
+  groupName : any;
+  groupNames : any;
+
+  sgRefreshToken : any;
+  sgAccessToken : any;
+
   constructor(
     private router: Router,
     private publisherService: PublisherService,
@@ -65,7 +73,8 @@ export class ManagePublisherComponent implements OnInit {
     private tostrService: ToastrService,
     private cpService: ColorPickerService,
     private route: ActivatedRoute,
-    private config: NgbDatepickerConfig
+    private config: NgbDatepickerConfig,
+    private toastr :ToastrService
   ) {
     this.publisherForm = this.fb.group({
       publisherName: ['', Validators.required],
@@ -106,6 +115,13 @@ export class ManagePublisherComponent implements OnInit {
         }
         if (this.publisherInfo.registeredDate) {
           this.getDateFormat(this.publisherInfo.registeredDate);
+        }
+        if(this.publisherInfo.groupId && this.publisherInfo.groupName) {
+          this.groupNames = this.publisherInfo.groupName
+        }
+        if(this.publisherInfo.sgRefreshToken && this.publisherInfo.sgAccessToken) {
+          this.sgAccessToken = this.publisherInfo.sgAccessToken;
+          this.sgRefreshToken = this.publisherInfo.sgRefreshToken
         }
         this.finalcolor = this.publisherInfo.headerColor;
         this.publisherForm.patchValue({
@@ -389,5 +405,38 @@ export class ManagePublisherComponent implements OnInit {
       this.publisherForm.get('headerColor').clearValidators();
       this.publisherForm.get('headerColor').updateValueAndValidity();
     }
+  }
+
+  onChangeGroup(event) {      
+    if(event != 'null') {
+      let info =  this.groupList.find(x => x.id == event);
+      this.groupId = info.id;
+      this.groupName = info.displayName;
+    } else {
+      this.groupId = '';
+      this.groupName = '';
+    }
+  }
+
+  openGropModel() {
+    this.publisherService.getPublisherGroup(this.editid).subscribe((data: any) => {
+      this.groupList = data.response.data;
+      $('#stationModal').modal('show');
+    },(error) => {
+      this.tostrService.error(error);
+    });
+  }
+
+  saveDefaultGroup() {
+    this.publisherService.defaultPublisherGroup(this.editid, this.groupId , this.groupName).subscribe((data: any) => {
+      //this.groupId = '';
+      localStorage.setItem('publisherdetail', JSON.stringify(data.response));
+      this.groupNames = data.response.groupName;
+      $('#stationModal').modal('hide');
+      this.toastr.success('Publisher default group updated successfully.', 'Success');
+      this.ngOnInit();
+    },(error) => {
+      this.tostrService.error(error);
+    });
   }
 }

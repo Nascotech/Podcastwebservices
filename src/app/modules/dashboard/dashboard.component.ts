@@ -108,17 +108,6 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  openGropModel(publisherId, groupId) {
-    this.selectedPublisherId = publisherId;
-    this.groupId = groupId;
-    this.publisherService.getPublisherGroup(publisherId).subscribe((data: any) => {
-      this.groupList = data.response.data;
-      $('#stationModal').modal('show');
-    },(error) => {
-      this.tostrService.error(error);
-    });
-  }
-
   gotoeditpage(publisher) {
     let id = publisher.id;
     this.router.navigate(['/edit/' + id]);
@@ -136,13 +125,13 @@ export class DashboardComponent implements OnInit {
   }
 
   saveDefaultGroup() {
-    this.publisherService.defaultPublisherGroup(this.selectedPublisherId, this.groupId).subscribe((data: any) => {
-      this.groupId = '';
-      $('#stationModal').modal('hide');
-      this.toastr.success('Publisher default group updated successfully.', 'Success');
-      this.ngOnInit();
-    },(error) => {
-      this.tostrService.error(error);
-    });
+  //   this.publisherService.defaultPublisherGroup(this.selectedPublisherId, this.groupId,).subscribe((data: any) => {
+  //     this.groupId = '';
+  //     $('#stationModal').modal('hide');
+  //     this.toastr.success('Publisher default group updated successfully.', 'Success');
+  //     this.ngOnInit();
+  //   },(error) => {
+  //     this.tostrService.error(error);
+  //   });
   }
 }

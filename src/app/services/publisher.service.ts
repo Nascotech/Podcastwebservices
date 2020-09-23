@@ -97,10 +97,11 @@ export class PublisherService {
     return this.corehttpService.httpGetRequest(this.publisherGroups + id);
   }
 
-  defaultPublisherGroup(publisherId, groupId): Observable<any> {
+  defaultPublisherGroup(publisherId, groupId , groupName): Observable<any> {
     return this.http.put(this.savePublisherGroup, {
       'publisherId': publisherId,
-      'groupId': groupId
+      'groupId': groupId,
+      'groupName' : groupName
     });
   }
 }
