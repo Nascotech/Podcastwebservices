@@ -118,6 +118,7 @@ export class ManagePublisherComponent implements OnInit {
         }
         if(this.publisherInfo.groupId && this.publisherInfo.groupName) {
           this.groupNames = this.publisherInfo.groupName
+          this.groupId = this.publisherInfo.groupId
         }
         if(this.publisherInfo.sgRefreshToken && this.publisherInfo.sgAccessToken) {
           this.sgAccessToken = this.publisherInfo.sgAccessToken;
