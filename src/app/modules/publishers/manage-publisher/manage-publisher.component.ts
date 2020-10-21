@@ -94,7 +94,7 @@ export class ManagePublisherComponent implements OnInit {
       sgScope: ['', Validators.required],
       password: ['', Validators.required],
       sgTokenType: ['', Validators.required],
-      headerColor: ['', Validators.required],
+      headerColor: ['#ffffff'],
       googleCode: ['', Validators.required],
       privacyPolicy: ['', [Validators.required, Validators.pattern(this.reg)]],
       termsOfUse: ['', [Validators.required, Validators.pattern(this.reg)]]
@@ -408,7 +408,7 @@ export class ManagePublisherComponent implements OnInit {
     }
   }
 
-  onChangeGroup(event) {      
+  onChangeGroup(event) {
     if(event != 'null') {
       let info =  this.groupList.find(x => x.id == event);
       this.groupId = info.id;
