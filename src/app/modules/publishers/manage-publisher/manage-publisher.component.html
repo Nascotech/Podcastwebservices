@@ -546,7 +546,7 @@
             <label>Groups</label>
             <select (change)="onChangeGroup($event.target.value)"  class="form-control">
               <option value="null"> Select Default Group</option>
-              <option *ngFor="let group of groupList" value="{{group.id}}" [selected]="group.id == groupId">{{group?.displayName}}</option>
+              <option *ngFor="let group of groupList" value="{{group.groupId}}" [selected]="group.groupId == groupId">{{group?.displayName}}</option>
             </select>
           </div>
         </div>
@@ -558,4 +558,3 @@
     </div>
   </div>
 </div>
-

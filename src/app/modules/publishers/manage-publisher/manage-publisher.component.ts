@@ -396,7 +396,6 @@ export class ManagePublisherComponent implements OnInit {
     }
   }
 
-
   public onEventLog(event: string, data: any): void {
     this.finalcolor = data;
     if (this.finalcolor ?.color == '' || null) {
@@ -410,8 +409,8 @@ export class ManagePublisherComponent implements OnInit {
 
   onChangeGroup(event) {
     if(event != 'null') {
-      let info =  this.groupList.find(x => x.id == event);
-      this.groupId = info.id;
+      let info =  this.groupList.find(x => x.groupId == event);
+      this.groupId = info.groupId;
       this.groupName = info.displayName;
     } else {
       this.groupId = '';
@@ -421,7 +420,7 @@ export class ManagePublisherComponent implements OnInit {
 
   openGropModel() {
     this.publisherService.getPublisherGroup(this.editid).subscribe((data: any) => {
-      this.groupList = data.response.data;
+      this.groupList = data.response;
       $('#stationModal').modal('show');
     },(error) => {
       this.tostrService.error(error);
