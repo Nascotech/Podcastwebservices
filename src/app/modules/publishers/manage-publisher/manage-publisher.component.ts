@@ -95,7 +95,7 @@ export class ManagePublisherComponent implements OnInit {
       password: ['', Validators.required],
       sgTokenType: ['', Validators.required],
       headerColor: ['#ffffff'],
-      googleCode: ['', Validators.required],
+      googleCode: [''],
       privacyPolicy: ['', [Validators.required, Validators.pattern(this.reg)]],
       termsOfUse: ['', [Validators.required, Validators.pattern(this.reg)]]
     });

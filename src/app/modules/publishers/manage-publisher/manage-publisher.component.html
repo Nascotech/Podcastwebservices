@@ -75,14 +75,14 @@
                         <div class="row">
                             <div class="col-12 col-sm-4">
                               <div class="controls">
-                                <label>Publisher Name	</label>
+                                <label>Publisher Name *	</label>
                                 <input type="text" class="form-control" placeholder="Publisher Name" formControlName="publisherName">
                                 <div class="text-danger" *ngIf="(submitted || publisherForm.get('publisherName').touched) && publisherForm.controls['publisherName'].hasError('required')">Publisher Name Required</div>
                               </div>
                             </div>
                           <div class="col-12 col-sm-4">
                             <div class="controls">
-                              <label>Domain	</label>
+                              <label>Domain *	</label>
                               <input type="text" class="form-control" placeholder="Domain" formControlName="domain">
                               <div class="text-danger">
                                   <div  *ngIf="(submitted || publisherForm.get('domain').touched) && publisherForm.controls['domain'].hasError('required')">Please Enter Domain</div>
@@ -92,7 +92,7 @@
                           </div>
                           <div class="col-12 col-sm-4">
                             <div class="controls">
-                              <label>Home Domain</label>
+                              <label>Home Domain *</label>
                               <input type="text" class="form-control" placeholder="Home Domain" formControlName="homeDomain">
                               <div class="text-danger">
                                   <div  *ngIf="(submitted || publisherForm.get('homeDomain').touched) && publisherForm.controls['homeDomain'].hasError('required')">Please Enter Home Domain</div>
@@ -106,14 +106,14 @@
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <div class="controls">
-                            <label>Contact Name	</label>
+                            <label>Contact Name *	</label>
                             <input type="text" class="form-control" placeholder="Contact Name" formControlName="fullName" >
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('fullName').touched) && publisherForm.controls['fullName'].hasError('required')">Contact Name is Required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>Contact Email	</label>
+                            <label>Contact Email *	</label>
                             <input type="email" class="form-control" placeholder="Contact Info" formControlName="email">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('required')">Contact Info is Required</div>
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('email')">Please Enter Valid Email</div>
@@ -139,7 +139,7 @@
                           <div class="row">
                               <div class="col-12 col-sm-4">
                                 <div class="controls">
-                                  <label>Privacy Policy	</label>
+                                  <label>Privacy Policy *	</label>
                                   <input type="text" class="form-control" placeholder="Privacy Policy" formControlName="privacyPolicy">
                                   <div class="text-danger">
                                     <div  *ngIf="(submitted || publisherForm.get('privacyPolicy').touched) && publisherForm.controls['privacyPolicy'].hasError('required')">Please Enter Privacy Policy</div>
@@ -149,7 +149,7 @@
                               </div>
                             <div class="col-12 col-sm-4">
                               <div class="controls">
-                                <label>Terms Of Use	</label>
+                                <label>Terms Of Use *	</label>
                                 <input type="text" class="form-control" placeholder="Terms Of Use" formControlName="termsOfUse">
                                 <div class="text-danger">
                                     <div  *ngIf="(submitted || publisherForm.get('termsOfUse').touched) && publisherForm.controls['termsOfUse'].hasError('required')">Please Enter Terms Of Use</div>
@@ -161,9 +161,9 @@
                               <div class="controls">
                                 <label>Tracking Id (Google Analytics)</label>
                                 <input type="text" class="form-control" placeholder="UA-XXXXX-Y" formControlName="googleCode">
-                                <div class="text-danger">
+                                <!-- <div class="text-danger">
                                   <div  *ngIf="(submitted || publisherForm.get('googleCode').touched) && publisherForm.controls['googleCode'].hasError('required')">Please Enter tracking id</div>
-                                </div>
+                                </div> -->
                              </div>
                             </div>
                           </div>
@@ -188,7 +188,7 @@
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgBaseURL</label>
+                            <label>sgBaseURL *</label>
                             <input type="text" formControlName="sgBaseUrl" class="form-control" placeholder="sgBaseURL">
                             <div class="text-danger">
                               <div *ngIf="(submitted || publisherForm.get('sgBaseUrl').touched) && publisherForm.controls['sgBaseUrl'].hasError('required')">sgBaseURL Required</div>
@@ -199,7 +199,7 @@
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgUsername</label>
+                            <label>sgUsername *</label>
                             <input type="text" formControlName="sgUsername" class="form-control" placeholder="sgUsername">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgUsername').touched) && publisherForm.controls['sgUsername'].hasError('required')">sgUsername Required</div>
 
@@ -207,14 +207,14 @@
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgClienSecret</label>
+                            <label>sgClienSecret *</label>
                             <input type="text" formControlName="sgClientSecret" class="form-control" placeholder="sgClienSecret">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgClientSecret').touched) && publisherForm.controls['sgClientSecret'].hasError('required')">sgClienSecret required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgGrantType</label>
+                            <label>sgGrantType *</label>
                             <input type="text" formControlName="sgGrantType" class="form-control" placeholder="sgGrantType">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgGrantType').touched) && publisherForm.controls['sgGrantType'].hasError('required')">sgGrantType required</div>
                           </div>
@@ -223,21 +223,21 @@
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgClientId</label>
+                            <label>sgClientId *</label>
                             <input type="text" formControlName="sgClientId" class="form-control" placeholder="sgClientId">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgClientId').touched) && publisherForm.controls['sgClientId'].hasError('required')">sgClientId required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgScope</label>
+                            <label>sgScope *</label>
                             <input type="text" class="form-control" formControlName="sgScope" placeholder="sgScope">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgScope').touched) && publisherForm.controls['sgScope'].hasError('required')">sgScope required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgPassword</label>
+                            <label>sgPassword *</label>
                             <input type="text" class="form-control" formControlName="password" placeholder="sgPassword">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('password').touched) && publisherForm.controls['password'].hasError('required')">sgPassword required</div>
 
@@ -245,7 +245,7 @@
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>sgTokenType	</label>
+                            <label>sgTokenType *</label>
                             <input type="text" formControlName="sgTokenType" class="form-control" placeholder="sgTokenType">
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgTokenType').touched) && publisherForm.controls['sgTokenType'].hasError('required')">sgTokenType required</div>
                             <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgTokenType').touched) && publisherForm.controls['sgTokenType'].hasError('email')">Please Enter Valid Email</div>
@@ -469,6 +469,7 @@
             </div>
           </div> -->
         </div>
+        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">* marked fields are mandatory</div>
         <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
           <button *ngIf="this.submitted === true" type="submit" [disabled]="!publisherForm.valid" [ngClass]="{'disable':!publisherForm.valid }" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> loading...
