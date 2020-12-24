@@ -327,6 +327,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12">
+          <div class="alert alert-danger mt-2" *ngIf="errorMessage" role="alert">
+            {{errorMessage}}
+          </div>
+          <div class="alert alert-danger mt-2" *ngIf="validationMessage.length >= 1" role="alert">
+            <ul>
+              <li *ngFor="let message of validationMessage;">{{message}}</li>
+            </ul>
+          </div>
+        </div>
           <!-- <div class="col-12 col-md-6">
             <div class="card">
               <div class="card-content" style="height: 200px;">
