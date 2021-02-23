@@ -10,6 +10,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
+import { SlugTransformDirective } from './slug-transform.directive';
 
 @NgModule({
   imports: [
@@ -20,11 +21,15 @@ import { DateSuffix } from 'src/app/pipes/datesuffix.pipe';
     BsDatepickerModule.forRoot(),
     ImageCropperModule,
     ColorPickerModule,
-    NgbModule,
-    
-
-     // Added
+    NgbModule
   ],
-  declarations: [ManagePublisherComponent,PublishersComponent]
+  declarations: [
+    ManagePublisherComponent,
+    PublishersComponent,
+    SlugTransformDirective
+  ],
+  exports: [
+    SlugTransformDirective
+  ],
 })
 export class PublishersModule { }

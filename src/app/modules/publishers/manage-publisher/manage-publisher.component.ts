@@ -30,6 +30,7 @@ export class ManagePublisherComponent implements OnInit {
   favIconChangedEvent: any = '';
   publisherForm: FormGroup;
   submitted = false;
+  isSlugValid = true;
   errorMessage: string;
   validationMessage = [];
   croppedImage: any = 'assets/img/150.png';
@@ -58,13 +59,13 @@ export class ManagePublisherComponent implements OnInit {
     }
   ];
 
-  groupId : any;
-  groupList : any = [];
-  groupName : any;
-  groupNames : any;
+  groupId: any;
+  groupList: any = [];
+  groupName: any;
+  groupNames: any;
 
-  sgRefreshToken : any;
-  sgAccessToken : any;
+  sgRefreshToken: any;
+  sgAccessToken: any;
 
   constructor(
     private router: Router,
@@ -74,10 +75,11 @@ export class ManagePublisherComponent implements OnInit {
     private cpService: ColorPickerService,
     private route: ActivatedRoute,
     private config: NgbDatepickerConfig,
-    private toastr :ToastrService
+    private toastr: ToastrService
   ) {
     this.publisherForm = this.fb.group({
       publisherName: ['', Validators.required],
+      publisherSlug: ['', Validators.required],
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       domain: ['', [Validators.required, Validators.pattern(this.reg)]],
@@ -116,17 +118,18 @@ export class ManagePublisherComponent implements OnInit {
         if (this.publisherInfo.registeredDate) {
           this.getDateFormat(this.publisherInfo.registeredDate);
         }
-        if(this.publisherInfo.groupId && this.publisherInfo.groupName) {
+        if (this.publisherInfo.groupId && this.publisherInfo.groupName) {
           this.groupNames = this.publisherInfo.groupName
           this.groupId = this.publisherInfo.groupId
         }
-        if(this.publisherInfo.sgRefreshToken && this.publisherInfo.sgAccessToken) {
+        if (this.publisherInfo.sgRefreshToken && this.publisherInfo.sgAccessToken) {
           this.sgAccessToken = this.publisherInfo.sgAccessToken;
           this.sgRefreshToken = this.publisherInfo.sgRefreshToken
         }
         this.finalcolor = this.publisherInfo.headerColor;
         this.publisherForm.patchValue({
           "publisherName": this.publisherInfo.publisherName,
+          "publisherSlug": this.publisherInfo.publisherSlug,
           "fullName": this.publisherInfo.fullName,
           "email": this.publisherInfo.email,
           "domain": this.publisherInfo.domain,
@@ -158,7 +161,7 @@ export class ManagePublisherComponent implements OnInit {
   onSubmit() {
     if (this.editid === null) {
       this.submitted = true;
-      if (!this.publisherForm.valid) {
+      if (!this.publisherForm.valid || !this.isSlugValid) {
         return;
       } else {
         const date = this.publisherForm.value.registeredDate;
@@ -170,6 +173,7 @@ export class ManagePublisherComponent implements OnInit {
         this.domainremoveLastcharacter();
         const data = {
           publisherName: this.publisherForm.get('publisherName').value,
+          publisherSlug: this.publisherForm.get('publisherSlug').value,
           fullName: this.publisherForm.get('fullName').value,
           email: this.publisherForm.get('email').value,
           domain: this.finaldomain,
@@ -217,7 +221,7 @@ export class ManagePublisherComponent implements OnInit {
       }
     } else {
       this.submitted = true;
-      if (this.publisherForm.invalid) {
+      if (this.publisherForm.invalid || this.isSlugValid === false) {
         return;
       } else {
         const date = this.publisherForm.value.registeredDate;
@@ -226,6 +230,7 @@ export class ManagePublisherComponent implements OnInit {
         const data = {
           publisherId: this.editid,
           publisherName: this.publisherForm.get('publisherName').value,
+          publisherSlug: this.publisherForm.get('publisherSlug').value,
           fullName: this.publisherForm.get('fullName').value,
           email: this.publisherForm.get('email').value,
           domain: this.finaldomain,
@@ -273,6 +278,34 @@ export class ManagePublisherComponent implements OnInit {
           }
         })
       }
+    }
+  }
+
+  focusOutFunction() {
+    if(this.publisherForm.get('publisherSlug').value) {
+      let data = {};
+      if (this.editid === null) {
+        data = {slug: this.publisherForm.get('publisherSlug').value}
+      } else {
+        data = {
+          publisherId: this.editid,
+          slug: this.publisherForm.get('publisherSlug').value,
+        }
+      }
+      this.publisherService.checkPublisherSlug(data).subscribe((data: any) => {
+        if(data.response.isValid) {
+          this.isSlugValid = true;
+        } else {
+          this.isSlugValid = false;
+        }
+      }, (error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          this.submitted = false;
+          this.router.navigate(['/dashboard']);
+        }
+      });
+    } else {
+      this.isSlugValid = true;
     }
   }
 
@@ -408,8 +441,8 @@ export class ManagePublisherComponent implements OnInit {
   }
 
   onChangeGroup(event) {
-    if(event != 'null') {
-      let info =  this.groupList.find(x => x.groupId == event);
+    if (event != 'null') {
+      let info = this.groupList.find(x => x.groupId == event);
       this.groupId = info.groupId;
       this.groupName = info.displayName;
     } else {
@@ -422,20 +455,20 @@ export class ManagePublisherComponent implements OnInit {
     this.publisherService.getPublisherGroup(this.editid).subscribe((data: any) => {
       this.groupList = data.response;
       $('#stationModal').modal('show');
-    },(error) => {
+    }, (error) => {
       this.tostrService.error(error);
     });
   }
 
   saveDefaultGroup() {
-    this.publisherService.defaultPublisherGroup(this.editid, this.groupId , this.groupName).subscribe((data: any) => {
+    this.publisherService.defaultPublisherGroup(this.editid, this.groupId, this.groupName).subscribe((data: any) => {
       //this.groupId = '';
       localStorage.setItem('publisherdetail', JSON.stringify(data.response));
       this.groupNames = data.response.groupName;
       $('#stationModal').modal('hide');
       this.toastr.success('Publisher default group updated successfully.', 'Success');
       this.ngOnInit();
-    },(error) => {
+    }, (error) => {
       this.tostrService.error(error);
     });
   }

@@ -18,6 +18,7 @@ export class PublisherService {
   editPublisherURL = this.baseURL + '/api/publisher';
   publisherGroups = this.baseURL + '/api/userGroups/';
   savePublisherGroup = this.baseURL + '/api/publisher/group/';
+  checkValidSlug = this.baseURL + '/api/checkPublisherSlug';
 
   constructor(
     private commonService: CommonService,
@@ -34,6 +35,7 @@ export class PublisherService {
     frmData.append('image', image);
     frmData.append('favIcon', icon);
     frmData.append('publisherName', data.publisherName);
+    frmData.append('publisherSlug', data.publisherSlug);
     frmData.append('fullName', data.fullName);
     frmData.append('email', data.email);
     frmData.append('domain', data.domain);
@@ -67,6 +69,7 @@ export class PublisherService {
     }
     frmData.append('publisherId', editid);
     frmData.append('publisherName', data.publisherName);
+    frmData.append('publisherSlug', data.publisherSlug);
     frmData.append('fullName', data.fullName);
     frmData.append('email', data.email);
     frmData.append('domain', data.domain);
@@ -103,5 +106,9 @@ export class PublisherService {
       'groupId': groupId,
       'groupName' : groupName
     });
+  }
+
+  checkPublisherSlug(data) {
+    return this.corehttpService.httpPostRequest(this.checkValidSlug, data);
   }
 }
