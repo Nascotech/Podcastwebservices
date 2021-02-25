@@ -38,7 +38,6 @@ export class PublisherService {
     frmData.append('publisherSlug', data.publisherSlug);
     frmData.append('fullName', data.fullName);
     frmData.append('email', data.email);
-    frmData.append('domain', data.domain);
     frmData.append('homeDomain', data.homeDomain);
     frmData.append('privacyPolicy', data.privacyPolicy);
     frmData.append('termsOfUse', data.termsOfUse);
@@ -72,7 +71,6 @@ export class PublisherService {
     frmData.append('publisherSlug', data.publisherSlug);
     frmData.append('fullName', data.fullName);
     frmData.append('email', data.email);
-    frmData.append('domain', data.domain);
     frmData.append('homeDomain', data.homeDomain);
     frmData.append('privacyPolicy', data.privacyPolicy);
     frmData.append('termsOfUse', data.termsOfUse);
