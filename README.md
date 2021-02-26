@@ -1,5 +1,6 @@
 # **Admin panel angular source** #
-By Atunwa
+
+This is angular source code for the admin panel which is used by owner/management of Atunwa digital to manage whole platform. e.g. functionality's like "manage publishers"
 
 **Project Link**: https://gitlab.com/atunwa/admin-panel-angular-source
 
