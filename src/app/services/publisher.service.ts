@@ -54,6 +54,8 @@ export class PublisherService {
     frmData.append('googleCode', data.googleCode);
     frmData.append('headerColor', data.headerColor);
     frmData.append('footerColor', data.headerColor);
+    frmData.append('headerScript', data.headerScript);
+    frmData.append('bodyScript', data.bodyScript);
     return this.http.post(this.savePublisherURL, frmData);
   }
 
@@ -87,6 +89,8 @@ export class PublisherService {
     frmData.append('googleCode', data.googleCode);
     frmData.append('headerColor', data.headerColor);
     frmData.append('footerColor', data.footerColor);
+    frmData.append('headerScript', data.headerScript);
+    frmData.append('bodyScript', data.bodyScript);
     return this.http.put(this.editPublisherURL, frmData);
   }
 
@@ -98,11 +102,11 @@ export class PublisherService {
     return this.corehttpService.httpGetRequest(this.publisherGroups + id);
   }
 
-  defaultPublisherGroup(publisherId, groupId , groupName): Observable<any> {
+  defaultPublisherGroup(publisherId, groupId, groupName): Observable<any> {
     return this.http.put(this.savePublisherGroup, {
       'publisherId': publisherId,
       'groupId': groupId,
-      'groupName' : groupName
+      'groupName': groupName
     });
   }
 
