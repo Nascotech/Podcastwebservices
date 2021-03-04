@@ -14,7 +14,8 @@
           <ul class="nav navbar-nav flex-row">
           <li class="nav-item mr-auto"><a class="navbar-brand" href="javascript:void(0);">
           <div class="brand-logo"></div>
-          <h2 class="brand-text mb-0">Atunwa Digital</h2></a></li>
+          <h2 class="brand-text mb-0">Atunwa Digital <span *ngIf="checkEnv === true" class="dev-env"><b>DEV</b></span></h2>
+        </a></li>
         </ul>
         </div>
         <ul class="nav navbar-nav float-right">

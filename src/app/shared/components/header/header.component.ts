@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
 import { CustomValidators } from 'src/app/_helpers/custom-validators';
 import { MustMatch } from 'src/app/_helpers/must-match.validator';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,14 +22,17 @@ export class HeaderComponent implements OnInit {
   changePasswordForm:FormGroup;
   submitted = false;
   validationMessage = [];
+  checkEnv = false;
 
   constructor(
     private router:Router,
     private formBuilder:FormBuilder,
+    private commonService: CommonService,
     private authService:AuthService
   ) { }
 
   ngOnInit() {
+    this.checkEnv = this.commonService.CHECK_ENV.isDev;
     this.currentuser=JSON.parse(localStorage.getItem('currentUser'));
     this.changePasswordForm = this.formBuilder.group({
       oldPassword: ['', Validators.required],

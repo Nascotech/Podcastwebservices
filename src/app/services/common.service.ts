@@ -1,27 +1,32 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { HttpHeaders } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class CommonService {
-  devicePlatform='web';
-  deviceToken=uuid.v4();
-  deviceUniqueId= 'web'+uuid.v4();
+
+  devicePlatform = 'web';
+  deviceToken = uuid.v4();
+  deviceUniqueId = 'web' + uuid.v4();
   deviceInfo = null;
-  os=null;
-  deviceModel=null;
+  os = null;
+  deviceModel = null;
 
   constructor(
-    private  router: Router,
+    private router: Router,
     private deviceService: DeviceDetectorService
   ) {
     this.getDevicedetails();
   }
+
+  CHECK_ENV = {
+    isDev: false
+  };
 
   PAGINATION = {
     default_page_size: 10,
@@ -29,9 +34,7 @@ export class CommonService {
 
   getDevicedetails() {
     this.deviceInfo = this.deviceService.getDeviceInfo();
-    this.os=this.deviceInfo.os;
-    this.deviceModel=this.deviceInfo.browser;
-  } 
-
-
+    this.os = this.deviceInfo.os;
+    this.deviceModel = this.deviceInfo.browser;
+  }
 }

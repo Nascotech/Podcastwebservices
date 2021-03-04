@@ -94,8 +94,8 @@
               </td>
               <td>
                 <div class="d-flex">
-                  atunwapodcasts.com?pubid={{publisher?.publisherSlug}}
-                  <a [href]="redirectToPage('atunwapodcasts.com?pubid=' + publisher?.publisherSlug)" style="color:'#7367F0'" target="_blank">
+                  {{domain}}?pubid={{publisher?.publisherSlug}}
+                  <a [href]="redirectToPage(this.domain + '?pubid=' + publisher?.publisherSlug)" style="color:'#7367F0'" target="_blank">
                     <span class="d-ex-link"><i class="fa fa-external-link" aria-hidden="true"></i></span>
                 </a>
                 </div>

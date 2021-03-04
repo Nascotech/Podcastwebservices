@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
   selectedPage: number;
   totalLength: number;
   pageSize: number;
@@ -30,6 +31,8 @@ export class DashboardComponent implements OnInit {
   finaldate: any;
   groupList: any = [];
   groupId: any;
+  checkEnv = false;
+  domain = "atunwapodcasts.com";
 
   constructor(private toastr: ToastrService,
     private router: Router,
@@ -42,6 +45,10 @@ export class DashboardComponent implements OnInit {
     //this.route.params.subscribe(params => this.pageNumber = params['page']);
     this.selectedPage = this.pageNumber;
     this.pageSize = this.commonService.PAGINATION.default_page_size;
+    this.checkEnv = this.commonService.CHECK_ENV.isDev;
+    if(this.checkEnv) {
+      this.domain = "devpub.atunwapodcasts.com";
+    }
     this.getPublishers();
     this.photoUrl = environment.img_uri;
   }

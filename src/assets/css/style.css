@@ -233,3 +233,9 @@ select.form-control:not([multiple='multiple']) {
   background: #7265ed !important;
   color: #fff !important;
 }
+
+.dev-env {
+  background-color: red;
+  color: white;
+  font-weight: 900 !important;
+}
