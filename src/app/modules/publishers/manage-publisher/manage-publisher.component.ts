@@ -149,8 +149,8 @@ export class ManagePublisherComponent implements OnInit {
           "sgTokenType": this.publisherInfo.sgTokenType,
           "password": this.publisherInfo.sgPassword,
           "headerColor": this.publisherInfo.headerColor,
-          "headerScript": atob(this.publisherInfo.headerScript),
-          "bodyScript": atob(this.publisherInfo.bodyScript)
+          "headerScript": (this.publisherInfo.headerScript) ? window.atob(this.publisherInfo.headerScript) : '',
+          "bodyScript": (this.publisherInfo.bodyScript) ? window.atob(this.publisherInfo.bodyScript) : ''
         });
       }
     })
@@ -161,13 +161,11 @@ export class ManagePublisherComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.publisherForm.value);
     if (this.editid === null) {
       this.submitted = true;
       if (!this.publisherForm.valid || !this.isSlugValid) {
         return;
       } else {
-        console.log(this.publisherForm.value);
         const date = this.publisherForm.value.registeredDate;
         this.registeredDate = date.year + '-' + date.month + '-' + date.day;
         const domainstring = this.publisherForm.get('domain').value;
@@ -194,8 +192,8 @@ export class ManagePublisherComponent implements OnInit {
           googleCode: btoa(this.publisherForm.get('googleCode').value),
           headerColor: this.finalcolor,
           footerColor: this.finalcolor,
-          headerScript: this.publisherForm.get('headerScript').value,
-          bodyScript: this.publisherForm.get('bodyScript').value,
+          headerScript: btoa(this.publisherForm.get('headerScript').value),
+          bodyScript: btoa(this.publisherForm.get('bodyScript').value),
         }
 
         this.publisherService.savePublisher(data, this.finalImage, this.registeredDate, this.finalfavIcon).subscribe((data: any) => {
