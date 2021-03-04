@@ -98,7 +98,9 @@ export class ManagePublisherComponent implements OnInit {
       headerColor: ['#ffffff'],
       googleCode: [''],
       privacyPolicy: ['', [Validators.required, Validators.pattern(this.reg)]],
-      termsOfUse: ['', [Validators.required, Validators.pattern(this.reg)]]
+      termsOfUse: ['', [Validators.required, Validators.pattern(this.reg)]],
+      headerScript: [''],
+      bodyScript: ['']
     });
   }
 
@@ -147,6 +149,8 @@ export class ManagePublisherComponent implements OnInit {
           "sgTokenType": this.publisherInfo.sgTokenType,
           "password": this.publisherInfo.sgPassword,
           "headerColor": this.publisherInfo.headerColor,
+          "headerScript": atob(this.publisherInfo.headerScript),
+          "bodyScript": atob(this.publisherInfo.bodyScript)
         });
       }
     })
@@ -157,11 +161,13 @@ export class ManagePublisherComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.publisherForm.value);
     if (this.editid === null) {
       this.submitted = true;
       if (!this.publisherForm.valid || !this.isSlugValid) {
         return;
       } else {
+        console.log(this.publisherForm.value);
         const date = this.publisherForm.value.registeredDate;
         this.registeredDate = date.year + '-' + date.month + '-' + date.day;
         const domainstring = this.publisherForm.get('domain').value;
@@ -188,6 +194,8 @@ export class ManagePublisherComponent implements OnInit {
           googleCode: btoa(this.publisherForm.get('googleCode').value),
           headerColor: this.finalcolor,
           footerColor: this.finalcolor,
+          headerScript: this.publisherForm.get('headerScript').value,
+          bodyScript: this.publisherForm.get('bodyScript').value,
         }
 
         this.publisherService.savePublisher(data, this.finalImage, this.registeredDate, this.finalfavIcon).subscribe((data: any) => {
@@ -245,6 +253,8 @@ export class ManagePublisherComponent implements OnInit {
           googleCode: btoa(this.publisherForm.get('googleCode').value),
           headerColor: this.finalcolor,
           footerColor: this.finalcolor,
+          headerScript: btoa(this.publisherForm.get('headerScript').value),
+          bodyScript: btoa(this.publisherForm.get('bodyScript').value),
         }
 
         this.publisherService.editPublisher(data, this.finalImage, this.editid, this.registeredDate, this.finalfavIcon).subscribe((data: any) => {
@@ -278,10 +288,10 @@ export class ManagePublisherComponent implements OnInit {
   }
 
   focusOutFunction() {
-    if(this.publisherForm.get('publisherSlug').value) {
+    if (this.publisherForm.get('publisherSlug').value) {
       let data = {};
       if (this.editid === null) {
-        data = {slug: this.publisherForm.get('publisherSlug').value}
+        data = { slug: this.publisherForm.get('publisherSlug').value }
       } else {
         data = {
           publisherId: this.editid,
@@ -289,7 +299,7 @@ export class ManagePublisherComponent implements OnInit {
         }
       }
       this.publisherService.checkPublisherSlug(data).subscribe((data: any) => {
-        if(data.response.isValid) {
+        if (data.response.isValid) {
           this.isSlugValid = true;
         } else {
           this.isSlugValid = false;
@@ -387,18 +397,9 @@ export class ManagePublisherComponent implements OnInit {
   }
 
   domainremoveLastcharacter() {
-    const domainstring = this.publisherForm.get('domain').value;
     const homedomainstring = this.publisherForm.get('homeDomain').value;
     const domainparivacypolicystring = this.publisherForm.get('privacyPolicy').value;
     const domaintermsofusestring = this.publisherForm.get('termsOfUse').value;
-    if (domainstring.substr(domainstring.length - 1)) {
-      var lastcharacter = domainstring.substr(domainstring.length - 1);
-      if (lastcharacter === '/') {
-        this.finaldomain = this.publisherForm.get('domain').value.slice(0, -1);
-      } else {
-        this.finaldomain = this.publisherForm.get('domain').value;
-      }
-    }
     if (homedomainstring.substr(homedomainstring.length - 1)) {
       var lastcharacter = homedomainstring.substr(homedomainstring.length - 1);
       if (lastcharacter === '/') {
@@ -427,7 +428,7 @@ export class ManagePublisherComponent implements OnInit {
 
   public onEventLog(event: string, data: any): void {
     this.finalcolor = data;
-    if (this.finalcolor ?.color == '' || null) {
+    if (this.finalcolor?.color == '' || null) {
       this.publisherForm.get('headerColor').setValidators(Validators.required);
       this.publisherForm.get('headerColor').updateValueAndValidity();
     } else {
@@ -467,5 +468,10 @@ export class ManagePublisherComponent implements OnInit {
     }, (error) => {
       this.tostrService.error(error);
     });
+  }
+
+  removeProtocol(script) {
+    let str1 = script.replace("http:", "");
+    return str1.replace("https:", "");
   }
 }

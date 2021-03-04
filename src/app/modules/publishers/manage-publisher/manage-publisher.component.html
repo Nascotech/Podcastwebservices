@@ -6,88 +6,103 @@
     </div>
     <div class="content-body">
       <form [formGroup]="publisherForm">
-      <section class="users-edit">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header c-title-header">
-                <div class="col-8 col-md-6 px-0">
-                  <div class="card-title float-left">Publisher Details</div>
-                </div>
-                <div class="col-4 col-md-6 px-0">
-                  <div class="card-title float-right">
-                    <div class="actions action-btns float-left">
-                      <div class="dt-buttons btn-group">
-                        <button class="btn btn-outline-primary" (click)="gotobackpage()"><span><i class="feather icon-chevron-left"></i> Back</span></button> </div>
+        <section class="users-edit">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header c-title-header">
+                  <div class="col-8 col-md-6 px-0">
+                    <div class="card-title float-left">Publisher Details</div>
+                  </div>
+                  <div class="col-4 col-md-6 px-0">
+                    <div class="card-title float-right">
+                      <div class="actions action-btns float-left">
+                        <div class="dt-buttons btn-group">
+                          <button class="btn btn-outline-primary" (click)="gotobackpage()"><span><i
+                                class="feather icon-chevron-left"></i> Back</span></button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-12">
-            <div class="card">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <h4 class="mb-2 mt-1"><i class="fas fa-user mr-25"></i>Publisher Information</h4>
-                    </div>
-                  </div>
-                  <div class="media mb-2">
-                    <a class="mr-2 my-25" >
-                      <img class="img-thumbnail img-circle" [src]="croppedImage" alt="" height="150" width="150">
-                      <input #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
-                      <input type="hidden" class="form-control" formControlName="image">
-                      <div class="text-danger" *ngIf="submitted && publisherForm.controls['image'].hasError('required')">Please upload publisher image</div>
-                      <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
-                       <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
-                    </a>
-                    <div class="media-body mt-50">
-                      <p class="pub-title">Logo</p>
-                      <div class="col-12 d-flex px-0">
-                        <button (click)="publisherImage.click()" class="btn btn-primary d-none d-sm-block mr-75">Change</button>
-                        <!-- <button (click)="publisherImage.click()" class="btn btn-primary d-block d-sm-none mr-75"><i class="feather icon-edit-1"></i></button> -->
-                        <a (click)="removeImage()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
-                        <!-- <a (click)="removeImage()" class="btn btn-outline-danger d-block d-sm-none"><i class="feather icon-trash-2"></i></a> -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 class="mb-2 mt-1"><i class="fas fa-user mr-25"></i>Publisher Information</h4>
                       </div>
                     </div>
-                    <a class="mr-2 my-25" >
-                      <img class="img-thumbnail img-circle" [src]="croppedfavIcon" alt="" height="150" width="150">
-                      <input #favIcon type="file" (change)="onFavIconChanged($event)" style="display:none">
-                      <input type="hidden" class="form-control" formControlName="favIcon">
-                      <div class="text-danger" *ngIf="submitted && publisherForm.controls['favIcon'].hasError('required')">Please upload fav Icon</div>
-                      <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
+                    <div class="media mb-2">
+                      <a class="mr-2 my-25">
+                        <img class="img-thumbnail img-circle" [src]="croppedImage" alt="" height="150" width="150">
+                        <input #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
+                        <input type="hidden" class="form-control" formControlName="image">
+                        <div class="text-danger"
+                          *ngIf="submitted && publisherForm.controls['image'].hasError('required')">Please upload
+                          publisher image</div>
+                        <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
                        <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
-                    </a>
-                    <div class="media-body mt-25">
-                      <p class="pub-title">Favicon</p>
-                      <div class="col-12 d-flex px-0">
-                        <button (click)="favIcon.click()" class="btn btn-primary d-none d-sm-block mr-75">Change</button>
-                        <a (click)="removefavIcon()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
+                      </a>
+                      <div class="media-body mt-50">
+                        <p class="pub-title">Logo</p>
+                        <div class="col-12 d-flex px-0">
+                          <button (click)="publisherImage.click()"
+                            class="btn btn-primary d-none d-sm-block mr-75">Change</button>
+                          <!-- <button (click)="publisherImage.click()" class="btn btn-primary d-block d-sm-none mr-75"><i class="feather icon-edit-1"></i></button> -->
+                          <a (click)="removeImage()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
+                          <!-- <a (click)="removeImage()" class="btn btn-outline-danger d-block d-sm-none"><i class="feather icon-trash-2"></i></a> -->
+                        </div>
+                      </div>
+                      <a class="mr-2 my-25">
+                        <img class="img-thumbnail img-circle" [src]="croppedfavIcon" alt="" height="150" width="150">
+                        <input #favIcon type="file" (change)="onFavIconChanged($event)" style="display:none">
+                        <input type="hidden" class="form-control" formControlName="favIcon">
+                        <div class="text-danger"
+                          *ngIf="submitted && publisherForm.controls['favIcon'].hasError('required')">Please upload fav
+                          Icon</div>
+                        <!-- <input  #publisherImage type="file" (change)="fileChangeEvent($event)" style="display:none">
+                       <img src="assets/img/150.png" alt="users avatar" class="users-avatar-shadow rounded" height="125" width="125">  -->
+                      </a>
+                      <div class="media-body mt-25">
+                        <p class="pub-title">Favicon</p>
+                        <div class="col-12 d-flex px-0">
+                          <button (click)="favIcon.click()"
+                            class="btn btn-primary d-none d-sm-block mr-75">Change</button>
+                          <a (click)="removefavIcon()" class="btn btn-outline-danger d-none d-sm-block">Remove</a>
+                        </div>
                       </div>
                     </div>
-                  </div>
                     <div class="row">
                       <div class="col-12 col-sm-12">
                         <div class="row">
                           <div class="col-12 col-sm-4">
                             <div class="form-group">
                               <div class="controls">
-                                <label>Publisher Name *	</label>
-                                <input type="text" class="form-control" placeholder="Publisher Name" formControlName="publisherName">
-                                <div class="text-danger" *ngIf="(submitted || publisherForm.get('publisherName').touched) && publisherForm.controls['publisherName'].hasError('required')">Publisher Name Required</div>
+                                <label>Publisher Name * </label>
+                                <input type="text" class="form-control" placeholder="Publisher Name"
+                                  formControlName="publisherName">
+                                <div class="text-danger"
+                                  *ngIf="(submitted || publisherForm.get('publisherName').touched) && publisherForm.controls['publisherName'].hasError('required')">
+                                  Publisher Name Required</div>
                               </div>
                             </div>
                           </div>
                           <div class="col-12 col-sm-4">
                             <div class="form-group">
                               <div class="controls">
-                                <label>Slug *	</label>
-                                <input type="text" class="form-control" appSlugTransform placeholder="Slug Name" (focusout)="focusOutFunction()" formControlName="publisherSlug">
-                                <div class="text-danger" *ngIf="(submitted || publisherForm.get('publisherSlug').touched) && publisherForm.controls['publisherSlug'].hasError('required')">Slug Required</div>
-                                <div class="text-danger" *ngIf="isSlugValid === false">Publisher already registered with the given slug</div>
+                                <label>Slug * </label>
+                                <input type="text" class="form-control" appSlugTransform placeholder="Slug Name"
+                                  (focusout)="focusOutFunction()" formControlName="publisherSlug">
+                                <div class="text-danger"
+                                  *ngIf="(submitted || publisherForm.get('publisherSlug').touched) && publisherForm.controls['publisherSlug'].hasError('required')">
+                                  Slug Required</div>
+                                <div class="text-danger" *ngIf="isSlugValid === false">Publisher already registered with
+                                  the given slug</div>
                               </div>
                             </div>
                           </div>
@@ -95,10 +110,13 @@
                             <div class="form-group">
                               <div class="controls">
                                 <label>Home Domain *</label>
-                                <input type="text" class="form-control" placeholder="Home Domain" formControlName="homeDomain">
+                                <input type="text" class="form-control" placeholder="Home Domain"
+                                  formControlName="homeDomain">
                                 <div class="text-danger">
-                                    <div  *ngIf="(submitted || publisherForm.get('homeDomain').touched) && publisherForm.controls['homeDomain'].hasError('required')">Please Enter Home Domain</div>
-                                    <div  *ngIf="f?.homeDomain?.errors?.pattern">Please Enter Valid Home Domain</div>
+                                  <div
+                                    *ngIf="(submitted || publisherForm.get('homeDomain').touched) && publisherForm.controls['homeDomain'].hasError('required')">
+                                    Please Enter Home Domain</div>
+                                  <div *ngIf="f?.homeDomain?.errors?.pattern">Please Enter Valid Home Domain</div>
                                 </div>
                               </div>
                             </div>
@@ -108,84 +126,138 @@
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <div class="controls">
-                            <label>Contact Name *	</label>
-                            <input type="text" class="form-control" placeholder="Contact Name" formControlName="fullName" >
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('fullName').touched) && publisherForm.controls['fullName'].hasError('required')">Contact Name is Required</div>
+                            <label>Contact Name * </label>
+                            <input type="text" class="form-control" placeholder="Contact Name"
+                              formControlName="fullName">
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('fullName').touched) && publisherForm.controls['fullName'].hasError('required')">
+                              Contact Name is Required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
-                            <label>Contact Email *	</label>
+                            <label>Contact Email * </label>
                             <input type="email" class="form-control" placeholder="Contact Info" formControlName="email">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('required')">Contact Info is Required</div>
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('email')">Please Enter Valid Email</div>
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('required')">
+                              Contact Info is Required</div>
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('email').touched) && publisherForm.controls['email'].hasError('email')">
+                              Please Enter Valid Email</div>
                           </div>
                         </div>
                       </div>
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <label>Status</label>
-                          <select formControlName="isActive" (change)="onChange($event.target.value)"  class="form-control">
-                            <option  selected></option>
-                            <option *ngFor="let status of Publisherstatus" [value]="status.value">{{status.name}}</option>
+                          <select formControlName="isActive" (change)="onChange($event.target.value)"
+                            class="form-control">
+                            <option selected></option>
+                            <option *ngFor="let status of Publisherstatus" [value]="status.value">{{status.name}}
+                            </option>
 
                           </select>
                         </div>
                         <div class="form-group">
                           <label>Registered Date</label>
-                          <input class="form-control"  name="registeredDate" formControlName="registeredDate" (click)="d.toggle()" ngbDatepicker #d="ngbDatepicker">
+                          <input class="form-control" name="registeredDate" formControlName="registeredDate"
+                            (click)="d.toggle()" ngbDatepicker #d="ngbDatepicker">
                         </div>
                       </div>
                       <div class="col-12 col-sm-12">
                         <div class="form-group">
                           <div class="row">
-                              <div class="col-12 col-sm-4">
-                                <div class="controls">
-                                  <label>Privacy Policy *	</label>
-                                  <input type="text" class="form-control" placeholder="Privacy Policy" formControlName="privacyPolicy">
-                                  <div class="text-danger">
-                                    <div  *ngIf="(submitted || publisherForm.get('privacyPolicy').touched) && publisherForm.controls['privacyPolicy'].hasError('required')">Please Enter Privacy Policy</div>
-                                    <div  *ngIf="f?.privacyPolicy?.errors?.pattern">Please Enter Valid Privacy Policy</div>
-                                </div>
-                               </div>
-                              </div>
                             <div class="col-12 col-sm-4">
                               <div class="controls">
-                                <label>Terms Of Use *	</label>
-                                <input type="text" class="form-control" placeholder="Terms Of Use" formControlName="termsOfUse">
+                                <label>Privacy Policy * </label>
+                                <input type="text" class="form-control" placeholder="Privacy Policy"
+                                  formControlName="privacyPolicy">
                                 <div class="text-danger">
-                                    <div  *ngIf="(submitted || publisherForm.get('termsOfUse').touched) && publisherForm.controls['termsOfUse'].hasError('required')">Please Enter Terms Of Use</div>
-                                    <div  *ngIf="f?.termsOfUse?.errors?.pattern">Please Enter Valid Terms Of Use</div>
+                                  <div
+                                    *ngIf="(submitted || publisherForm.get('privacyPolicy').touched) && publisherForm.controls['privacyPolicy'].hasError('required')">
+                                    Please Enter Privacy Policy</div>
+                                  <div *ngIf="f?.privacyPolicy?.errors?.pattern">Please Enter Valid Privacy Policy</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                              <div class="controls">
+                                <label>Terms Of Use * </label>
+                                <input type="text" class="form-control" placeholder="Terms Of Use"
+                                  formControlName="termsOfUse">
+                                <div class="text-danger">
+                                  <div
+                                    *ngIf="(submitted || publisherForm.get('termsOfUse').touched) && publisherForm.controls['termsOfUse'].hasError('required')">
+                                    Please Enter Terms Of Use</div>
+                                  <div *ngIf="f?.termsOfUse?.errors?.pattern">Please Enter Valid Terms Of Use</div>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12 col-sm-4">
                               <div class="controls">
                                 <label>Tracking Id (Google Analytics)</label>
-                                <input type="text" class="form-control" placeholder="UA-XXXXX-Y" formControlName="googleCode">
+                                <input type="text" class="form-control" placeholder="UA-XXXXX-Y"
+                                  formControlName="googleCode">
                                 <!-- <div class="text-danger">
                                   <div  *ngIf="(submitted || publisherForm.get('googleCode').touched) && publisherForm.controls['googleCode'].hasError('required')">Please Enter tracking id</div>
                                 </div> -->
-                             </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="card">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-key"></i> sgRecast Credentials</h4>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Script Config</h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Header Script </label>
+                            <!-- <input type="textarea" formControlName="headerScript" class="form-control"
+                              placeholder="sgHeaderScript"> -->
+                            <textarea class="form-control text-form-control" rows="3" id="comment"
+                              formControlName='headerScript'></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                          <div class="controls">
+                            <label>Body Script </label>
+                            <!-- <input type="text" formControlName="bodyScript" class="form-control"
+                              placeholder="sgBodyScript"> -->
+                            <textarea class="form-control text-form-control" rows="3" id="comment"
+                              formControlName='bodyScript'></textarea>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="col-12">
+              <div class="card">
+                <div class="card-content">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 class="mb-2 mt-1"><i class="fal fa-key"></i> sgRecast Credentials</h4>
+                      </div>
+                    </div>
                     <div class="row">
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
@@ -193,7 +265,9 @@
                             <label>sgBaseURL *</label>
                             <input type="text" formControlName="sgBaseUrl" class="form-control" placeholder="sgBaseURL">
                             <div class="text-danger">
-                              <div *ngIf="(submitted || publisherForm.get('sgBaseUrl').touched) && publisherForm.controls['sgBaseUrl'].hasError('required')">sgBaseURL Required</div>
+                              <div
+                                *ngIf="(submitted || publisherForm.get('sgBaseUrl').touched) && publisherForm.controls['sgBaseUrl'].hasError('required')">
+                                sgBaseURL Required</div>
                               <div *ngIf="f?.sgBaseUrl?.errors?.pattern">Please Enter Valid Url</div>
                             </div>
 
@@ -202,23 +276,32 @@
                         <div class="form-group">
                           <div class="controls">
                             <label>sgUsername *</label>
-                            <input type="text" formControlName="sgUsername" class="form-control" placeholder="sgUsername">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgUsername').touched) && publisherForm.controls['sgUsername'].hasError('required')">sgUsername Required</div>
+                            <input type="text" formControlName="sgUsername" class="form-control"
+                              placeholder="sgUsername">
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgUsername').touched) && publisherForm.controls['sgUsername'].hasError('required')">
+                              sgUsername Required</div>
 
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
                             <label>sgClienSecret *</label>
-                            <input type="text" formControlName="sgClientSecret" class="form-control" placeholder="sgClienSecret">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgClientSecret').touched) && publisherForm.controls['sgClientSecret'].hasError('required')">sgClienSecret required</div>
+                            <input type="text" formControlName="sgClientSecret" class="form-control"
+                              placeholder="sgClienSecret">
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgClientSecret').touched) && publisherForm.controls['sgClientSecret'].hasError('required')">
+                              sgClienSecret required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
                             <label>sgGrantType *</label>
-                            <input type="text" formControlName="sgGrantType" class="form-control" placeholder="sgGrantType">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgGrantType').touched) && publisherForm.controls['sgGrantType'].hasError('required')">sgGrantType required</div>
+                            <input type="text" formControlName="sgGrantType" class="form-control"
+                              placeholder="sgGrantType">
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgGrantType').touched) && publisherForm.controls['sgGrantType'].hasError('required')">
+                              sgGrantType required</div>
                           </div>
                         </div>
                       </div>
@@ -226,292 +309,168 @@
                         <div class="form-group">
                           <div class="controls">
                             <label>sgClientId *</label>
-                            <input type="text" formControlName="sgClientId" class="form-control" placeholder="sgClientId">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgClientId').touched) && publisherForm.controls['sgClientId'].hasError('required')">sgClientId required</div>
+                            <input type="text" formControlName="sgClientId" class="form-control"
+                              placeholder="sgClientId">
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgClientId').touched) && publisherForm.controls['sgClientId'].hasError('required')">
+                              sgClientId required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
                             <label>sgScope *</label>
                             <input type="text" class="form-control" formControlName="sgScope" placeholder="sgScope">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgScope').touched) && publisherForm.controls['sgScope'].hasError('required')">sgScope required</div>
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgScope').touched) && publisherForm.controls['sgScope'].hasError('required')">
+                              sgScope required</div>
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
                             <label>sgPassword *</label>
                             <input type="text" class="form-control" formControlName="password" placeholder="sgPassword">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('password').touched) && publisherForm.controls['password'].hasError('required')">sgPassword required</div>
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('password').touched) && publisherForm.controls['password'].hasError('required')">
+                              sgPassword required</div>
 
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="controls">
                             <label>sgTokenType *</label>
-                            <input type="text" formControlName="sgTokenType" class="form-control" placeholder="sgTokenType">
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgTokenType').touched) && publisherForm.controls['sgTokenType'].hasError('required')">sgTokenType required</div>
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('sgTokenType').touched) && publisherForm.controls['sgTokenType'].hasError('email')">Please Enter Valid Email</div>
+                            <input type="text" formControlName="sgTokenType" class="form-control"
+                              placeholder="sgTokenType">
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgTokenType').touched) && publisherForm.controls['sgTokenType'].hasError('required')">
+                              sgTokenType required</div>
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('sgTokenType').touched) && publisherForm.controls['sgTokenType'].hasError('email')">
+                              Please Enter Valid Email</div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card">
-              <div class="card-content" style="height: 200px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-12">
-                      <h4 style="color:'2C2C2C'" class="mb-2 mt-1"><i class="fa fa-moon-o" aria-hidden="true"></i>Theme Info</h4>
+            <div class="col-12 col-md-6">
+              <div class="card">
+                <div class="card-content" style="height: 200px;">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 style="color:'2C2C2C'" class="mb-2 mt-1"><i class="fa fa-moon-o"
+                            aria-hidden="true"></i>Theme Info</h4>
+                      </div>
                     </div>
-                  </div>
                     <div class="row">
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <div class="controls">
                             <label>Primary Color</label>
-                            <input type="text" formControlName="headerColor" [cpPosition]="'top'" [(colorPicker)]="finalcolor" [style.background]="finalcolor" [value]="color" class="form-control"/>
-                            <div class="text-danger" *ngIf="(submitted || publisherForm.get('headerColor').touched) && publisherForm.controls['headerColor'].hasError('required')">Primary color Required</div>
+                            <input type="text" formControlName="headerColor" [cpPosition]="'top'"
+                              [(colorPicker)]="finalcolor" [style.background]="finalcolor" [value]="color"
+                              class="form-control" />
+                            <div class="text-danger"
+                              *ngIf="(submitted || publisherForm.get('headerColor').touched) && publisherForm.controls['headerColor'].hasError('required')">
+                              Primary color Required</div>
 
                             <!-- <div class="text-danger" *ngIf="t?.headerColor?.errors?.required">Header Color Code Required</div> -->
                           </div>
                         </div>
                       </div>
                     </div>
-                  <!-- users edit account form ends -->
+                    <!-- users edit account form ends -->
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card">
+            <div class="col-12 col-md-6">
+              <div class="card">
                 <div class="card-content">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <h4  class="mb-2 mt-1"><i  class="fa fa-users"></i>
-                                  Default Group/Station
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <table class="table">
-                                    <thead>
-                                        <tr *ngIf="sgRefreshToken && sgAccessToken">
-                                            <th scope="col">Group Name</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="ng-star-inserted" *ngIf="sgRefreshToken && sgAccessToken">
-                                            <td *ngIf="groupNames">{{groupNames}}</td>
-                                            <td *ngIf="!groupNames">N/A</td>
-                                            <td class="product-action">
-                                              <button (click) = "openGropModel()"
-                                              type="button"
-                                              class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i
-                                              class="feather icon-edit"></i>
-                                            </button>
-                                          </td>
-                                        </tr>
-                                        <tr *ngIf="!sgRefreshToken && !sgAccessToken">
-                                          <h4>This account is not verified yet</h4>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-          <div class="alert alert-danger mt-2" *ngIf="errorMessage" role="alert">
-            {{errorMessage}}
-          </div>
-          <div class="alert alert-danger mt-2" *ngIf="validationMessage.length >= 1" role="alert">
-            <ul>
-              <li *ngFor="let message of validationMessage;">{{message}}</li>
-            </ul>
-          </div>
-        </div>
-          <!-- <div class="col-12 col-md-6">
-            <div class="card">
-              <div class="card-content" style="height: 200px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6 col-md-12">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Ad Manager Header Script Tag</h4>
-                    </div>
-                  </div>
+                  <div class="card-body">
                     <div class="row">
-                      <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                          <div class="controls">
-                            <textarea class="form-control" formControlName="manageheader"  rows="3" placeholder="Paste Code here"></textarea>
-                          </div>
-                        </div>
+                      <div class="col-12">
+                        <h4 class="mb-2 mt-1"><i class="fa fa-users"></i>
+                          Default Group/Station
+                        </h4>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class="col-12 col-sm-12">
+                        <table class="table">
+                          <thead>
+                            <tr *ngIf="sgRefreshToken && sgAccessToken">
+                              <th scope="col">Group Name</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="ng-star-inserted" *ngIf="sgRefreshToken && sgAccessToken">
+                              <td *ngIf="groupNames">{{groupNames}}</td>
+                              <td *ngIf="!groupNames">N/A</td>
+                              <td class="product-action">
+                                <button (click)="openGropModel()" type="button"
+                                  class="btn btn-icon btn-outline-primary mr-1 mb-1 waves-effect waves-light"><i
+                                    class="feather icon-edit"></i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr *ngIf="!sgRefreshToken && !sgAccessToken">
+                              <h4>This account is not verified yet</h4>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-md-3">
-            <div class="card">
-              <div class="card-content" style="height: 225px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6 col-md-12">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 1</h4>
-                    </div>
-                  </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                          <div class="controls">
-                            <textarea class="form-control" formControlName="sidebar1" rows="4" placeholder="Paste Code here"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
+            <div class="col-md-12">
+              <div class="alert alert-danger mt-2" *ngIf="errorMessage" role="alert">
+                {{errorMessage}}
+              </div>
+              <div class="alert alert-danger mt-2" *ngIf="validationMessage.length >= 1" role="alert">
+                <ul>
+                  <li *ngFor="let message of validationMessage;">{{message}}</li>
+                </ul>
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-3">
-            <div class="card">
-              <div class="card-content" style="height: 225px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6 col-md-12">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 2</h4>
-                    </div>
-                  </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                          <div class="controls">
-                            <textarea class="form-control" formControlName="sidebar2" rows="4" placeholder="Paste Code here"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">* marked fields are mandatory
           </div>
-          <div class="col-12 col-md-3">
-            <div class="card">
-              <div class="card-content" style="height: 225px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6 col-md-12">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 3</h4>
-                    </div>
-                  </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                          <div class="controls">
-                            <textarea class="form-control" formControlName="sidebar3" rows="4" placeholder="Paste Code here"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
+            <button *ngIf="this.submitted === true" type="submit" [disabled]="!publisherForm.valid"
+              [ngClass]="{'disable':!publisherForm.valid }"
+              class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">
+              <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> loading...
+            </button>
+            <button *ngIf="this.submitted === false" [ngClass]="{'disable':!publisherForm.valid}" (click)="onSubmit()"
+              type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">Save
+              Changes</button>
+            <button type="reset" (click)="reset()"
+              class="btn btn-outline-warning waves-effect waves-light">Reset</button>
           </div>
-          <div class="col-12 col-md-3">
-            <div class="card">
-              <div class="card-content" style="height: 225px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6 col-md-12">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Sidebar 4</h4>
-                    </div>
-                  </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                          <div class="controls">
-                            <textarea class="form-control" formControlName="sidebar4" rows="4" placeholder="Paste Code here"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-12">
-            <div class="card">
-              <div class="card-content" style="height: 200px;">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-6">
-                      <h4 class="mb-2 mt-1"><i class="fal fa-code"></i> Leaderboard 1</h4>
-                    </div>
-                  </div>
-                    <div class="row">
-                      <div class="col-12 col-sm-12">
-                        <div class="form-group">
-                          <div class="controls">
-                            <textarea class="form-control" formControlName="leaderboard1" rows="3" placeholder="Paste Code here"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  <div class="alert alert-danger mt-2 col-md-12" *ngIf="errorMessage" role="alert">
-                    {{errorMessage}}
-                  </div>
-                  <div class="alert alert-danger mt-2 col-md-12" *ngIf="validationMessage.length >= 1" role="alert">
-                    <ul>
-                      <li *ngFor="let message of validationMessage;">{{message}}</li>
-                    </ul>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div> -->
-        </div>
-        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">* marked fields are mandatory</div>
-        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end mt-1">
-          <button *ngIf="this.submitted === true" type="submit" [disabled]="!publisherForm.valid" [ngClass]="{'disable':!publisherForm.valid }" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> loading...
-          </button>
-          <button *ngIf="this.submitted === false" [ngClass]="{'disable':!publisherForm.valid}"  [disabled]="!publisherForm.valid || !isSlugValid" (click)="onSubmit()"  type="submit" class="btn btn-primary glow mb-1 mb-sm-0 mr-0 mr-sm-1 waves-effect waves-light">Save
-            Changes</button>
-          <button type="reset" (click)="reset()" class="btn btn-outline-warning waves-effect waves-light">Reset</button>
-        </div>
-      </section>
-    </form>
+        </section>
+      </form>
     </div>
   </div>
 </div>
 
 
 <!-- Publisher Image Modal-->
-<div class="modal fade" id="publisherImageModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="publisherImageModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Crop Image</h5>
       </div>
       <div class="modal-body">
-        <image-cropper
-            [imageChangedEvent]="imageChangedEvent"
-            [maintainAspectRatio]="true"
-            [aspectRatio]="1 / 1"
-            format="png"
-            (imageCropped)="imageCropped($event)"
-        ></image-cropper>
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+          format="png" (imageCropped)="imageCropped($event)"></image-cropper>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Crop Image</button>
@@ -521,20 +480,16 @@
 </div>
 
 <!-- fav Icon Modal-->
-<div class="modal fade" id="favIconModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="favIconModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Crop Image</h5>
       </div>
       <div class="modal-body">
-        <image-cropper
-            [imageChangedEvent]="favIconChangedEvent"
-            [maintainAspectRatio]="true"
-            [aspectRatio]="1 / 1"
-            format="png"
-            (imageCropped)="favIconCropped($event)"
-        ></image-cropper>
+        <image-cropper [imageChangedEvent]="favIconChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+          format="png" (imageCropped)="favIconCropped($event)"></image-cropper>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Crop Image</button>
@@ -544,7 +499,8 @@
 </div>
 
 <!-- Default station modal-->
-<div class="modal fade" id="stationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="stationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -557,9 +513,10 @@
         <div class="col-12 col-sm-12">
           <div class="form-group">
             <label>Groups</label>
-            <select (change)="onChangeGroup($event.target.value)"  class="form-control">
+            <select (change)="onChangeGroup($event.target.value)" class="form-control">
               <option value="null"> Select Default Group</option>
-              <option *ngFor="let group of groupList" value="{{group.groupId}}" [selected]="group.groupId == groupId">{{group?.displayName}}</option>
+              <option *ngFor="let group of groupList" value="{{group.groupId}}" [selected]="group.groupId == groupId">
+                {{group?.displayName}}</option>
             </select>
           </div>
         </div>
