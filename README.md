@@ -3,7 +3,7 @@
 This is angular source code for the admin panel which is used by owner/management of Atunwa digital to manage whole platform. e.g. functionality's like "manage publishers".
 
 **Live code link**: https://admin.atunwapodcasts.com/
-**Project Link**: https://gitlab.com/atunwa/admin-panel-angular-source
+**Project Link**: https://github.com/pellutech/admin-panel-angular-source
 
 **Setup Project - local server**
 
